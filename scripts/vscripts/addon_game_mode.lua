@@ -4,6 +4,12 @@ if TransportGameMode == nil then
 	TransportGameMode = class({})
 end
 
+-- require files
+require("timers")
+require("utils")
+require("msg")
+require("path")
+
 function Precache( context )
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
