@@ -1,6 +1,6 @@
-if path == nil then path = {} end
+if Path == nil then Path = {} end
 ---[[
-function path:find_path(unit, path_corners)
+function Path:find_path(unit, path_corners)
     unit.next_corner_num = 1
     Timers:CreateTimer(0.1, function()
         local i = tonumber(unit.next_corner_num)
@@ -26,7 +26,7 @@ end
 -- ]]
 
 -- 规划corner_1到corner_7的100个路点的路线
-function path:get_path()
+function Path:get_path()
     local p = {}
     for i = 1, 150 do
         if i == 1 or i == 150 then
@@ -97,6 +97,6 @@ function path:get_path()
 end
 
 -- 计算两点（三维向量）之间距离
-function path:distance_between_two_point(point_1, point_2)
+function Path:distance_between_two_point(point_1, point_2)
     return ((point_1.x - point_2.x) ^ 2 + (point_1.y - point_2.y) ^ 2) ^ 0.5
 end
