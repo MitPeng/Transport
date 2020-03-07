@@ -18,6 +18,9 @@ _G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map.txt")
 --保存路段
 _G.road_section_num = 1
 
+-- 关联修改器
+LinkLuaModifier("modifier_hero_xp_gold", "modifiers/modifier_hero_xp_gold.lua", LUA_MODIFIER_MOTION_NONE)
+
 function Precache(context)
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
@@ -35,7 +38,25 @@ function Activate()
 end
 
 function TransportGameMode:InitGameMode()
+	-- 监听单位重生或者创建事件
+	ListenToGameEvent("npc_spawned", Dynamic_Wrap(CEventGameMode, "OnNPCSpawned"), self)
+
 	GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
+end
+
+-- 单位出生
+function CEventGameMode:OnNPCSpawned(keys)
+	local hero = EntIndexToHScript(keys.entindex)
+	if hero:IsHero() then
+		-- 初次重生
+		if hero.is_first_spawn == nil then
+			hero.is_first_spawn = false
+			-- 添加自动获取经验金钱
+			hero:AddNewModifier(hero, nil, "modifier_hero_xp_gold", {duration = -1})
+		else
+			-- 不是初次重生
+		end
+	end
 end
 
 -- Evaluate the state of the game
