@@ -56,4 +56,10 @@ function is_transport(key)
         --双方都不在或双方都在，则在原地不动
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
     end
+
+    --提供视野
+    local loc = caster:GetAbsOrigin()
+    local radius = ability:GetSpecialValueFor("vision_radius")
+    AddFOWViewer(DOTA_TEAM_GOODGUYS, loc, radius, 0.3, false)
+    AddFOWViewer(DOTA_TEAM_BADGUYS, loc, radius, 0.3, false)
 end
