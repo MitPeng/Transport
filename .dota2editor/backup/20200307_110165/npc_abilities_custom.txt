@@ -65,7 +65,6 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityCastRange"	"%radius"
 		"Modifiers"
 		{
 			"modifier_transport"
@@ -90,7 +89,7 @@
 						"Function"	"is_transport"
 					}
 				}
-				"ThinkInterval"	"%interval"
+				"ThinkInterval"	"0.3"
 				"IsHidden"	"1"
 			}
 			"modifier_transport_stun"
@@ -111,11 +110,6 @@
 			{
 				"var_type"	"FIELD_INTEGER"
 				"radius"	"500"
-			}
-			"02"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"interval"	"0.3"
 			}
 		}
 	}

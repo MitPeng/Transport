@@ -115,7 +115,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"interval"	"0.3"
+				"interval"	"0.2"
 			}
 		}
 	}

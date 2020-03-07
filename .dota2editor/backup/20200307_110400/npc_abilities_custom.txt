@@ -90,7 +90,7 @@
 						"Function"	"is_transport"
 					}
 				}
-				"ThinkInterval"	"%interval"
+				"ThinkInterval"	"0.5"
 				"IsHidden"	"1"
 			}
 			"modifier_transport_stun"
@@ -111,11 +111,6 @@
 			{
 				"var_type"	"FIELD_INTEGER"
 				"radius"	"500"
-			}
-			"02"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"interval"	"0.3"
 			}
 		}
 	}

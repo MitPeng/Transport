@@ -65,7 +65,6 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
-		"AbilityCastRange"	"%radius"
 		"Modifiers"
 		{
 			"modifier_transport"
@@ -74,7 +73,7 @@
 				"Duration"	"-1"
 				"Passive"	"1"
 				"TextureName"	"courier_return_to_base"
-				"IsBuff"	"0"
+				"IsBuff"	"1"
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -90,8 +89,7 @@
 						"Function"	"is_transport"
 					}
 				}
-				"ThinkInterval"	"%interval"
-				"IsHidden"	"1"
+				"ThinkInterval"	"0.3"
 			}
 			"modifier_transport_stun"
 			{
@@ -111,11 +109,6 @@
 			{
 				"var_type"	"FIELD_INTEGER"
 				"radius"	"500"
-			}
-			"02"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"interval"	"0.3"
 			}
 		}
 	}

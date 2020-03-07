@@ -10,7 +10,10 @@ require("utils")
 require("msg")
 require("path")
 
-function Precache( context )
+-- 载入kv
+_G.load_kv = LoadKeyValues("scripts/vscripts/kv/load_kv.txt")
+
+function Precache(context)
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
 			PrecacheResource( "model", "*.vmdl", context )
@@ -27,8 +30,7 @@ function Activate()
 end
 
 function TransportGameMode:InitGameMode()
-	print( "Template addon is loaded." )
-	GameRules:GetGameModeEntity():SetThink( "OnThink", self, "GlobalThink", 2 )
+	GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
 end
 
 -- Evaluate the state of the game
