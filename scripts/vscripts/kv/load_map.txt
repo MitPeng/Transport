@@ -1,0 +1,17 @@
+//载入地图路点
+"load_map"
+{
+    "road_section_1"
+    {
+        "1" "corner_1"
+        "2" "corner_2"
+        "3" "corner_3"
+    }
+    "road_section_2"
+    {
+        "1" "corner_3"
+        "2" "corner_4"
+        "3" "corner_5"
+        "4" "corner_6"
+    }
+}

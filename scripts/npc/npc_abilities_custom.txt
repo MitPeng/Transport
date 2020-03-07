@@ -110,7 +110,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"500"
+				"radius"	"600"
 			}
 			"02"
 			{

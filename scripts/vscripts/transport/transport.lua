@@ -18,16 +18,13 @@ function is_transport(key)
             end
         end
     end
-    if good == 0 and bad == 0 then
-        --双方都不在，则在原地不动
-        ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
-    elseif good == 0 and bad ~= 0 then
+    if good == 0 and bad ~= 0 then
         --解除眩晕
         if caster:HasModifier("modifier_transport_stun") then
             caster:RemoveModifierByName("modifier_transport_stun")
         end
         --运输方不在，防守方在，则退至上一个目标点
-
+        Path:find_path(caster, Path:get_path(caster))
         --防守方加经验和金钱
         for i, hero in ipairs(bad_hero) do
             local level = hero:GetLevel()
@@ -44,7 +41,7 @@ function is_transport(key)
             caster:RemoveModifierByName("modifier_transport_stun")
         end
         --运输方在，防守方不在，则推至下一个目标点
-
+        Path:find_path(caster, Path:get_path(caster))
         --运输方加经验和金钱
         for i, hero in ipairs(good_hero) do
             local level = hero:GetLevel()
@@ -55,5 +52,8 @@ function is_transport(key)
                 level * _G.load_kv["lvl_bonus_gold"]
             PlayerResource:SetGold(hero:GetPlayerID(), gold, false)
         end
+    else
+        --双方都不在或双方都在，则在原地不动
+        ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
     end
 end

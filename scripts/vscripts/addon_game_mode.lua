@@ -10,8 +10,13 @@ require("utils")
 require("msg")
 require("path")
 
+--全局变量
 -- 载入kv
 _G.load_kv = LoadKeyValues("scripts/vscripts/kv/load_kv.txt")
+_G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map.txt")
+
+--保存路段
+_G.road_section_num = 1
 
 function Precache(context)
 	--[[
