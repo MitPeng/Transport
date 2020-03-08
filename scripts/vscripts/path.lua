@@ -15,7 +15,7 @@ function Path:find_path(unit, path_corners)
                 local next_corner = Entities:FindByName(nil, path_corner)
                 if not GameRules:IsGamePaused() then
                     local next_corner_point = next_corner:GetOrigin()
-                    local distance = path:distance_between_two_point(unit:GetOrigin(), next_corner_point)
+                    local distance = Path:distance_between_two_point(unit:GetOrigin(), next_corner_point)
                     -- 到达目标点附近，指向下一个点，否则继续移动到目标点
                     if (distance <= 10.0 and distance >= 0) then
                         unit.next_corner_num = i + 1
@@ -34,7 +34,8 @@ end
 -- 规划运输车运动路线
 function Path:get_path(unit)
     local p = {}
-    local corners = _G.load_map[_G.road_section_num]
+    --加载路段信息
+    local corners = _G.load_map["road_section_" .. _G.road_section_num]
     local next_corner_num = unit.next_corner_num
     --初始路点避免出错
     if next_corner_num == 1 then
@@ -56,6 +57,18 @@ function Path:get_path(unit)
         end
     end
     return p
+end
+
+--判断是否到达目标点，并转到下一路段
+function Path:set_road_section(unit)
+    --加载下一路段信息
+    local corners = _G.load_map["road_section_" .. (_G.road_section_num + 1)]
+    --判断与目标点的距离
+    local distance = Path:distance_between_two_point(unit:GetOrigin(), corners[1])
+    -- 如果到达目标点附近，指向下一个路段
+    if (distance <= 10.0 and distance >= 0) then
+        _G.road_section_num = _G.road_section_num + 1
+    end
 end
 
 -- 计算两点（三维向量）之间距离

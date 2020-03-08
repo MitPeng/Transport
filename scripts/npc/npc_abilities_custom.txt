@@ -113,6 +113,23 @@
 					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
+			"modifier_transport_road_section"
+			{
+				"Duration"	"-1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
+						"Function"	"road_section"
+					}
+				}
+				"ThinkInterval"	"%interval"
+			}
 		}
 		"AbilitySpecial"
 		{

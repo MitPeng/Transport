@@ -24,6 +24,7 @@ function is_transport(key)
             caster:RemoveModifierByName("modifier_transport_stun")
         end
         --运输方不在，防守方在，则退至上一个目标点
+        caster.is_transport = false
         Path:find_path(caster, Path:get_path(caster))
         --防守方加经验和金钱
         for i, hero in ipairs(bad_hero) do
@@ -41,6 +42,7 @@ function is_transport(key)
             caster:RemoveModifierByName("modifier_transport_stun")
         end
         --运输方在，防守方不在，则推至下一个目标点
+        caster.is_transport = true
         Path:find_path(caster, Path:get_path(caster))
         --运输方加经验和金钱
         for i, hero in ipairs(good_hero) do
@@ -54,12 +56,20 @@ function is_transport(key)
         end
     else
         --双方都不在或双方都在，则在原地不动
+        caster.is_transport = false
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
     end
 
     --提供视野
     local loc = caster:GetAbsOrigin()
     local radius = ability:GetSpecialValueFor("vision_radius")
-    AddFOWViewer(DOTA_TEAM_GOODGUYS, loc, radius, 0.3, false)
-    AddFOWViewer(DOTA_TEAM_BADGUYS, loc, radius, 0.3, false)
+    local interval = ability:GetSpecialValueFor("interval")
+    AddFOWViewer(DOTA_TEAM_GOODGUYS, loc, radius, interval, false)
+    AddFOWViewer(DOTA_TEAM_BADGUYS, loc, radius, interval, false)
+end
+
+--判断是否到达下一路段起点
+function road_section(keys)
+    local caster = keys.caster
+    Path:set_road_section(caster)
 end
