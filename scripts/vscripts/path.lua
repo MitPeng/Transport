@@ -59,18 +59,6 @@ function Path:get_path(unit)
     return p
 end
 
---判断是否到达目标点，并转到下一路段
-function Path:set_road_section(unit)
-    --加载下一路段信息
-    local corners = _G.load_map["road_section_" .. (_G.road_section_num + 1)]
-    --判断与目标点的距离
-    local distance = Path:distance_between_two_point(unit:GetOrigin(), corners[1])
-    -- 如果到达目标点附近，指向下一个路段
-    if (distance <= 10.0 and distance >= 0) then
-        _G.road_section_num = _G.road_section_num + 1
-    end
-end
-
 -- 计算两点（三维向量）之间距离
 function Path:distance_between_two_point(point_1, point_2)
     return ((point_1.x - point_2.x) ^ 2 + (point_1.y - point_2.y) ^ 2) ^ 0.5

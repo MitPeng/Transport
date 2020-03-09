@@ -23,7 +23,13 @@ function is_transport(key)
         if caster:HasModifier("modifier_transport_stun") then
             caster:RemoveModifierByName("modifier_transport_stun")
         end
-        --运输方不在，防守方在，则退至上一个目标点
+        --运输方不在，防守方在
+        --如果处于防守目标点阶段,则移除防守buff
+        if caster.is_defend then
+            caster.is_defend = false
+            caster:RemoveModifierByName("modifier_transport_defend_road_section")
+        end
+        --退至上一个目标点
         caster.is_transport = false
         Path:find_path(caster, Path:get_path(caster))
         --防守方加经验和金钱
@@ -71,5 +77,32 @@ end
 --判断是否到达下一路段起点
 function road_section(keys)
     local caster = keys.caster
-    Path:set_road_section(caster)
+    local ability = keys.ability
+    --加载下一路段信息
+    local corners = _G.load_map["road_section_" .. (_G.road_section_num + 1)]
+    --判断与目标点的距离
+    local distance = Path:distance_between_two_point(caster:GetOrigin(), corners[1])
+    -- 如果到达目标点附近
+    if (distance <= 10.0 and distance >= 0) then
+        --如果进入目标点,但还没进入防御阶段
+        if not caster.is_defend then
+            ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_defend_road_section", {})
+            caster.is_defend = true
+        end
+    end
+end
+
+--防御阶段每秒事件
+function is_defend(keys)
+    local caster = keys.caster
+    local modifier = caster:FindModifierByName("modifier_transport_defend_road_section")
+    local remaining_time = modifier:GetRemainingTime()
+    print(math.ceil(remaining_time))
+end
+
+--防御阶段结束
+function end_defend(keys)
+    keys.caster.is_defend = false
+    _G.road_section_num = _G.road_section_num + 1
+    print("end_defend")
 end

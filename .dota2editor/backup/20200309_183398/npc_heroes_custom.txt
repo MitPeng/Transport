@@ -1,0 +1,35 @@
+// Dota2 Editor
+// Get latest version: https://github.com/zombieJ/nw-dota2editor
+
+"DOTAHeroes"
+{
+	"Version"		"1"
+
+	// =================================================================================================================
+	// HERO: Templar Assassin
+	// =================================================================================================================
+	"npc_dota_hero_templar_assassin_template"
+	{
+		// Hero to override
+		"override_hero"	"npc_dota_hero_templar_assassin"
+		// Ability 1
+		"Ability1"	"templar_assassin_refraction_holdout"
+		// Range of vision at night time.
+		"VisionNighttimeRange"	"1800"
+		"Ability2"	""
+		"Ability3"	""
+		"Ability4"	""
+		"Ability5"	""
+		"Ability6"	""
+		"Ability7"	""
+		"Ability8"	""
+		"Ability9"	""
+		"Ability10"	""
+		"Ability11"	""
+		"Ability12"	""
+		"Ability13"	""
+		"Ability14"	""
+		"Ability15"	""
+		"Ability16"	""
+	}
+}
