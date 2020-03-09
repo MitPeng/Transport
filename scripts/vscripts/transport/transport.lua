@@ -97,12 +97,20 @@ function is_defend(keys)
     local caster = keys.caster
     local modifier = caster:FindModifierByName("modifier_transport_defend_road_section")
     local remaining_time = modifier:GetRemainingTime()
-    print(math.ceil(remaining_time))
+    print("Defend remaining time: " .. math.ceil(remaining_time))
 end
 
 --防御阶段结束
 function end_defend(keys)
     keys.caster.is_defend = false
-    _G.road_section_num = _G.road_section_num + 1
-    print("end_defend")
+    local next_road_section_num = _G.road_section_num + 1
+    --如果还存在下一个路段，则设置下一个路段标志
+    if _G.load_map["road_section_" .. (_G.road_section_num + 1)] then
+        print("End defend,turn to next road section!")
+        _G.road_section_num = next_road_section_num
+    else
+        print("End Game!")
+        --如果已经到达最后一个路段终点并防御完成，则结束游戏，推进方获胜
+        GameRules.SetGameWinner(DOTA_TEAM_GOODGUYS)
+    end
 end
