@@ -9,6 +9,7 @@ require("timers")
 require("utils")
 require("msg")
 require("path")
+require("notifications")
 
 --全局变量
 -- 载入kv
