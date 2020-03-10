@@ -12,4 +12,7 @@
     "lvl_bonus_gold" "0.1"
     "base_bonus_xp" "2.0"
     "lvl_bonus_xp" "0.4"
+    //初次重生英雄等级和金钱
+    "first_spawn_hero_lvl" "6"
+    "first_spawn_hero_gold" "1500"
 }

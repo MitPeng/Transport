@@ -39,23 +39,39 @@ end
 
 function TransportGameMode:InitGameMode()
 	-- 监听单位重生或者创建事件
-	ListenToGameEvent("npc_spawned", Dynamic_Wrap(CEventGameMode, "OnNPCSpawned"), self)
+	ListenToGameEvent("npc_spawned", Dynamic_Wrap(TransportGameMode, "OnNPCSpawned"), self)
 
 	GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 2)
 end
 
 -- 单位出生
-function CEventGameMode:OnNPCSpawned(keys)
+function TransportGameMode:OnNPCSpawned(keys)
 	local hero = EntIndexToHScript(keys.entindex)
 	if hero:IsHero() then
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
+			--设置英雄初次重生等级和金钱
+			local hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
+			for i = 1, hero_lvl - 1 do
+				hero:HeroLevelUp(false)
+			end
+			hero:SetGold(tonumber(_G.load_kv["first_spawn_hero_gold"]), false)
+
 			-- 添加自动获取经验金钱
 			hero:AddNewModifier(hero, nil, "modifier_hero_xp_gold", {duration = -1})
-		else
-			-- 不是初次重生
 		end
+		--根据当前路段设置重生点
+		--天辉夜魇重生点不同
+		local spawn_point
+		if hero:GetTeam() == DOTA_TEAM_GOODGUYS then
+			--获取重生点位置
+			spawn_point = "good_spawn_" .. _G.road_section_num
+		elseif hero:GetTeam() == DOTA_TEAM_BADGUYS then
+			spawn_point = "bad_spawn_" .. _G.road_section_num
+		end
+		local vec = Entities:FindByName(nil, spawn_point):GetOrigin()
+		hero:SetOrigin(vec)
 	end
 end
 
