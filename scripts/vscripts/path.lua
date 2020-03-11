@@ -20,7 +20,6 @@ function Path:find_path(unit, path_corners)
                     if (distance <= 10.0 and distance >= 0) then
                         unit.next_corner_num = i + 1
                     else
-                        print("move")
                         unit:MoveToPositionAggressive(next_corner_point)
                     end
                 end
@@ -42,21 +41,21 @@ function Path:get_path(unit)
     if next_corner_num == 1 or next_corner_num == nil then
         next_corner_num = 2
     end
-    local is_transport = unit.is_transport
     --如果是运输状态
     --路点计数
     local k = 1
-    if is_transport then
+    if unit.is_good_transport or unit.is_bad_transport then
         for i = tonumber(next_corner_num), tonumber(Utils:count_nums(corners)) do
-            p[k] = corners[i]
+            p[k] = corners[tostring(i)]
             k = k + 1
         end
     else --如果不是运输状态
         for i = next_corner_num - 1, 1 do
-            p[k] = corners[i]
+            p[k] = corners[tostring(i)]
             k = k + 1
         end
     end
+    DeepPrintTable(p)
     return p
 end
 
