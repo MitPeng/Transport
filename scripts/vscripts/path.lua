@@ -20,6 +20,7 @@ function Path:find_path(unit, path_corners)
                     if (distance <= 10.0 and distance >= 0) then
                         unit.next_corner_num = i + 1
                     else
+                        print("move")
                         unit:MoveToPositionAggressive(next_corner_point)
                     end
                 end
@@ -38,7 +39,7 @@ function Path:get_path(unit)
     local corners = _G.load_map["road_section_" .. _G.road_section_num]
     local next_corner_num = unit.next_corner_num
     --初始路点避免出错
-    if next_corner_num == 1 then
+    if next_corner_num == 1 or next_corner_num == nil then
         next_corner_num = 2
     end
     local is_transport = unit.is_transport
@@ -46,7 +47,7 @@ function Path:get_path(unit)
     --路点计数
     local k = 1
     if is_transport then
-        for i = next_corner_num, #corners do
+        for i = tonumber(next_corner_num), tonumber(Utils:count_nums(corners)) do
             p[k] = corners[i]
             k = k + 1
         end

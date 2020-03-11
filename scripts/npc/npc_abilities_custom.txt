@@ -94,20 +94,17 @@
 				"IsHidden"	"1"
 				"States"
 				{
-					"MODIFIER_STATE_ATTACK_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_MAGIC_IMMUNE"	"MODIFIER_STATE_VALUE_ENABLED"
-					"MODIFIER_STATE_LOW_ATTACK_PRIORITY"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 			"modifier_transport_stun"
 			{
 				"Duration"	"-1"
 				"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"IsDebuff"	"0"
-				"IsHidden"	"1"
+				"IsDebuff"	"1"
+				"IsHidden"	"0"
 				"States"
 				{
 					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
@@ -178,6 +175,34 @@
 			{
 				"var_type"	"FIELD_FLOAT"
 				"defend_time"	"30.0"
+			}
+		}
+	}
+
+	"hero_gold_xp"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"buyback"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Modifiers"
+		{
+			"modifier_hero_gold_xp"
+			{
+				"Duration"	"-1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Passive"	"1"
+				"TextureName"	"buyback"
+				"IsBuff"	"1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/hero_gold_xp.lua"
+						"Function"	"get_gold_xp"
+					}
+				}
+				"ThinkInterval"	"0.3"
 			}
 		}
 	}

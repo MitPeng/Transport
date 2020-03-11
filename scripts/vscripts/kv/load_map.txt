@@ -12,6 +12,10 @@
         "1" "corner_3"
         "2" "corner_4"
         "3" "corner_5"
-        "4" "corner_6"
+    }
+    "road_section_3"
+    {
+        "1" "corner_5"
+        "2" "corner_6"
     }
 }
