@@ -10,6 +10,7 @@ require("utils")
 require("msg")
 require("path")
 require("notifications")
+require("string")
 
 --全局变量
 -- 载入kv
@@ -18,6 +19,10 @@ _G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map.txt")
 
 --保存路段
 _G.road_section_num = 1
+
+--保存上一路点和下一路点
+_G.pre_corner = 1
+_G.next_corner = 2
 
 function Precache(context)
 	--[[
@@ -81,7 +86,7 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		-- print("Player game begin") -- 玩家开始游戏
 		-- 游戏开始后生成运输车
-		local vec = Entities:FindByName(nil, "corner_1"):GetOrigin()
+		local vec = Path:get_corner_vector(_G.pre_corner)
 		local car = Utils:create_unit_simple("car_1", vec, true, DOTA_TEAM_GOODGUYS)
 	end
 end
