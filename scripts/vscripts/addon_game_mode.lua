@@ -60,6 +60,8 @@ function TransportGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(10.0)
 	-- 设置初始金钱
 	GameRules:SetStartingGold(tonumber(_G.load_kv["first_spawn_hero_gold"]))
+	-- 开启宇宙商店模式
+	GameRules:SetUseUniversalShopMode(true)
 	-- 垃圾回收
 	GameRules:GetGameModeEntity():SetContextThink(
 		DoUniqueString("collectgarbage"),
@@ -116,6 +118,8 @@ function TransportGameMode:OnNPCSpawned(keys)
 			0.1,
 			function()
 				hero:SetOrigin(vec)
+				--加个相位效果，防止英雄卡位
+				hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})
 				PlayerResource:SetCameraTarget(hero:GetPlayerID(), hero)
 				Timers:CreateTimer(
 					0.1,

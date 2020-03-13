@@ -27,7 +27,7 @@
 		"Model"	"models/items/courier/carty/carty.vmdl"
 		"ModelScale"	"4"
 		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_GROUND"
-		"MovementSpeed"	"200"
+		"MovementSpeed"	"100"
 		"MovementTurnRate"	"1.0"
 		"HasInventory"	"0"
 		"ConsideredHero"	"0"

@@ -21,6 +21,14 @@ function is_transport(keys)
         end
     end
     if good == 0 and bad ~= 0 then
+        --根据人数设置移速
+        if caster:HasModifier("modifier_transport_move_speed") then
+            caster:SetModifierStackCount("modifier_transport_move_speed", caster, bad)
+        else
+            ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_move_speed", {duration = -1})
+            caster:SetModifierStackCount("modifier_transport_move_speed", caster, bad)
+        end
+
         --如果不是防守方反推进，则执行
         --如果正在反推进，则不执行
         if not caster.is_bad_transport then
@@ -53,6 +61,13 @@ function is_transport(keys)
             end
         end
     elseif good ~= 0 and bad == 0 then
+        --根据人数设置移速
+        if caster:HasModifier("modifier_transport_move_speed") then
+            caster:SetModifierStackCount("modifier_transport_move_speed", caster, good)
+        else
+            ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_move_speed", {duration = -1})
+            caster:SetModifierStackCount("modifier_transport_move_speed", caster, good)
+        end
         --若不处于防御阶段，则去下一个路点
         if not caster:HasModifier("modifier_transport_defend_road_section") then
             --如果不是推进方推进，则执行

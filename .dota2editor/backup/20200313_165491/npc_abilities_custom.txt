@@ -97,6 +97,7 @@
 					"MODIFIER_STATE_INVULNERABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_UNIT_COLLISION"	"MODIFIER_STATE_VALUE_ENABLED"
 					"MODIFIER_STATE_NO_HEALTH_BAR"	"MODIFIER_STATE_VALUE_ENABLED"
+					"MODIFIER_STATE_UNSELECTABLE"	"MODIFIER_STATE_VALUE_ENABLED"
 				}
 			}
 			"modifier_transport_stun"
@@ -122,7 +123,7 @@
 					{
 						"Target"	"CASTER"
 						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
-						"Function"	"road_section"
+						"Function"	"change_corner"
 					}
 				}
 				"ThinkInterval"	"%interval"
@@ -133,6 +134,20 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"TextureName"	"courier_return_to_base"
 				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
+						"Function"	"is_defend"
+					}
+				}
+				"ThinkInterval"	"1.0"
+				"States"
+				{
+					"MODIFIER_STATE_STUNNED"	"MODIFIER_STATE_VALUE_ENABLED"
+				}
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -142,16 +157,16 @@
 						"Function"	"is_defend"
 					}
 				}
-				"OnDestroy"
+			}
+			"modifier_transport_move_speed"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"IsBuff"	"1"
+				"Properties"
 				{
-					"RunScript"
-					{
-						"Target"	"CASTER"
-						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
-						"Function"	"end_defend"
-					}
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%move_speed_per_hero"
 				}
-				"ThinkInterval"	"1.0"
 			}
 		}
 		"AbilitySpecial"
@@ -174,7 +189,12 @@
 			"04"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"defend_time"	"30.0"
+				"defend_time"	"10.0"
+			}
+			"05"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"move_speed_per_hero"	"10"
 			}
 		}
 	}

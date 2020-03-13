@@ -158,16 +158,6 @@
 					}
 				}
 			}
-			"modifier_transport_move_speed"
-			{
-				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"Duration"	"-1"
-				"IsBuff"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%move_speed_per_hero"
-				}
-			}
 		}
 		"AbilitySpecial"
 		{
@@ -190,11 +180,6 @@
 			{
 				"var_type"	"FIELD_FLOAT"
 				"defend_time"	"10.0"
-			}
-			"05"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"move_speed_per_hero"	"10"
 			}
 		}
 	}
