@@ -1,0 +1,4 @@
+"addon"
+{
+    "defend_success" "Defend Success! Turn to the next road section!"
+}

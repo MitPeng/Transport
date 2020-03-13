@@ -1,0 +1,4 @@
+"addon"
+{
+    "defend_success" "防守成功！进入下一路段！"
+}
