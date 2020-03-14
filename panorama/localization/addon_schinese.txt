@@ -1,4 +1,5 @@
 "addon"
 {
     "defend_success" "防守成功！进入下一路段！"
+    "push_remain_30" "推进时间还剩30秒！"
 }

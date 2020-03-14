@@ -187,6 +187,8 @@ function is_defend(keys)
             caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
             Utils:unit_abilities_lvlup(caster)
             ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_road_section", {duration = -1})
+            --重置推进时间
+            _G.push_time = tonumber(_G.load_kv["push_time"])
         else
             print("End Game!")
             --如果已经到达最后一个路段终点并防御完成，则结束游戏，推进方获胜
@@ -195,5 +197,36 @@ function is_defend(keys)
     else
         print("Defend remaining time: " .. remaining_time)
         Notifications:TopToAll({text = remaining_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}})
+    end
+end
+
+--推进阶段每秒事件
+function is_push(keys)
+    local caster = keys.caster
+    --不处于防御阶段则倒计时
+    if not caster.is_defend then
+        if _G.push_time == 0 then
+            --推进时间耗尽,游戏结束,防守方胜利
+            print("Push Failed! End Game!")
+            GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+            --剩余推进时间减1
+            _G.push_time = _G.push_time - 1
+        elseif _G.push_time > 0 then
+            --提前3秒文字提示
+            if _G.push_time == 33 then
+                Notifications:TopToAll(
+                    {text = "#push_remain_30", duration = 3.0, style = {color = "red", ["font-size"] = "50px"}}
+                )
+            end
+            --倒数30秒数字提示
+            if _G.push_time <= 30 then
+                Notifications:TopToAll(
+                    {text = _G.push_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}}
+                )
+            end
+            print("Push remaining time: " .. _G.push_time)
+            --剩余推进时间减1
+            _G.push_time = _G.push_time - 1
+        end
     end
 end

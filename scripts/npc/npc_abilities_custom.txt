@@ -168,6 +168,22 @@
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%move_speed_per_hero"
 				}
 			}
+			"modifier_transport_section_push"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
+						"Function"	"is_push"
+					}
+				}
+				"ThinkInterval"	"1.0"
+				"Passive"	"1"
+			}
 		}
 		"AbilitySpecial"
 		{

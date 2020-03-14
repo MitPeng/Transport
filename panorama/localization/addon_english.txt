@@ -1,4 +1,5 @@
 "addon"
 {
     "defend_success" "Defend Success! Turn to the next road section!"
+    "push_remain_30"    "30 seconds left to push!"
 }

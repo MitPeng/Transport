@@ -24,6 +24,9 @@ _G.road_section_num = 1
 _G.pre_corner = 1
 _G.next_corner = 2
 
+--推进时间
+_G.push_time = tonumber(_G.load_kv["push_time"])
+
 function Precache(context)
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
@@ -120,9 +123,10 @@ function TransportGameMode:OnNPCSpawned(keys)
 				hero:SetOrigin(vec)
 				--加个相位效果，防止英雄卡位
 				hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})
+				--镜头聚焦英雄后取消
 				PlayerResource:SetCameraTarget(hero:GetPlayerID(), hero)
 				Timers:CreateTimer(
-					0.1,
+					0.2,
 					function()
 						PlayerResource:SetCameraTarget(hero:GetPlayerID(), nil)
 					end
