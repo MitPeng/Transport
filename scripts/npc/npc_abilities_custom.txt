@@ -157,6 +157,15 @@
 						"Function"	"is_defend"
 					}
 				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
+						"Function"	"stop_defend"
+					}
+				}
 			}
 			"modifier_transport_move_speed"
 			{

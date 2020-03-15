@@ -20,6 +20,7 @@ function Precache(context)
 			PrecacheResource( "particle", "*.vpcf", context )
 			PrecacheResource( "particle_folder", "particles/folder", context )
 	]]
+	PrecacheResource("soundfile", "soundevents/game_sounds_ui_imported.vsndevts", context)
 end
 
 -- Create the game mode when we activate
@@ -44,7 +45,7 @@ function TransportGameMode:InitGameMode()
 	_G.next_corner = 2
 
 	--推进时间
-	_G.push_time = tonumber(_G.load_map["push_time"])
+	_G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
 
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
@@ -67,6 +68,9 @@ function TransportGameMode:InitGameMode()
 	GameRules:SetStartingGold(tonumber(_G.load_kv["first_spawn_hero_gold"]))
 	-- 开启宇宙商店模式
 	GameRules:SetUseUniversalShopMode(true)
+	-- 7.23更新，使用modifier来为英雄增加被动金钱
+	GameRules:SetGoldTickTime(0)
+	GameRules:SetGoldPerTick(0)
 	-- 垃圾回收
 	GameRules:GetGameModeEntity():SetContextThink(
 		DoUniqueString("collectgarbage"),

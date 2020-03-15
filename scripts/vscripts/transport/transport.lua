@@ -182,13 +182,16 @@ function is_defend(keys)
             Notifications:TopToAll(
                 {text = "#defend_success", duration = 3.0, style = {color = "red", ["font-size"] = "50px"}}
             )
+            --成功音效
+            caster:EmitSound("Tutorial.TaskCompleted")
             _G.pre_corner = _G.next_corner
             _G.next_corner = _G.next_corner + 1
             caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
             Utils:unit_abilities_lvlup(caster)
-            ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_road_section", {duration = -1})
+            --设置路段
+            _G.road_section_num = _G.road_section_num + 1
             --重置推进时间
-            _G.push_time = tonumber(_G.load_kv["push_time"])
+            _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
         else
             print("End Game!")
             --如果已经到达最后一个路段终点并防御完成，则结束游戏，推进方获胜
@@ -197,7 +200,16 @@ function is_defend(keys)
     else
         print("Defend remaining time: " .. remaining_time)
         Notifications:TopToAll({text = remaining_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}})
+        --计时音效
+        caster:EmitSound("Tutorial.TaskProgress")
     end
+end
+
+--中断或结束防御阶段事件
+function stop_defend(keys)
+    local caster = keys.caster
+    local ability = keys.ability
+    ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_road_section", {duration = -1})
 end
 
 --推进阶段每秒事件
@@ -223,6 +235,7 @@ function is_push(keys)
                 Notifications:TopToAll(
                     {text = _G.push_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}}
                 )
+                caster:EmitSound("Tutorial.TaskProgress")
             end
             print("Push remaining time: " .. _G.push_time)
             --剩余推进时间减1
