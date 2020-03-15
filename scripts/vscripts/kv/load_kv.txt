@@ -15,6 +15,4 @@
     //初次重生英雄等级和金钱
     "first_spawn_hero_lvl" "6"
     "first_spawn_hero_gold" "1500"
-    //推进时间(秒)
-    "push_time"    "60"
 }

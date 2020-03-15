@@ -1,5 +1,5 @@
 //载入地图路点
-"load_map"
+"load_map_map_1"
 {   
         "1" "section_1"
         "2" "corner_2"
@@ -7,4 +7,6 @@
         "4" "corner_4"
         "5" "section_5"
         "6" "section_6"
+        //推进时间(秒)
+        "push_time"    "60"
 }

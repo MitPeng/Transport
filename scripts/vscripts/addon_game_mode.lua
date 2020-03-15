@@ -12,21 +12,6 @@ require("path")
 require("notifications")
 require("string")
 
---全局变量
--- 载入kv
-_G.load_kv = LoadKeyValues("scripts/vscripts/kv/load_kv.txt")
-_G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map.txt")
-
---保存路段
-_G.road_section_num = 1
-
---保存上一路点和下一路点
-_G.pre_corner = 1
-_G.next_corner = 2
-
---推进时间
-_G.push_time = tonumber(_G.load_kv["push_time"])
-
 function Precache(context)
 	--[[
 		Precache things we know we'll use.  Possible file types include (but not limited to):
@@ -44,6 +29,23 @@ function Activate()
 end
 
 function TransportGameMode:InitGameMode()
+	local map_name = GetMapName()
+	--全局变量
+	-- 载入kv
+	_G.load_kv = LoadKeyValues("scripts/vscripts/kv/load_kv.txt")
+	--根据地图名载入地图信息
+	_G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map_" .. map_name .. ".txt")
+
+	--保存路段
+	_G.road_section_num = 1
+
+	--保存上一路点和下一路点
+	_G.pre_corner = 1
+	_G.next_corner = 2
+
+	--推进时间
+	_G.push_time = tonumber(_G.load_map["push_time"])
+
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
 	-- 监听单位重生或者创建事件
