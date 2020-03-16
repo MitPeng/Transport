@@ -142,7 +142,12 @@ function change_corner(keys)
             elseif string.find(Path:get_corner_name(_G.next_corner), "section") == 1 then
                 --如果进入目标点,但还没进入防御阶段
                 if not caster.is_defend then
-                    ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_defend_road_section", {})
+                    ability:ApplyDataDrivenModifier(
+                        caster,
+                        caster,
+                        "modifier_transport_defend_road_section",
+                        {duration = tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2}
+                    )
                     caster:RemoveModifierByName("modifier_transport_road_section")
                     caster.is_defend = true
                 end
@@ -173,6 +178,7 @@ function is_defend(keys)
     local ability = keys.ability
     local modifier = caster:FindModifierByName("modifier_transport_defend_road_section")
     local remaining_time = math.ceil(modifier:GetRemainingTime())
+    --剩余时间为0
     if remaining_time == 0 then
         --防御阶段结束
         caster.is_defend = false
@@ -180,7 +186,7 @@ function is_defend(keys)
         if _G.load_map[tostring(_G.next_corner + 1)] then
             print("End defend,turn to next road section!")
             Notifications:TopToAll(
-                {text = "#defend_success", duration = 3.0, style = {color = "red", ["font-size"] = "50px"}}
+                {text = "#defend_success", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
             )
             --成功音效
             caster:EmitSound("Tutorial.TaskCompleted")
@@ -198,10 +204,24 @@ function is_defend(keys)
             GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
         end
     else
-        print("Defend remaining time: " .. remaining_time)
-        Notifications:TopToAll({text = remaining_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}})
-        --计时音效
-        caster:EmitSound("Tutorial.TaskProgress")
+        --开始前2秒给提示
+        if remaining_time == tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2 then
+            print("Start Defend!")
+            Notifications:TopToAll(
+                {text = "#start_defend", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
+            )
+            --计时音效
+            caster:EmitSound("Tutorial.TaskProgress")
+        end
+        --开始倒计时
+        if remaining_time <= tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) then
+            print("Defend remaining time: " .. remaining_time)
+            Notifications:TopToAll(
+                {text = remaining_time, duration = 0.9, style = {color = "yellow", ["font-size"] = "50px"}}
+            )
+            --计时音效
+            caster:EmitSound("Tutorial.TaskProgress")
+        end
     end
 end
 
@@ -224,22 +244,32 @@ function is_push(keys)
             --剩余推进时间减1
             _G.push_time = _G.push_time - 1
         elseif _G.push_time > 0 then
-            --提前3秒文字提示
-            if _G.push_time == 33 then
+            --提前2秒文字提示
+            if _G.push_time == 32 then
                 Notifications:TopToAll(
-                    {text = "#push_remain_30", duration = 3.0, style = {color = "red", ["font-size"] = "50px"}}
+                    {text = "#push_remain_30", duration = 2.0, style = {color = "red", ["font-size"] = "50px"}}
                 )
+                --计时音效
+                caster:EmitSound("Tutorial.TaskProgress")
             end
             --倒数30秒数字提示
             if _G.push_time <= 30 then
                 Notifications:TopToAll(
                     {text = _G.push_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}}
                 )
+                --计时音效
                 caster:EmitSound("Tutorial.TaskProgress")
             end
             print("Push remaining time: " .. _G.push_time)
             --剩余推进时间减1
             _G.push_time = _G.push_time - 1
+        end
+    else
+        --若处于防御阶段，并且推进时间小于进入防守阶段保底推进时间，则增加推进时间
+        --若推进时间大于，则不变
+        local shortest_push_time = tonumber(_G.load_map["shortest_push_time"])
+        if _G.push_time < shortest_push_time then
+            _G.push_time = shortest_push_time
         end
     end
 end

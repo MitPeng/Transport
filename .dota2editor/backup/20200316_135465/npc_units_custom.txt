@@ -1,0 +1,37 @@
+// Dota2 Editor
+// Get latest version: https://github.com/zombieJ/nw-dota2editor
+
+"DOTAUnits"
+{
+	"Version"		"1"
+
+	"car_1"
+	{
+		"BaseClass"	"npc_dota_base"
+		"Ability1"	"shelter"
+		"Ability2"	"transport"
+		"Ability3"	""
+		"Ability4"	""
+		"Ability5"	""
+		"Ability6"	""
+		"Ability7"	""
+		"Ability8"	""
+		"Ability9"	""
+		"Ability10"	""
+		"Ability11"	""
+		"Ability12"	""
+		"Ability13"	""
+		"Ability14"	""
+		"Ability15"	""
+		"Ability16"	""
+		"Model"	"models/items/courier/carty/carty.vmdl"
+		"ModelScale"	"4"
+		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_GROUND"
+		"MovementSpeed"	"100"
+		"MovementTurnRate"	"1.0"
+		"HasInventory"	"0"
+		"ConsideredHero"	"0"
+		"VisionDaytimeRange"	"1000"
+		"VisionNighttimeRange"	"1000"
+	}
+}

@@ -24,6 +24,7 @@
 				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 				"Aura_Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_ALL"
 				"Properties"	{}
+				"Aura_Flags"	"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD"
 			}
 			"modifier_shelter_aura"
 			{
@@ -85,6 +86,7 @@
 							"Teams"	"DOTA_UNIT_TARGET_TEAM_BOTH"
 							"Center"	"CASTER"
 							"Radius"	"%radius"
+							"Flags"	"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD"
 						}
 						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
 						"Function"	"is_transport"
@@ -130,7 +132,7 @@
 			}
 			"modifier_transport_defend_road_section"
 			{
-				"Duration"	"%defend_time"
+				"Duration"	"-1"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"TextureName"	"courier_return_to_base"
 				"IsBuff"	"1"
@@ -199,7 +201,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"800"
+				"radius"	"700"
 			}
 			"02"
 			{
@@ -212,11 +214,6 @@
 				"vision_radius"	"300"
 			}
 			"04"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"defend_time"	"10.0"
-			}
-			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
 				"move_speed_per_hero"	"10"

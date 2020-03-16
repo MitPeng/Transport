@@ -11,4 +11,10 @@
         "push_time_1"    "300"
         "push_time_2"    "200"
         "push_time_3"    "100"
+        //每个路段点防守时间(秒)
+        "defend_time_1" "30"
+        "defend_time_2" "20"
+        "defend_time_3" "10"
+        //进入防守阶段后，最短推进时间
+        "shortest_push_time"    "60"
 }
