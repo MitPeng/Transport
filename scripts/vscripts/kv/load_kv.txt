@@ -3,10 +3,10 @@
 {
     //base基础和lvl等级倍数
     //0.3秒涨一次金钱和经验
-    "base_gold" "3.0"
-    "lvl_gold" "0.2"
-    "base_xp" "3.0"
-    "lvl_xp" "0.7"
+    "base_gold" "4.0"
+    "lvl_gold" "0.1"
+    "base_xp" "4.0"
+    "lvl_xp" "0.4"
     //0.3秒涨一次奖励的金钱和经验
     "base_bonus_gold" "2.0"
     "lvl_bonus_gold" "0.1"
@@ -14,5 +14,5 @@
     "lvl_bonus_xp" "0.4"
     //初次重生英雄等级和金钱
     "first_spawn_hero_lvl" "6"
-    "first_spawn_hero_gold" "1500"
+    "first_spawn_hero_gold" "1800"
 }

@@ -60,7 +60,7 @@ function TransportGameMode:InitGameMode()
 	-- 设置展示时间
 	GameRules:SetShowcaseTime(0)
 	-- 设置游戏准备时间
-	GameRules:SetPreGameTime(0)
+	GameRules:SetPreGameTime(30)
 	-- 设置不能买活
 	GameRules:GetGameModeEntity():SetBuybackEnabled(false)
 	-- 设置复活时间
@@ -94,9 +94,39 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
-		-- MakeRandomHeroSelection()
+		--准备时间升至设置等级
+		for i = 0, 9 do
+			local player = PlayerResource:GetPlayer(i)
+			if player then
+				Timers:CreateTimer(
+					1.0,
+					function()
+						local hero = player:GetAssignedHero()
+						if hero then
+							local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
+							local total_xp = 0
+							for i = 1, first_spawn_hero_lvl - 1 do
+								--每级增加经验从经验表中获取
+								local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(i)])
+								total_xp = total_xp + lvlup_xp
+							end
+							hero:AddExperience(total_xp, 0, false, false)
+						end
+					end
+				)
+			end
+		end
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		-- print("Player game begin") -- 玩家开始游戏
+		-- 添加自动获取经验金钱
+		for i = 0, 9 do
+			local player = PlayerResource:GetPlayer(i)
+			if player then
+				local hero = player:GetAssignedHero()
+				local ability = hero:AddAbility("hero_gold_xp")
+				ability:SetLevel(1)
+			end
+		end
 		-- 游戏开始后生成运输车
 		local vec = Path:get_corner_vector(_G.pre_corner)
 		local car = Utils:create_unit_simple("car_1", vec, true, DOTA_TEAM_GOODGUYS)
@@ -110,9 +140,6 @@ function TransportGameMode:OnNPCSpawned(keys)
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
-			-- 添加自动获取经验金钱
-			local ability = hero:AddAbility("hero_gold_xp")
-			ability:SetLevel(1)
 		end
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同
