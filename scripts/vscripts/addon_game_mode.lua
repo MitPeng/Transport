@@ -36,7 +36,8 @@ function TransportGameMode:InitGameMode()
 	_G.load_kv = LoadKeyValues("scripts/vscripts/kv/load_kv.txt")
 	--根据地图名载入地图信息
 	_G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map_" .. map_name .. ".txt")
-
+	--载入经验表
+	_G.load_lvlup_xp = LoadKeyValues("scripts/vscripts/kv/load_lvlup_xp.txt")
 	--保存路段
 	_G.road_section_num = 1
 
