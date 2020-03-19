@@ -178,49 +178,53 @@ function is_defend(keys)
     local ability = keys.ability
     local modifier = caster:FindModifierByName("modifier_transport_defend_road_section")
     local remaining_time = math.ceil(modifier:GetRemainingTime())
-    --剩余时间为0
-    if remaining_time == 0 then
-        --防御阶段结束
-        caster.is_defend = false
-        --如果还存在下一个路点，则设置
-        if _G.load_map[tostring(_G.next_corner + 1)] then
-            print("End defend,turn to next road section!")
-            Notifications:TopToAll(
-                {text = "#defend_success", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
-            )
-            --成功音效
-            caster:EmitSound("Tutorial.TaskCompleted")
-            _G.pre_corner = _G.next_corner
-            _G.next_corner = _G.next_corner + 1
-            caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
-            Utils:unit_abilities_lvlup(caster)
-            --设置路段
-            _G.road_section_num = _G.road_section_num + 1
-            --重置推进时间
-            _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
+    --游戏没结束才运行
+    if not caster.is_game_end then
+        --剩余时间为0
+        if remaining_time == 0 then
+            --防御阶段结束
+            caster.is_defend = false
+            --如果还存在下一个路点，则设置
+            if _G.load_map[tostring(_G.next_corner + 1)] then
+                print("End defend,turn to next road section!")
+                Notifications:TopToAll(
+                    {text = "#defend_success", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
+                )
+                --成功音效
+                caster:EmitSound("Tutorial.TaskCompleted")
+                _G.pre_corner = _G.next_corner
+                _G.next_corner = _G.next_corner + 1
+                caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
+                Utils:unit_abilities_lvlup(caster)
+                --设置路段
+                _G.road_section_num = _G.road_section_num + 1
+                --重置推进时间
+                _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
+            else
+                print("End Game!")
+                --如果已经到达最后一个路段终点并防御完成，则结束游戏，推进方获胜
+                GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
+                caster.is_game_end = true
+            end
         else
-            print("End Game!")
-            --如果已经到达最后一个路段终点并防御完成，则结束游戏，推进方获胜
-            GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
-        end
-    else
-        --开始前2秒给提示
-        if remaining_time == tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2 then
-            print("Start Defend!")
-            Notifications:TopToAll(
-                {text = "#start_defend", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
-            )
-            --计时音效
-            caster:EmitSound("Tutorial.TaskProgress")
-        end
-        --开始倒计时
-        if remaining_time <= tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) then
-            print("Defend remaining time: " .. remaining_time)
-            Notifications:TopToAll(
-                {text = remaining_time, duration = 0.9, style = {color = "yellow", ["font-size"] = "50px"}}
-            )
-            --计时音效
-            caster:EmitSound("Tutorial.TaskProgress")
+            --开始前2秒给提示
+            if remaining_time == tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2 then
+                print("Start Defend!")
+                Notifications:TopToAll(
+                    {text = "#start_defend", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
+                )
+                --计时音效
+                caster:EmitSound("Tutorial.TaskProgress")
+            end
+            --开始倒计时
+            if remaining_time <= tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) then
+                print("Defend remaining time: " .. remaining_time)
+                Notifications:TopToAll(
+                    {text = remaining_time, duration = 0.9, style = {color = "yellow", ["font-size"] = "50px"}}
+                )
+                --计时音效
+                caster:EmitSound("Tutorial.TaskProgress")
+            end
         end
     end
 end
