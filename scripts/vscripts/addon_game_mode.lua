@@ -60,7 +60,7 @@ function TransportGameMode:InitGameMode()
 	-- 设置展示时间
 	GameRules:SetShowcaseTime(0)
 	-- 设置游戏准备时间
-	GameRules:SetPreGameTime(30)
+	GameRules:SetPreGameTime(60)
 	-- 设置不能买活
 	GameRules:GetGameModeEntity():SetBuybackEnabled(false)
 	-- 设置复活时间
@@ -105,9 +105,9 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 						if hero then
 							local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
 							local total_xp = 0
-							for i = 1, first_spawn_hero_lvl - 1 do
+							for k = 1, first_spawn_hero_lvl - 1 do
 								--每级增加经验从经验表中获取
-								local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(i)])
+								local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(k)])
 								total_xp = total_xp + lvlup_xp
 							end
 							hero:AddExperience(total_xp, 0, false, false)
@@ -116,6 +116,13 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 				)
 			end
 		end
+		Timers.CreateTimer(
+			1.0,
+			function()
+				--准备时间提示
+				Notifications:TopToAll({text = "#glhf", duration = 7.0, style = {color = "yellow", ["font-size"] = "40px"}})
+			end
+		)
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		-- print("Player game begin") -- 玩家开始游戏
 		-- 添加自动获取经验金钱
@@ -130,6 +137,10 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		-- 游戏开始后生成运输车
 		local vec = Path:get_corner_vector(_G.pre_corner)
 		local car = Utils:create_unit_simple("car_1", vec, true, DOTA_TEAM_GOODGUYS)
+		--开始运输提示
+		Notifications:TopToAll(
+			{text = "#start_transport", duration = 3.0, style = {color = "yellow", ["font-size"] = "50px"}}
+		)
 	end
 end
 
@@ -172,6 +183,19 @@ end
 
 -- Evaluate the state of the game
 function TransportGameMode:OnThink()
+	if _G.push_time >= 0 then
+		--获取推进时间分秒
+		local push_time_min = math.modf(_G.push_time / 60)
+		local push_time_sec = math.fmod(_G.push_time, 60)
+		if push_time_sec < 10 then
+			push_time_sec = "0" .. push_time_sec
+		end
+		local show_push_time_event = {
+			push_time_min = push_time_min,
+			push_time_sec = push_time_sec
+		}
+		CustomGameEventManager:Send_ServerToAllClients("show_push_time", show_push_time_event)
+	end
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		--print( "Template addon script is running." )
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then

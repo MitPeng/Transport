@@ -3,4 +3,7 @@
     "defend_success" "Defend Success! Turn to the next road section!"
     "push_remain_30"    "Push time is coming to an end!"
     "start_defend"  "Start defending the transporter!"
+    "push_time_remain"  "Push Time"
+    "start_transport"  "Start Transport!"
+    "glhf"  "Good Luck Have Fun !"
 }
