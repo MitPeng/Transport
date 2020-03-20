@@ -187,6 +187,9 @@ function TransportGameMode:OnThink()
 		--获取推进时间分秒
 		local push_time_min = math.modf(_G.push_time / 60)
 		local push_time_sec = math.fmod(_G.push_time, 60)
+		if push_time_min < 10 then
+			push_time_min = "0" .. push_time_min
+		end
 		if push_time_sec < 10 then
 			push_time_sec = "0" .. push_time_sec
 		end

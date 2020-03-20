@@ -8,13 +8,13 @@
         "5" "section_5"
         "6" "section_6"
         //每个路段推进时间(秒)
-        "push_time_1"    "3000"
-        "push_time_2"    "2000"
-        "push_time_3"    "1000"
+        "push_time_1"    "150"
+        "push_time_2"    "100"
+        "push_time_3"    "100"
         //每个路段点防守时间(秒)
-        "defend_time_1" "30"
-        "defend_time_2" "20"
-        "defend_time_3" "10"
+        "defend_time_1" "10"
+        "defend_time_2" "9"
+        "defend_time_3" "8"
         //进入防守阶段后，最短推进时间
         "shortest_push_time"    "60"
 }
