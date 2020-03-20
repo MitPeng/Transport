@@ -248,6 +248,21 @@ function is_push(keys)
             --剩余推进时间减1
             _G.push_time = _G.push_time - 1
         elseif _G.push_time > 0 then
+            --获取推进时间分秒
+            local push_time_min = math.modf(_G.push_time / 60)
+            local push_time_sec = math.fmod(_G.push_time, 60)
+            if push_time_min < 10 then
+                push_time_min = "0" .. push_time_min
+            end
+            if push_time_sec < 10 then
+                push_time_sec = "0" .. push_time_sec
+            end
+            local show_push_time_event = {
+                push_time_min = push_time_min,
+                push_time_sec = push_time_sec
+            }
+            --推进时间UI显示
+            CustomGameEventManager:Send_ServerToAllClients("show_push_time", show_push_time_event)
             --提前2秒文字提示
             if _G.push_time == 32 then
                 Notifications:TopToAll(
