@@ -48,6 +48,16 @@ function TransportGameMode:InitGameMode()
 	--推进时间
 	_G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
 
+	--记录路段点
+	_G.map_sections = {}
+	local i = 1
+	for _, v in pairs(_G.load_map) do
+		if string.find(v, "section") == 1 then
+			_G.map_sections[i] = Entities:FindByName(nil, v):GetAbsOrigin()
+			i = i + 1
+		end
+	end
+
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
 	-- 监听单位重生或者创建事件
@@ -136,7 +146,7 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		end
 		-- 游戏开始后生成运输车
 		local vec = Path:get_corner_vector(_G.pre_corner)
-		local car = Utils:create_unit_simple("car_1", vec, true, DOTA_TEAM_GOODGUYS)
+		local car = Utils:create_unit_simple(_G.load_map["car_name"], vec, true, DOTA_TEAM_GOODGUYS)
 		--开始运输提示
 		Notifications:TopToAll(
 			{text = "#start_transport", duration = 3.0, style = {color = "yellow", ["font-size"] = "50px"}}
@@ -183,6 +193,15 @@ end
 
 -- Evaluate the state of the game
 function TransportGameMode:OnThink()
+	--每个路段点提供视野
+	for _, v in ipairs(_G.map_sections) do
+		local loc = v
+		local radius = 600
+		local interval = 1.0
+		AddFOWViewer(DOTA_TEAM_GOODGUYS, loc, radius, interval, false)
+		AddFOWViewer(DOTA_TEAM_BADGUYS, loc, radius, interval, false)
+	end
+
 	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
 		--print( "Template addon script is running." )
 	elseif GameRules:State_Get() >= DOTA_GAMERULES_STATE_POST_GAME then

@@ -1,0 +1,32 @@
+//载入地图路点
+"load_map_forest"
+{   
+        "1" "section_1"
+        "2" "corner_2"
+        "3" "corner_3"
+        "4" "section_4"
+        "5" "corner_5"
+        "6" "corner_6"
+        "7" "corner_7"
+        "8" "corner_8"
+        "9" "corner_9"
+        "10" "corner_10"
+        "11" "section_11"
+        "12" "corner_12"
+        "13" "corner_13"
+        "14" "corner_14"
+        "15" "corner_15"
+        "16" "section_16"
+        //每个路段推进时间(秒)
+        "push_time_1"    "480"
+        "push_time_2"    "600"
+        "push_time_3"    "480"
+        //每个路段点防守时间(秒)
+        "defend_time_1" "20"
+        "defend_time_2" "20"
+        "defend_time_3" "30"
+        //进入防守阶段后，最短推进时间
+        "shortest_push_time"    "60"
+        //运输车名
+        "car_name"      "car_forest"
+}
