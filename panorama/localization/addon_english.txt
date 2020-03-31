@@ -6,4 +6,6 @@
     "push_time_remain"  "Push Time"
     "start_transport"  "Start Transport!"
     "glhf"  "Good Luck Have Fun !"
+    "player_prepare"  "Prepare to battle !"
+    "car_spawn"  "Transport car will be spawned !"
 }

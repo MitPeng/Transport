@@ -103,34 +103,60 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
+		-- end
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
 		--准备时间升至设置等级
-		for i = 0, 9 do
-			local player = PlayerResource:GetPlayer(i)
-			if player then
-				Timers:CreateTimer(
-					1.0,
-					function()
+		Timers:CreateTimer(
+			1.0,
+			function()
+				local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
+				local total_xp = 0
+				for k = 1, first_spawn_hero_lvl - 1 do
+					--每级增加经验从经验表中获取
+					local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(k)])
+					total_xp = total_xp + lvlup_xp
+				end
+				for i = 0, 9 do
+					local player = PlayerResource:GetPlayer(i)
+					if player then
 						local hero = player:GetAssignedHero()
 						if hero then
-							local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
-							local total_xp = 0
-							for k = 1, first_spawn_hero_lvl - 1 do
-								--每级增加经验从经验表中获取
-								local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(k)])
-								total_xp = total_xp + lvlup_xp
-							end
 							hero:AddExperience(total_xp, 0, false, false)
 						end
 					end
-				)
+				end
 			end
-		end
-		Timers.CreateTimer(
-			1.0,
+		)
+		Timers:CreateTimer(
+			4.0,
 			function()
 				--准备时间提示
-				Notifications:TopToAll({text = "#glhf", duration = 7.0, style = {color = "yellow", ["font-size"] = "40px"}})
+				Notifications:TopToAll({text = "#glhf", duration = 6.0, style = {color = "yellow", ["font-size"] = "40px"}})
+			end
+		)
+		Timers:CreateTimer(
+			12.0,
+			function()
+				--玩家准备提示
+				Notifications:TopToAll(
+					{text = "#player_prepare", duration = 6.0, style = {color = "yellow", ["font-size"] = "40px"}}
+				)
+			end
+		)
+		Timers:CreateTimer(
+			20.0,
+			function()
+				--运输车出生提示
+				Notifications:TopToAll({text = "#car_spawn", duration = 30.0, style = {color = "yellow", ["font-size"] = "40px"}})
+				local start_vec = Path:get_corner(_G.pre_corner):GetAbsOrigin()
+				for i = 0, 10 do
+					Timers:CreateTimer(
+						i * 3,
+						function()
+							CustomGameEventManager:Send_ServerToAllClients("frd_ping_minimap", {loc = start_vec})
+						end
+					)
+				end
 			end
 		)
 	elseif newState == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
@@ -147,6 +173,7 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		-- 游戏开始后生成运输车
 		local vec = Path:get_corner_vector(_G.pre_corner)
 		local car = Utils:create_unit_simple(_G.load_map["car_name"], vec, true, DOTA_TEAM_GOODGUYS)
+		car:SetForwardVector(Path:get_corner_vector(_G.next_corner) - Path:get_corner_vector(_G.pre_corner))
 		--开始运输提示
 		Notifications:TopToAll(
 			{text = "#start_transport", duration = 3.0, style = {color = "yellow", ["font-size"] = "50px"}}
