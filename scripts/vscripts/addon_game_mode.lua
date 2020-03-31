@@ -57,6 +57,15 @@ function TransportGameMode:InitGameMode()
 			i = i + 1
 		end
 	end
+	--记录初次出生所需等级经验
+	local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
+	local total_xp = 0
+	for k = 1, first_spawn_hero_lvl - 1 do
+		--每级增加经验从经验表中获取
+		local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(k)])
+		total_xp = total_xp + lvlup_xp
+	end
+	_G.first_spawn_xp = total_xp
 
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
@@ -105,28 +114,6 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		-- end
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
-		--准备时间升至设置等级
-		Timers:CreateTimer(
-			1.0,
-			function()
-				local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
-				local total_xp = 0
-				for k = 1, first_spawn_hero_lvl - 1 do
-					--每级增加经验从经验表中获取
-					local lvlup_xp = tonumber(_G.load_lvlup_xp[tostring(k)])
-					total_xp = total_xp + lvlup_xp
-				end
-				for i = 0, 9 do
-					local player = PlayerResource:GetPlayer(i)
-					if player then
-						local hero = player:GetAssignedHero()
-						if hero then
-							hero:AddExperience(total_xp, 0, false, false)
-						end
-					end
-				end
-			end
-		)
 		Timers:CreateTimer(
 			4.0,
 			function()
@@ -188,6 +175,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
+			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
 		end
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同

@@ -52,12 +52,13 @@ function is_transport(keys)
         for i, hero in ipairs(bad_hero) do
             if hero:IsRealHero() then
                 local level = hero:GetLevel()
-                local xp = _G.load_kv["base_xp"] + level * _G.load_kv["lvl_xp"]
-                hero:AddExperience(xp, 0, false, false)
-                local gold =
-                    PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + _G.load_kv["base_gold"] +
-                    level * _G.load_kv["lvl_gold"]
+                local add_xp = _G.load_kv["base_bonus_xp"] + level * _G.load_kv["lvl_bonus_xp"]
+                hero:AddExperience(add_xp, 0, false, false)
+                PopupXPGain(hero, math.floor(xp))
+                local add_gold = _G.load_kv["base_bonus_gold"] + level * _G.load_kv["lvl_bonus_gold"]
+                local gold = PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + add_gold
                 PlayerResource:SetGold(hero:GetPlayerID(), gold, false)
+                PopupGoldGain(hero, math.floor(add_gold))
             end
         end
     elseif good ~= 0 and bad == 0 then
@@ -88,12 +89,13 @@ function is_transport(keys)
         for i, hero in ipairs(good_hero) do
             if hero:IsRealHero() then
                 local level = hero:GetLevel()
-                local xp = _G.load_kv["base_bonus_xp"] + level * _G.load_kv["lvl_bonus_xp"]
-                hero:AddExperience(xp, 0, false, false)
-                local gold =
-                    PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + _G.load_kv["base_bonus_gold"] +
-                    level * _G.load_kv["lvl_bonus_gold"]
+                local add_xp = _G.load_kv["base_bonus_xp"] + level * _G.load_kv["lvl_bonus_xp"]
+                hero:AddExperience(add_xp, 0, false, false)
+                PopupXPGain(hero, math.floor(add_xp))
+                local add_gold = _G.load_kv["base_bonus_gold"] + level * _G.load_kv["lvl_bonus_gold"]
+                local gold = PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + add_gold
                 PlayerResource:SetGold(hero:GetPlayerID(), gold, false)
+                PopupGoldGain(hero, math.floor(add_gold))
             end
         end
     elseif good == 0 and bad == 0 then
