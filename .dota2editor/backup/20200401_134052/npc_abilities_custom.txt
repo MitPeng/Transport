@@ -67,6 +67,10 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_BOTH"
 		"AbilityCastRange"	"%radius"
+		"precache"
+		{
+			"particle"	"particles/transport_bonus_area.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_transport"
@@ -195,6 +199,49 @@
 				"ThinkInterval"	"1.0"
 				"Passive"	"1"
 			}
+			"modifier_transport_bonus"
+			{
+				"Duration"	"-1"
+				"ThinkInterval"	"%interval"
+				"Passive"	"1"
+				"IsBuff"	"0"
+				"IsHidden"	"1"
+				"Aura"	"modifier_transport_bonus_apply"
+				"Aura_Radius"	"%radius"
+				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_BOTH"
+				"Aura_Types"	"DOTA_UNIT_TARGET_HERO"
+				"Aura_Flags"	"DOTA_UNIT_TARGET_FLAG_INVULNERABLE | DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES | DOTA_UNIT_TARGET_FLAG_NOT_ANCIENTS | DOTA_UNIT_TARGET_FLAG_NOT_CREEP_HERO | DOTA_UNIT_TARGET_FLAG_NOT_ILLUSIONS | DOTA_UNIT_TARGET_FLAG_NOT_SUMMONED | DOTA_UNIT_TARGET_FLAG_OUT_OF_WORLD"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"EffectName"	"particles/transport_bonus_area.vpcf"
+				"EffectAttachType"	"follow_origin"
+			}
+			"modifier_transport_bonus_apply"
+			{
+				"Passive"	"0"
+				"Duration"	"-1"
+				"TextureName"	"buyback"
+				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
+						"Function"	"bonus_apply"
+					}
+				}
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/transport.lua"
+						"Function"	"bonus_apply"
+					}
+				}
+				"ThinkInterval"	"1.0"
+				"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+			}
 		}
 		"AbilitySpecial"
 		{
@@ -245,15 +292,7 @@
 					}
 				}
 				"ThinkInterval"	"1.0"
-				"IsHidden"	"0"
-			}
-		}
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"radius"	"700"
+				"IsHidden"	"1"
 			}
 		}
 	}

@@ -57,6 +57,7 @@ function TransportGameMode:InitGameMode()
 			i = i + 1
 		end
 	end
+
 	--记录初次出生所需等级经验
 	local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
 	local total_xp = 0
@@ -161,6 +162,8 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		local vec = Path:get_corner_vector(_G.pre_corner)
 		local car = Utils:create_unit_simple(_G.load_map["car_name"], vec, true, DOTA_TEAM_GOODGUYS)
 		car:SetForwardVector(Path:get_corner_vector(_G.next_corner) - Path:get_corner_vector(_G.pre_corner))
+		--保存运输车实体
+		_G.transport_car = car
 		--开始运输提示
 		Notifications:TopToAll(
 			{text = "#start_transport", duration = 3.0, style = {color = "yellow", ["font-size"] = "50px"}}

@@ -48,19 +48,6 @@ function is_transport(keys)
             caster:MoveToPosition(Path:get_corner(_G.pre_corner):GetOrigin())
         -- Path:find_path(caster, Path:get_path(caster))
         end
-        --防守方加经验和金钱
-        for i, hero in ipairs(bad_hero) do
-            if hero:IsRealHero() then
-                local level = hero:GetLevel()
-                local add_xp = _G.load_kv["base_bonus_xp"] + level * _G.load_kv["lvl_bonus_xp"]
-                hero:AddExperience(add_xp, 0, false, false)
-                PopupXPGain(hero, math.floor(xp))
-                local add_gold = _G.load_kv["base_bonus_gold"] + level * _G.load_kv["lvl_bonus_gold"]
-                local gold = PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + add_gold
-                PlayerResource:SetGold(hero:GetPlayerID(), gold, false)
-                PopupGoldGain(hero, math.floor(add_gold))
-            end
-        end
     elseif good ~= 0 and bad == 0 then
         --根据人数设置移速
         if caster:HasModifier("modifier_transport_move_speed") then
@@ -83,19 +70,6 @@ function is_transport(keys)
                 caster.is_good_transport = true
                 caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
             -- Path:find_path(caster, Path:get_path(caster))
-            end
-        end
-        --运输方加经验和金钱
-        for i, hero in ipairs(good_hero) do
-            if hero:IsRealHero() then
-                local level = hero:GetLevel()
-                local add_xp = _G.load_kv["base_bonus_xp"] + level * _G.load_kv["lvl_bonus_xp"]
-                hero:AddExperience(add_xp, 0, false, false)
-                PopupXPGain(hero, math.floor(add_xp))
-                local add_gold = _G.load_kv["base_bonus_gold"] + level * _G.load_kv["lvl_bonus_gold"]
-                local gold = PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + add_gold
-                PlayerResource:SetGold(hero:GetPlayerID(), gold, false)
-                PopupGoldGain(hero, math.floor(add_gold))
             end
         end
     elseif good == 0 and bad == 0 then
