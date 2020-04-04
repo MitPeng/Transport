@@ -85,6 +85,9 @@ function TransportGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetBuybackEnabled(false)
 	-- 设置复活时间
 	GameRules:GetGameModeEntity():SetFixedRespawnTime(10.0)
+	--设置泉水回蓝回血
+	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen(10.0)
+	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen(10.0)
 	-- 设置初始金钱
 	GameRules:SetStartingGold(tonumber(_G.load_kv["first_spawn_hero_gold"]))
 	-- 开启宇宙商店模式
