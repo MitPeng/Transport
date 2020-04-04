@@ -72,6 +72,8 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
 	-- 监听单位重生或者创建事件
 	ListenToGameEvent("npc_spawned", Dynamic_Wrap(TransportGameMode, "OnNPCSpawned"), self)
+	-- 监听玩家聊天事件
+	ListenToGameEvent("player_chat", Dynamic_Wrap(TransportGameMode, "PlayerChat"), self)
 
 	-- 设置选择英雄时间
 	GameRules:SetHeroSelectionTime(90)
@@ -209,6 +211,30 @@ function TransportGameMode:OnNPCSpawned(keys)
 				)
 			end
 		)
+	end
+end
+
+function TransportGameMode:PlayerChat(keys)
+	--添加天赋技能
+	--猛然一击
+	if keys.text == "suddenly_strike" then
+		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+		local ability = hero:AddAbility("suddenly_strike")
+		ability:SetLevel(1)
+		hero.talent_ability = ability
+	end
+	--删除天赋技能
+	if keys.text == "delete_talent" then
+		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+		for i = 0, hero:GetModifierCount() do
+			local modifier_name = hero:GetModifierNameByIndex(i)
+			-- print(i .. ":" .. modifier_name)
+			if modifier_name ~= nil and string.find(modifier_name, hero.talent_ability:GetAbilityName()) then
+				hero:RemoveModifierByName(modifier_name)
+			end
+		end
+		hero:RemoveAbilityByHandle(hero.talent_ability)
+		hero.talent_ability = nil
 	end
 end
 

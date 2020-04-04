@@ -257,4 +257,81 @@
 			}
 		}
 	}
+
+	"suddenly_strike"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"modifier_cny2015_combat"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_ALL"
+		"AbilityUnitDamageType"	"DAMAGE_TYPE_PURE"
+		"SpellImmunityType"	"SPELL_IMMUNITY_ENEMIES_YES"
+		"MaxLevel"	"1"
+		"RequiredLevel"	"1"
+		"AbilityCooldown"	"6.0"
+		"precache"
+		{
+			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"particle"	"particles/units/heroes/hero_pangolier/pangolier_luckyshot_disarm_cast.vpcf"
+		}
+		"Modifiers"
+		{
+			"modifier_suddenly_strike_apply"
+			{
+				"Duration"	"-1"
+				"TextureName"	"modifier_cny2015_combat"
+				"IsBuff"	"1"
+				"OnAttackLanded"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"scripts/vscripts/talent/suddenly_strike.lua"
+						"Function"	"damage"
+					}
+				}
+				"Passive"	"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"EffectAttachType"	"follow_origin"
+				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
+			}
+			"modifier_suddenly_strike_slow"
+			{
+				"Duration"	"%slow_time"
+				"TextureName"	"modifier_cny2015_combat"
+				"IsDebuff"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%slow_percent"
+				}
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"particles/units/heroes/hero_pangolier/pangolier_luckyshot_disarm_cast.vpcf"
+						"EffectAttachType"	"attach_hitloc"
+					}
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_damage"	"20"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"slow_percent"	"-80"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"slow_time"	"1.5"
+			}
+		}
+	}
 }
