@@ -379,7 +379,7 @@
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
-				"OnAttackLanded"
+				"OnDealDamage"
 				{
 					"Lifesteal"
 					{

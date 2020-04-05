@@ -340,12 +340,6 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"modifier_cny_beast_aegis"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"MaxLevel"	"1"
-		"RequiredLevel"	"1"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_huskar/huskar_berserkers_blood_glow.vpcf"
-		}
 		"Modifiers"
 		{
 			"modifier_bloodthirsty"
@@ -368,32 +362,23 @@
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%count_duration"
-				"TextureName"	"bloodthirsty_count"
+				"TextureName"	"modifier_cny_beast_aegis"
 				"IsBuff"	"1"
 			}
 			"modifier_bloodthirsty_apply"
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%bloodthirsty_duration"
-				"TextureName"	"bloodthirsty_apply"
+				"TextureName"	"modifier_cny_beast_aegis"
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
-				"OnAttackLanded"
+				"OnDealDamage"
 				{
 					"Lifesteal"
 					{
-						"Target"	"CASTER"
+						"Target"	"TARGET"
 						"LifestealPercent"	"%lifesteal_percent"
-					}
-				}
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"Target"	"CASTER"
-						"ScriptFile"	"scripts/vscripts/talent/bloodthirsty.lua"
-						"Function"	"fire_effect"
 					}
 				}
 			}
@@ -403,12 +388,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_times"	"8"
+				"attack_times"	"10"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"count_duration"	"5"
+				"count_duration"	"10"
 			}
 			"03"
 			{

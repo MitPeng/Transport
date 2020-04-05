@@ -379,7 +379,7 @@
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
-				"OnAttackLanded"
+				"OnDealDamage"
 				{
 					"Lifesteal"
 					{
@@ -392,8 +392,6 @@
 					"RunScript"
 					{
 						"Target"	"CASTER"
-						"ScriptFile"	"scripts/vscripts/talent/bloodthirsty.lua"
-						"Function"	"fire_effect"
 					}
 				}
 			}
