@@ -396,6 +396,8 @@
 						"Function"	"fire_effect"
 					}
 				}
+				"StatusEffectName"	"particles/status_fx/status_effect_life_stealer_rage.vpcf"
+				"StatusEffectPriority"	"10"
 			}
 		}
 		"AbilitySpecial"

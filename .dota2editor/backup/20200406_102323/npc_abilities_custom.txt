@@ -342,6 +342,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_huskar/huskar_berserkers_blood_glow.vpcf"
+			"particle"	"particles/econ/items/lifestealer/ls_ti9_immortal/ls_ti9_open_wounds.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_bloodthirsty"
@@ -375,7 +380,7 @@
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
-				"OnDealDamage"
+				"OnAttackLanded"
 				{
 					"Lifesteal"
 					{
@@ -383,6 +388,17 @@
 						"LifestealPercent"	"%lifesteal_percent"
 					}
 				}
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/bloodthirsty.lua"
+						"Function"	"fire_effect"
+					}
+				}
+				"EffectName"	"particles/econ/items/lifestealer/ls_ti9_immortal/ls_ti9_open_wounds.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -390,12 +406,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_times"	"10"
+				"attack_times"	"8"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"count_duration"	"10"
+				"count_duration"	"5"
 			}
 			"03"
 			{
