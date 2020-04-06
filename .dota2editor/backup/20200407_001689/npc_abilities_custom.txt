@@ -531,10 +531,6 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
-		}
 		"Modifiers"
 		{
 			"modifier_charge"
@@ -600,8 +596,6 @@
 						"ModifierName"	"modifier_charge_damage_amp"
 					}
 				}
-				"EffectName"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
-				"EffectAttachType"	"attach_origin"
 			}
 			"modifier_charge_damage_amp"
 			{
@@ -632,11 +626,6 @@
 			{
 				"var_type"	"FIELD_FLOAT"
 				"lvl_amp"	"2"
-			}
-			"04"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"charge_distance"	"650"
 			}
 		}
 	}

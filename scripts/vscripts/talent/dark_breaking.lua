@@ -34,7 +34,6 @@ function breaking(keys)
     local caster = keys.caster
     local target_armor = target:GetPhysicalArmorValue(false)
     local target_magic_resistance = target:GetMagicalArmorValue()
-    print(target_magic_resistance)
     local max_count = ability:GetSpecialValueFor("max_count")
     local break_percent = ability:GetSpecialValueFor("break_percent") / 100
     local count = target:GetModifierStackCount("modifier_dark_breaking_target_count", caster)
