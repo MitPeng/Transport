@@ -17,7 +17,7 @@ function count_buff(keys)
                 caster:RemoveModifierByName("modifier_bloodthirsty_count")
                 ability:ApplyDataDrivenModifier(caster, caster, "modifier_bloodthirsty_count", {})
                 caster:SetModifierStackCount("modifier_bloodthirsty_count", caster, count)
-            elseif count == attack_times - 1 then --计数等于9则加嗜血buff并清除计数buff
+            elseif count == attack_times - 1 then --计数等于attack_times-1则加嗜血buff并清除计数buff
                 caster:RemoveModifierByName("modifier_bloodthirsty_count")
                 ability:ApplyDataDrivenModifier(caster, caster, "modifier_bloodthirsty_apply", {})
             end
@@ -26,22 +26,4 @@ function count_buff(keys)
             caster:SetModifierStackCount("modifier_bloodthirsty_count", caster, 1)
         end
     end
-end
-
-function fire_effect(keys)
-    -- Get Resources
-    local particle_cast = "particles/units/heroes/hero_huskar/huskar_berserkers_blood_glow.vpcf"
-    local modifier = keys.caster:FindModifierByName("modifier_bloodthirsty_apply")
-    -- Create Particle
-    local effect_cast = ParticleManager:CreateParticle(particle_cast, PATTACH_ABSORIGIN_FOLLOW, modifier:GetParent())
-
-    -- buff particle
-    modifier:AddParticle(
-        effect_cast,
-        false, -- bDestroyImmediately
-        false, -- bStatusEffect
-        -1, -- iPriority
-        false, -- bHeroEffect
-        false -- bOverheadEffect
-    )
 end

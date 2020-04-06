@@ -424,10 +424,6 @@
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_ALL"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"precache"
-		{
-			"particle"	"particles/units/heroes/hero_snapfire/hero_snapfire_shells_debuff.vpcf"
-		}
 		"Modifiers"
 		{
 			"modifier_dark_breaking"
@@ -452,8 +448,6 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"TextureName"	"dark_breaking"
 				"IsDebuff"	"1"
-				"EffectName"	"particles/units/heroes/hero_snapfire/hero_snapfire_shells_debuff.vpcf"
-				"EffectAttachType"	"follow_overhead"
 			}
 			"modifier_dark_breaking_target_apply"
 			{
