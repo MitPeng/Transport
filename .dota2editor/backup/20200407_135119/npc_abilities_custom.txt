@@ -693,17 +693,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"attack_time"	"1.1"
+				"attack_time"	"0.9"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed"	"100"
+				"attack_speed"	"150"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"2.5"
+				"duration"	"1.5"
 			}
 		}
 	}
