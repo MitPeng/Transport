@@ -721,71 +721,8 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"max_count"	"60"
+				"max_count"	"80"
 			}
 		}
-	}
-
-	"source_of_life"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"forest_troll_high_priest_heal"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"block_master"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"sylph_sprite_shield"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"unstoppable"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"blue_dragonspawn_sorcerer_evasion"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"boiling_blood"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"forged_spirit_melting_strike"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"keen"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"sylph_spriggans_curse"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"mana_surging"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"filler_ability"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"arcane_comprehension"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"spawnlord_aura"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"soul_harvest"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"necronomicon_warrior_last_will"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-	}
-
-	"rebirth"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"sylph_revive"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 }
