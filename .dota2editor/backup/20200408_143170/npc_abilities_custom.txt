@@ -806,7 +806,7 @@
 				"Properties"	{}
 				"Passive"	"1"
 				"Duration"	"-1"
-				"IsHidden"	"1"
+				"IsHidden"	"0"
 				"OnCreated"
 				{
 					"ApplyModifier"
@@ -832,7 +832,7 @@
 						"Function"	"apply_count"
 					}
 				}
-				"IsBuff"	"0"
+				"IsBuff"	"1"
 				"TextureName"	"block_master"
 				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
 				"EffectAttachType"	"follow_origin"

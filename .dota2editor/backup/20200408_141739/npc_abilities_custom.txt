@@ -791,14 +791,10 @@
 	"block_master"
 	{
 		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"block_master"
+		"AbilityTextureName"	"sylph_sprite_shield"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"precache"
-		{
-			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
-		}
 		"Modifiers"
 		{
 			"modifier_block_master"
@@ -806,7 +802,7 @@
 				"Properties"	{}
 				"Passive"	"1"
 				"Duration"	"-1"
-				"IsHidden"	"1"
+				"IsHidden"	"0"
 				"OnCreated"
 				{
 					"ApplyModifier"
@@ -832,10 +828,7 @@
 						"Function"	"apply_count"
 					}
 				}
-				"IsBuff"	"0"
-				"TextureName"	"block_master"
-				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
-				"EffectAttachType"	"follow_origin"
+				"IsBuff"	"1"
 			}
 			"modifier_block_master_lua_base_damage"
 			{
@@ -863,7 +856,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"block_percent"	"40"
+				"block_percent"	"60"
 			}
 		}
 	}
