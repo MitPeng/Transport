@@ -991,12 +991,6 @@
 						"ModifierName"	"modifier_bloodseeker_thirst"
 						"Duration"	"-1"
 					}
-					"ApplyModifier"
-					{
-						"Target"	"CASTER"
-						"ModifierName"	"modifier_phased"
-						"Duration"	"-1"
-					}
 				}
 				"OnIntervalThink"
 				{
@@ -1013,11 +1007,6 @@
 					{
 						"Target"	"CASTER"
 						"ModifierName"	"modifier_bloodseeker_thirst"
-					}
-					"RemoveModifier"
-					{
-						"Target"	"CASTER"
-						"ModifierName"	"modifier_phased"
 					}
 				}
 				"ThinkInterval"	"%interval"
@@ -1036,7 +1025,7 @@
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_movespeed"
 				}
-				"ThinkInterval"	"0.15"
+				"ThinkInterval"	"0.8"
 				"OnIntervalThink"
 				{
 					"FireEffect"

@@ -994,7 +994,7 @@
 					"ApplyModifier"
 					{
 						"Target"	"CASTER"
-						"ModifierName"	"modifier_phased"
+						"ModifierName"	"modifier_phrased"
 						"Duration"	"-1"
 					}
 				}
@@ -1017,7 +1017,7 @@
 					"RemoveModifier"
 					{
 						"Target"	"CASTER"
-						"ModifierName"	"modifier_phased"
+						"ModifierName"	"modifier_phrased"
 					}
 				}
 				"ThinkInterval"	"%interval"
@@ -1036,7 +1036,7 @@
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_movespeed"
 				}
-				"ThinkInterval"	"0.15"
+				"ThinkInterval"	"0.3"
 				"OnIntervalThink"
 				{
 					"FireEffect"

@@ -1036,7 +1036,7 @@
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_movespeed"
 				}
-				"ThinkInterval"	"0.15"
+				"ThinkInterval"	"0.3"
 				"OnIntervalThink"
 				{
 					"FireEffect"
