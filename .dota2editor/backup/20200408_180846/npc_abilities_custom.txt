@@ -735,6 +735,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"600"
+		"precache"
+		{
+			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_source_of_life"
@@ -765,6 +769,8 @@
 					}
 				}
 				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -782,11 +788,91 @@
 		}
 	}
 
-	"block_master_lua"
+	"block_master"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"block_master"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"	"1"
+		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+		}
+		"Modifiers"
+		{
+			"modifier_block_master"
+			{
+				"Properties"	{}
+				"Passive"	"1"
+				"Duration"	"-1"
+				"IsHidden"	"1"
+				"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"Target"	"CASTER"
+						"ModifierName"	"modifier_block_master_lua_base_damage"
+						"Duration"	"-1"
+					}
+					"ApplyModifier"
+					{
+						"Target"	"CASTER"
+						"ModifierName"	"modifier_block_master_block_damage"
+						"Duration"	"-1"
+					}
+				}
+				"ThinkInterval"	"0.1"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/block_master.lua"
+						"Function"	"apply_count"
+					}
+				}
+				"IsBuff"	"0"
+				"TextureName"	"block_master"
+				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"EffectAttachType"	"follow_origin"
+			}
+			"modifier_block_master_lua_base_damage"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"IsHidden"	"1"
+				"Duration"	"-1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"-1"
+				}
+			}
+			"modifier_block_master_block_damage"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"IsHidden"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK"	"1"
+				}
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"block_percent"	"40"
+			}
+		}
+	}
+
+	"unstoppable_lua"
 	{
 		"BaseClass"	"ability_lua"
-		"AbilityTextureName"	"sylph_sprite_shield"
-		"ScriptFile"	"talent/block_master_lua"
+		"AbilityTextureName"	"blue_dragonspawn_sorcerer_evasion"
+		"ScriptFile"	"talent/unstoppable_lua"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
@@ -794,19 +880,20 @@
 		{
 			"01"
 			{
-				"var_type"	"FIELD_INTEGER"
-				"block_percent"	"60"
+				"var_type"	"FIELD_FLOAT"
+				"lvl_armor"	"1.5"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_magic"	"1.5"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_status"	"1.5"
 			}
 		}
-	}
-
-	"unstoppable"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"blue_dragonspawn_sorcerer_evasion"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"MaxLevel"	"1"
-		"RequiredLevel"	"1"
 	}
 
 	"boiling_blood"

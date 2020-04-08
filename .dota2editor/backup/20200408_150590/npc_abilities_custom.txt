@@ -795,6 +795,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_block_master"
@@ -802,7 +806,7 @@
 				"Properties"	{}
 				"Passive"	"1"
 				"Duration"	"-1"
-				"IsHidden"	"0"
+				"IsHidden"	"1"
 				"OnCreated"
 				{
 					"ApplyModifier"
@@ -828,8 +832,10 @@
 						"Function"	"apply_count"
 					}
 				}
-				"IsBuff"	"1"
+				"IsBuff"	"0"
 				"TextureName"	"block_master"
+				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_block_master_lua_base_damage"
 			{
@@ -857,7 +863,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"block_percent"	"30"
+				"block_percent"	"40"
 			}
 		}
 	}

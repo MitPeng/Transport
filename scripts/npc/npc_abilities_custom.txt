@@ -868,13 +868,32 @@
 		}
 	}
 
-	"unstoppable"
+	"unstoppable_lua"
 	{
-		"BaseClass"	"ability_datadriven"
+		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"blue_dragonspawn_sorcerer_evasion"
+		"ScriptFile"	"talent/unstoppable_lua"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_armor"	"1.5"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_magic"	"1.5"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_status"	"1.5"
+			}
+		}
 	}
 
 	"boiling_blood"

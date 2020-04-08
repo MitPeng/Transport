@@ -791,10 +791,14 @@
 	"block_master"
 	{
 		"BaseClass"	"ability_datadriven"
-		"AbilityTextureName"	"sylph_sprite_shield"
+		"AbilityTextureName"	"block_master"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_block_master"
@@ -802,7 +806,7 @@
 				"Properties"	{}
 				"Passive"	"1"
 				"Duration"	"-1"
-				"IsHidden"	"0"
+				"IsHidden"	"1"
 				"OnCreated"
 				{
 					"ApplyModifier"
@@ -828,7 +832,10 @@
 						"Function"	"apply_count"
 					}
 				}
-				"IsBuff"	"1"
+				"IsBuff"	"0"
+				"TextureName"	"block_master"
+				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_block_master_lua_base_damage"
 			{
@@ -856,18 +863,37 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"block_percent"	"60"
+				"block_percent"	"40"
 			}
 		}
 	}
 
-	"unstoppable"
+	"unstoppable_lua"
 	{
-		"BaseClass"	"ability_datadriven"
+		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"blue_dragonspawn_sorcerer_evasion"
+		"ScriptFile"	"talent/unstoppable_lua"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_armor"	"1.5"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_magic"	"1.5"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_status"	"1.0"
+			}
+		}
 	}
 
 	"boiling_blood"

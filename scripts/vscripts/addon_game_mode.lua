@@ -265,10 +265,17 @@ function TransportGameMode:PlayerChat(keys)
 		ability:SetLevel(1)
 		hero.talent_ability = ability
 	end
-	-- 生命源泉
+	-- 格挡大师
 	if keys.text == "block_master" then
 		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
 		local ability = hero:AddAbility("block_master")
+		ability:SetLevel(1)
+		hero.talent_ability = ability
+	end
+	-- 势不可挡
+	if keys.text == "unstoppable" then
+		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+		local ability = hero:AddAbility("unstoppable_lua")
 		ability:SetLevel(1)
 		hero.talent_ability = ability
 	end
