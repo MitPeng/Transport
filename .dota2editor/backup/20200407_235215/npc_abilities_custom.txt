@@ -731,55 +731,6 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"forest_troll_high_priest_heal"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
-		"MaxLevel"	"1"
-		"RequiredLevel"	"1"
-		"AbilityCastRange"	"600"
-		"Modifiers"
-		{
-			"modifier_source_of_life"
-			{
-				"Passive"	"1"
-				"Duration"	"-1"
-				"TextureName"	"forest_troll_high_priest_heal"
-				"OnIntervalThink"
-				{
-					"ActOnTargets"
-					{
-						"Target"
-						{
-							"Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
-							"Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Center"	"CASTER"
-							"Radius"	"%radius"
-						}
-						"Action"
-						{
-							"RunScript"
-							{
-								"Target"	"TARGET"
-								"ScriptFile"	"scripts/vscripts/talent/source_of_life.lua"
-								"Function"	"source_of_life"
-							}
-						}
-					}
-				}
-				"ThinkInterval"	"1.0"
-			}
-		}
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"radius"	"600"
-			}
-			"02"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"lvl_damage"	"4"
-			}
-		}
 	}
 
 	"block_master"
@@ -787,8 +738,6 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"sylph_sprite_shield"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"MaxLevel"	"1"
-		"RequiredLevel"	"1"
 	}
 
 	"unstoppable"

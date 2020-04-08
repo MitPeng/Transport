@@ -777,7 +777,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_damage"	"4"
+				"lvl_damage"	"5"
 			}
 		}
 	}
@@ -787,8 +787,6 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"sylph_sprite_shield"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"MaxLevel"	"1"
-		"RequiredLevel"	"1"
 	}
 
 	"unstoppable"

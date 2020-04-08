@@ -734,7 +734,6 @@
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"600"
 		"Modifiers"
 		{
 			"modifier_source_of_life"
@@ -777,7 +776,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_damage"	"4"
+				"max_hp_damage"	"5"
 			}
 		}
 	}
@@ -787,8 +786,6 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"sylph_sprite_shield"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"MaxLevel"	"1"
-		"RequiredLevel"	"1"
 	}
 
 	"unstoppable"
