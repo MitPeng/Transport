@@ -953,7 +953,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"attack_speed_reduce_time"	"10.0"
+				"attack_speed_reduce_time"	"12.0"
 			}
 			"02"
 			{

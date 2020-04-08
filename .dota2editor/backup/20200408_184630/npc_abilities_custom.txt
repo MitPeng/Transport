@@ -941,7 +941,6 @@
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"-1000"
-					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"	"2.0"
 				}
 				"Duration"	"%attack_speed_reduce_time"
 				"IsDebuff"	"1"
@@ -953,17 +952,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"attack_speed_reduce_time"	"10.0"
+				"attack_speed_reduce_time"	"6.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent_caster"	"25"
-			}
-			"03"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"hp_percent_target"	"50"
+				"hp_percent"	"40"
 			}
 		}
 	}
