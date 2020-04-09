@@ -1136,13 +1136,27 @@
 		}
 	}
 
-	"arcane_comprehension"
+	"arcane_comprehension_lua"
 	{
-		"BaseClass"	"ability_datadriven"
+		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"spawnlord_aura"
+		"ScriptFile"	"talent/arcane_comprehension_lua"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_cast_range"	"20"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_cd"	"2"
+			}
+		}
 	}
 
 	"soul_harvest"

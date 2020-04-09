@@ -1121,17 +1121,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"cd"	"3.0"
+				"cd"	"5.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana"	"5"
+				"mana"	"10"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana_regen"	"0.05"
+				"mana_regen"	"0.1"
 			}
 		}
 	}
@@ -1143,6 +1143,54 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"Modifiers"
+		{
+			"modifier_arcane_comprehension"
+			{
+				"Duration"	"-1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Passive"	"1"
+				"IsHidden"	"0"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/arcane_comprehension.lua"
+						"Function"	"apply_count"
+					}
+				}
+				"ThinkInterval"	"1.0"
+				"IsBuff"	"1"
+				"TextureName"	"spawnlord_aura"
+			}
+			"modifier_arcane_comprehension_apply"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"Passive"	"1"
+				"IsBuff"	"0"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_CAST_RANGE_BONUS"	"%lvl_cast_range"
+					"MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE"	"%lvl_cd"
+				}
+				"IsHidden"	"1"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_cast_range"	"20"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"lvl_cd"	"-2"
+			}
+		}
 	}
 
 	"soul_harvest"

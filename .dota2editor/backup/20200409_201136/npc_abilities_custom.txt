@@ -1105,13 +1105,15 @@
 					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"	"%mana_regen"
 				}
 				"TextureName"	"filler_ability"
+				"IsHidden"	"0"
 			}
 			"modifier_mana_surging_cd"
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%cd"
-				"IsDebuff"	"1"
+				"IsDebuff"	"0"
 				"TextureName"	"filler_ability"
+				"IsHidden"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -1119,28 +1121,42 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"cd"	"3.0"
+				"cd"	"5.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana"	"5"
+				"mana"	"10"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana_regen"	"0.05"
+				"mana_regen"	"0.1"
 			}
 		}
 	}
 
-	"arcane_comprehension"
+	"arcane_comprehension_lua"
 	{
-		"BaseClass"	"ability_datadriven"
+		"BaseClass"	"ability_lua"
 		"AbilityTextureName"	"spawnlord_aura"
+		"ScriptFile"	"talent/arcane_comprehension_lua"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_cast_range"	"20"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_cd"	"2"
+			}
+		}
 	}
 
 	"soul_harvest"
