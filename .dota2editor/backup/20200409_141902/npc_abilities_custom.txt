@@ -1121,17 +1121,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"cd"	"5.0"
+				"cd"	"3.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana"	"10"
+				"mana"	"5"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana_regen"	"0.1"
+				"mana_regen"	"0.05"
 			}
 		}
 	}

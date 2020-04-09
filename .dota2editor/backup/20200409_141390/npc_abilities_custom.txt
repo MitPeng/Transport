@@ -1105,15 +1105,13 @@
 					"MODIFIER_PROPERTY_MANA_REGEN_CONSTANT"	"%mana_regen"
 				}
 				"TextureName"	"filler_ability"
-				"IsHidden"	"0"
 			}
 			"modifier_mana_surging_cd"
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%cd"
-				"IsDebuff"	"0"
+				"IsDebuff"	"1"
 				"TextureName"	"filler_ability"
-				"IsHidden"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -1121,17 +1119,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"cd"	"5.0"
+				"cd"	"3.0"
 			}
 			"02"
 			{
-				"var_type"	"FIELD_FLOAT"
-				"mana"	"10"
+				"var_type"	"FIELD_INTEGER"
+				"mana"	"5"
 			}
 			"03"
 			{
-				"var_type"	"FIELD_FLOAT"
-				"mana_regen"	"0.1"
+				"var_type"	"FIELD_INTEGER"
+				"mana_regen"	"0.05"
 			}
 		}
 	}
