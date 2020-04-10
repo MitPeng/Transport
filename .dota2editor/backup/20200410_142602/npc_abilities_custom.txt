@@ -1250,7 +1250,6 @@
 					{
 						"Target"	"CASTER"
 						"ModifierName"	"modifier_rebirth_movespeed"
-						"Duration"	"%duration"
 					}
 				}
 				"OnDeath"
@@ -1260,6 +1259,15 @@
 						"Target"	"CASTER"
 						"ScriptFile"	"scripts/vscripts/talent/rebirth.lua"
 						"Function"	"set_respawn_time"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/rebirth.lua"
+						"Function"	"reset_respawn_time"
 					}
 				}
 			}
@@ -1273,6 +1281,23 @@
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"550"
 				}
+				"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"Target"	"CASTER"
+						"ModifierName"	"modifier_phased"
+						"Duration"	"-1"
+					}
+				}
+				"OnDestroy"
+				{
+					"RemoveModifier"
+					{
+						"Target"	"CASTER"
+						"ModifierName"	"modifier_phased"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1280,7 +1305,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"10.0"
+				"duration"	"8.0"
 			}
 		}
 	}

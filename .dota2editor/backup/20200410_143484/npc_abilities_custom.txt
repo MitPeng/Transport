@@ -1273,6 +1273,15 @@
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"550"
 				}
+				"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"Target"	"CASTER"
+						"ModifierName"	"modifier_phased"
+						"Duration"	"%duration"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
