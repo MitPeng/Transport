@@ -29,4 +29,23 @@
         "shortest_push_time"    "60"
         //运输车名
         "car_name"      "car_forest"
+        //该地图的天赋技能
+        "talent_abilities"
+        {
+                "1"  "suddenly_strike"
+                "2"  "bloodthirsty"
+                "3"  "dark_breaking"
+                "4"  "charge"
+                "5"  "fanaticism"
+                "6"  "unyielding_lua"
+                "7"  "source_of_life"
+                "8"  "block_master"
+                "9"  "unstoppable_lua"
+                "10" "boiling_blood"
+                "11" "keen"
+                "12" "mana_surging"
+                "13" "arcane_comprehension_lua"
+                "14" "soul_harvest"
+                "15" "rebirth"
+        }
 }

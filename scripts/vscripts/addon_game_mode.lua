@@ -30,16 +30,23 @@ function Activate()
 end
 
 function TransportGameMode:InitGameMode()
-	local map_name = GetMapName()
+	_G.map_name = GetMapName()
 	--全局变量
 	-- 载入kv
 	_G.load_kv = LoadKeyValues("scripts/vscripts/kv/load_kv.txt")
 	--根据地图名载入地图信息
-	_G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map_" .. map_name .. ".txt")
+	_G.load_map = LoadKeyValues("scripts/vscripts/kv/load_map_" .. _G.map_name .. ".txt")
 	--载入经验表
 	_G.load_lvlup_xp = LoadKeyValues("scripts/vscripts/kv/load_lvlup_xp.txt")
 	--保存路段
 	_G.road_section_num = 1
+	--天赋技能
+	_G.talent_abilities = _G.load_map["talent_abilities"]
+	--天赋技能个数
+	_G.abilities_num = 0
+	for _, _ in pairs(_G.talent_abilities) do
+		_G.abilities_num = _G.abilities_num + 1
+	end
 
 	--保存上一路点和下一路点
 	_G.pre_corner = 1
@@ -52,9 +59,11 @@ function TransportGameMode:InitGameMode()
 	_G.map_sections = {}
 	local i = 1
 	for _, v in pairs(_G.load_map) do
-		if string.find(v, "section") == 1 then
-			_G.map_sections[i] = Entities:FindByName(nil, v):GetAbsOrigin()
-			i = i + 1
+		if type(v) == "string" then
+			if string.find(v, "section") == 1 then
+				_G.map_sections[i] = Entities:FindByName(nil, v):GetAbsOrigin()
+				i = i + 1
+			end
 		end
 	end
 
@@ -74,6 +83,13 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("npc_spawned", Dynamic_Wrap(TransportGameMode, "OnNPCSpawned"), self)
 	-- 监听玩家聊天事件
 	ListenToGameEvent("player_chat", Dynamic_Wrap(TransportGameMode, "PlayerChat"), self)
+
+	CustomGameEventManager:RegisterListener(
+		"player_select_ability",
+		function(_, keys)
+			self:OnPlayerSelectAbility(keys)
+		end
+	)
 
 	-- 设置选择英雄时间
 	GameRules:SetHeroSelectionTime(90)
@@ -108,6 +124,38 @@ function TransportGameMode:InitGameMode()
 	)
 
 	GameRules:GetGameModeEntity():SetThink("OnThink", self, "GlobalThink", 1)
+end
+
+function TransportGameMode:OnPlayerSelectAbility(keys)
+	local abilityName = keys.AbilityName
+	if abilityName == "Random" then
+		local rd = RandomInt(1, _G.abilities_num)
+		abilityName = _G.talent_abilities[tostring(rd)]
+	end
+	local playerID = keys.PlayerID
+	local player = PlayerResource:GetPlayer(playerID)
+	local hero = player:GetAssignedHero()
+	if not hero then
+		return
+	end
+
+	if hero.talent_ability then
+		--删除原有的天赋技能
+		for i = 0, hero:GetModifierCount() do
+			local modifier_name = hero:GetModifierNameByIndex(i)
+			-- print(i .. ":" .. modifier_name)
+			if modifier_name ~= nil and string.find(modifier_name, hero.talent_ability:GetAbilityName()) then
+				hero:RemoveModifierByName(modifier_name)
+			end
+		end
+		hero:RemoveAbilityByHandle(hero.talent_ability)
+		hero.talent_ability = nil
+	end
+
+	--添加新的天赋技能
+	local ability = hero:AddAbility(abilityName)
+	ability:SetLevel(1)
+	hero.talent_ability = ability
 end
 
 function TransportGameMode:OnGameRulesStateChange(keys)
@@ -183,7 +231,40 @@ function TransportGameMode:OnNPCSpawned(keys)
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
+			--升至指定等级
 			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
+			Timers:CreateTimer(
+				0,
+				function()
+					--随机4个天赋技能
+					local abilities = {}
+					while true do
+						local rd = RandomInt(1, _G.abilities_num)
+						local isHave = false
+						for i = 0, #abilities do
+							if abilities[i] and abilities[i] == _G.talent_abilities[tostring(rd)] then
+								isHave = true
+								break
+							end
+						end
+						if not isHave then
+							table.insert(abilities, _G.talent_abilities[tostring(rd)])
+						end
+						if #abilities == 4 then
+							break
+						end
+					end
+					--选择天赋技能
+					CustomGameEventManager:Send_ServerToPlayer(
+						PlayerResource:GetPlayer(hero:GetPlayerID()),
+						"show_ability_selector",
+						{
+							PlayerID = hero:GetPlayerID(),
+							Abilities = abilities
+						}
+					)
+				end
+			)
 		end
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同
@@ -215,124 +296,156 @@ function TransportGameMode:OnNPCSpawned(keys)
 end
 
 function TransportGameMode:PlayerChat(keys)
-	--添加天赋技能
-	--猛然一击
-	if keys.text == "suddenly_strike" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("suddenly_strike")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	--嗜血
-	if keys.text == "bloodthirsty" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("bloodthirsty")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	--暗黑切割
-	if keys.text == "dark_breaking" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("dark_breaking")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	--冲锋
-	if keys.text == "charge" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("charge")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	--狂热
-	if keys.text == "fanaticism" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("fanaticism")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	--坚毅不屈
-	if keys.text == "unyielding" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("unyielding_lua")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 生命源泉
-	if keys.text == "source_of_life" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("source_of_life")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 格挡大师
-	if keys.text == "block_master" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("block_master")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 势不可挡
-	if keys.text == "unstoppable" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("unstoppable_lua")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 沸腾之血
-	if keys.text == "boiling_blood" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("boiling_blood")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 敏锐
-	if keys.text == "keen" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("keen")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 法力澎湃
-	if keys.text == "mana_surging" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("mana_surging")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 奥术领悟
-	if keys.text == "arcane_comprehension" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("arcane_comprehension_lua")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 灵魂收割
-	if keys.text == "soul_harvest" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("soul_harvest")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	-- 重生之欲
-	if keys.text == "rebirth" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		local ability = hero:AddAbility("rebirth")
-		ability:SetLevel(1)
-		hero.talent_ability = ability
-	end
-	--删除天赋技能
-	if keys.text == "delete_talent" then
-		local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
-		for i = 0, hero:GetModifierCount() do
-			local modifier_name = hero:GetModifierNameByIndex(i)
-			-- print(i .. ":" .. modifier_name)
-			if modifier_name ~= nil and string.find(modifier_name, hero.talent_ability:GetAbilityName()) then
-				hero:RemoveModifierByName(modifier_name)
-			end
+	if _G.map_name == "map_1" then
+		--添加天赋技能
+		--猛然一击
+		if keys.text == "suddenly_strike" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("suddenly_strike")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
 		end
-		hero:RemoveAbilityByHandle(hero.talent_ability)
-		hero.talent_ability = nil
+		--嗜血
+		if keys.text == "bloodthirsty" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("bloodthirsty")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		--暗黑切割
+		if keys.text == "dark_breaking" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("dark_breaking")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		--冲锋
+		if keys.text == "charge" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("charge")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		--狂热
+		if keys.text == "fanaticism" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("fanaticism")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		--坚毅不屈
+		if keys.text == "unyielding" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("unyielding_lua")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 生命源泉
+		if keys.text == "source_of_life" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("source_of_life")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 格挡大师
+		if keys.text == "block_master" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("block_master")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 势不可挡
+		if keys.text == "unstoppable" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("unstoppable_lua")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 沸腾之血
+		if keys.text == "boiling_blood" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("boiling_blood")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 敏锐
+		if keys.text == "keen" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("keen")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 法力澎湃
+		if keys.text == "mana_surging" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("mana_surging")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 奥术领悟
+		if keys.text == "arcane_comprehension" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("arcane_comprehension_lua")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 灵魂收割
+		if keys.text == "soul_harvest" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("soul_harvest")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 重生之欲
+		if keys.text == "rebirth" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("rebirth")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		--删除天赋技能
+		if keys.text == "delete_talent" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			for i = 0, hero:GetModifierCount() do
+				local modifier_name = hero:GetModifierNameByIndex(i)
+				-- print(i .. ":" .. modifier_name)
+				if modifier_name ~= nil and string.find(modifier_name, hero.talent_ability:GetAbilityName()) then
+					hero:RemoveModifierByName(modifier_name)
+				end
+			end
+			hero:RemoveAbilityByHandle(hero.talent_ability)
+			hero.talent_ability = nil
+		end
+		--调出天赋选择面板
+		if keys.text == "select_talent" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local abilities = {}
+			while true do
+				local rd = RandomInt(1, _G.abilities_num)
+				local isHave = false
+				for i = 0, #abilities do
+					if abilities[i] and abilities[i] == _G.talent_abilities[tostring(rd)] then
+						isHave = true
+						break
+					end
+				end
+				if not isHave then
+					table.insert(abilities, _G.talent_abilities[tostring(rd)])
+				end
+				if #abilities == 4 then
+					break
+				end
+			end
+			--选择天赋技能
+			CustomGameEventManager:Send_ServerToPlayer(
+				PlayerResource:GetPlayer(hero:GetPlayerID()),
+				"show_ability_selector",
+				{
+					PlayerID = hero:GetPlayerID(),
+					Abilities = abilities
+				}
+			)
+		end
 	end
 end
 

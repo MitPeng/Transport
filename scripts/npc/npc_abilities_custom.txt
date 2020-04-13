@@ -332,6 +332,11 @@
 				"var_type"	"FIELD_FLOAT"
 				"slow_time"	"1.5"
 			}
+			"04"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"cd"	"6.0"
+			}
 		}
 	}
 

@@ -8,4 +8,6 @@
     "glhf"  "Good Luck Have Fun !"
     "player_prepare"  "Prepare to battle !"
     "car_spawn"  "Transport car will be spawned !"
+    "ability_selector_title"    "Talent Ability Selector"
+    "random_one"    "Random Talent"
 }

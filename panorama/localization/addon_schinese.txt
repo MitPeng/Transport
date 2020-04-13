@@ -8,4 +8,6 @@
     "glhf"  "祝大家好运，玩的开心！"
     "player_prepare"  "请做好开战准备！"
     "car_spawn"  "运输车将于信号点出生！"
+    "ability_selector_title"    "天赋技能选择"
+    "random_one"    "随机天赋"
 }
