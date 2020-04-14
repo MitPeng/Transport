@@ -21,3 +21,17 @@ function boiling_blood(keys)
     ApplyDamage(damage_table_2)
     PopupDamageOverTime(target, math.ceil(damage_target))
 end
+
+function burning_damage(keys)
+    local caster = keys.caster
+    local target = keys.target
+    local ability = keys.ability
+    local damage = ability:GetSpecialValueFor("lvl_burning_damage") * caster:GetLevel()
+    local damage_table = {
+        victim = target,
+        attacker = caster,
+        damage = damage,
+        damage_type = DAMAGE_TYPE_MAGICAL
+    }
+    ApplyDamage(damage_table)
+end

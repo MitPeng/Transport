@@ -312,7 +312,7 @@ function TransportGameMode:PlayerChat(keys)
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end
-		--暗黑切割
+		--暗黑粉碎
 		if keys.text == "dark_breaking" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
 			local ability = hero:AddAbility("dark_breaking")

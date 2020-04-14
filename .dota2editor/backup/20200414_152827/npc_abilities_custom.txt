@@ -909,7 +909,6 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"300"
 		"precache"
 		{
 			"particle"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
