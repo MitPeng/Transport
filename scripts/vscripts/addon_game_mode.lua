@@ -159,14 +159,28 @@ function TransportGameMode:OnPlayerSelectAbility(keys)
 end
 
 function TransportGameMode:OnGameRulesStateChange(keys)
-	-- DeepPrintTable(keys)
 	-- 获取游戏进度
 	local newState = GameRules:State_Get()
-
-	if newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+	if newState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
+		Timers:CreateTimer(
+			1.0,
+			function()
+				--显示所有天赋技能
+				local all_talent_abilities = {}
+				for num = 1, _G.abilities_num do
+					table.insert(all_talent_abilities, _G.talent_abilities[tostring(num)])
+				end
+				CustomGameEventManager:Send_ServerToAllClients(
+					"show_all_talent_abilities",
+					{
+						Abilities = all_talent_abilities
+					}
+				)
+			end
+		)
+	elseif newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
-		-- end
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
 		Timers:CreateTimer(
 			4.0,
