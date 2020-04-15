@@ -1331,22 +1331,13 @@
 				{
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"550"
 				}
-				"OnIntervalThink"
+				"OnCreated"
 				{
 					"ApplyModifier"
 					{
 						"Target"	"CASTER"
 						"ModifierName"	"modifier_phased"
-						"Duration"	"-1"
-					}
-				}
-				"ThinkInterval"	"0.1"
-				"OnDestroy"
-				{
-					"RemoveModifier"
-					{
-						"Target"	"CASTER"
-						"ModifierName"	"modifier_phased"
+						"Duration"	"%duration"
 					}
 				}
 			}

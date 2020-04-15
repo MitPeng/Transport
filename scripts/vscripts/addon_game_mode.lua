@@ -281,7 +281,9 @@ function TransportGameMode:OnNPCSpawned(keys)
 			function()
 				hero:SetOrigin(vec)
 				--加个相位效果，防止英雄卡位
-				hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})
+				if not hero:HasAbility("keen") and not hero:HasAbility("rebirth") then
+					hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})
+				end
 				--镜头聚焦英雄后取消
 				PlayerResource:SetCameraTarget(hero:GetPlayerID(), hero)
 				Timers:CreateTimer(
