@@ -37,5 +37,6 @@
               "13" "arcane_comprehension_lua"
               "14" "soul_harvest"
               "15" "rebirth"
+              "16" "miser"
         }
 }

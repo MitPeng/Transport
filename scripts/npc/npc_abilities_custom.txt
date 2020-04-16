@@ -1360,4 +1360,41 @@
 			}
 		}
 	}
+
+	"miser"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"roshan_halloween_fed"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"	"1"
+		"RequiredLevel"	"1"
+		"Modifiers"
+		{
+			"modifier_miser"
+			{
+				"Duration"	"-1"
+				"Passive"	"1"
+				"TextureName"	"roshan_halloween_fed"
+				"IsBuff"	"0"
+				"OnDeath"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/miser.lua"
+						"Function"	"miser"
+					}
+				}
+				"IsHidden"	"1"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"times"	"1.5"
+			}
+		}
+	}
 }
