@@ -182,6 +182,45 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
+		--初次选择天赋技能
+		Timers:CreateTimer(
+			1.0,
+			function()
+				for i = 0, 9 do
+					local player = PlayerResource:GetPlayer(i)
+					if player then
+						local hero = player:GetAssignedHero()
+						--随机4个天赋技能
+						local abilities = {}
+						while true do
+							local rd = RandomInt(1, _G.abilities_num)
+							local isHave = false
+							for i = 0, #abilities do
+								if abilities[i] and abilities[i] == _G.talent_abilities[tostring(rd)] then
+									isHave = true
+									break
+								end
+							end
+							if not isHave then
+								table.insert(abilities, _G.talent_abilities[tostring(rd)])
+							end
+							if #abilities == 4 then
+								break
+							end
+						end
+						--选择天赋技能
+						CustomGameEventManager:Send_ServerToPlayer(
+							PlayerResource:GetPlayer(hero:GetPlayerID()),
+							"show_ability_selector",
+							{
+								PlayerID = hero:GetPlayerID(),
+								Abilities = abilities
+							}
+						)
+					end
+				end
+			end
+		)
 		Timers:CreateTimer(
 			4.0,
 			function()
@@ -247,38 +286,6 @@ function TransportGameMode:OnNPCSpawned(keys)
 			hero.is_first_spawn = false
 			--升至指定等级
 			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
-			Timers:CreateTimer(
-				0,
-				function()
-					--随机4个天赋技能
-					local abilities = {}
-					while true do
-						local rd = RandomInt(1, _G.abilities_num)
-						local isHave = false
-						for i = 0, #abilities do
-							if abilities[i] and abilities[i] == _G.talent_abilities[tostring(rd)] then
-								isHave = true
-								break
-							end
-						end
-						if not isHave then
-							table.insert(abilities, _G.talent_abilities[tostring(rd)])
-						end
-						if #abilities == 4 then
-							break
-						end
-					end
-					--选择天赋技能
-					CustomGameEventManager:Send_ServerToPlayer(
-						PlayerResource:GetPlayer(hero:GetPlayerID()),
-						"show_ability_selector",
-						{
-							PlayerID = hero:GetPlayerID(),
-							Abilities = abilities
-						}
-					)
-				end
-			)
 		end
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同
