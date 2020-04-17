@@ -11,4 +11,5 @@
     "ability_selector_title"    "Talent Ability Selector"
     "random_one"    "Random Talent"
     "all_talent_abilities"  "All Talent Abilities"
+    "cancel_change" "Cancel"
 }

@@ -128,9 +128,14 @@ end
 
 function TransportGameMode:OnPlayerSelectAbility(keys)
 	local abilityName = keys.AbilityName
+	--随机一个技能
 	if abilityName == "Random" then
 		local rd = RandomInt(1, _G.abilities_num)
 		abilityName = _G.talent_abilities[tostring(rd)]
+	end
+	--取消更换
+	if abilityName == "Cancel" then
+		return
 	end
 	local playerID = keys.PlayerID
 	local player = PlayerResource:GetPlayer(playerID)
@@ -214,7 +219,8 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 							"show_ability_selector",
 							{
 								PlayerID = hero:GetPlayerID(),
-								Abilities = abilities
+								Abilities = abilities,
+								is_first = true
 							}
 						)
 					end
@@ -472,7 +478,8 @@ function TransportGameMode:PlayerChat(keys)
 				"show_ability_selector",
 				{
 					PlayerID = hero:GetPlayerID(),
-					Abilities = abilities
+					Abilities = abilities,
+					is_first = false
 				}
 			)
 		end
