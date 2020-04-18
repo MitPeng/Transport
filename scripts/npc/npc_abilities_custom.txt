@@ -1376,7 +1376,7 @@
 				"Passive"	"1"
 				"TextureName"	"roshan_halloween_fed"
 				"IsBuff"	"0"
-				"OnDeath"
+				"OnCreated"
 				{
 					"RunScript"
 					{
@@ -1386,6 +1386,16 @@
 					}
 				}
 				"IsHidden"	"1"
+				"ThinkInterval"	"%interval"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/miser.lua"
+						"Function"	"miser"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1393,7 +1403,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"times"	"1.5"
+				"interval"	"30.0"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"times"	"1.2"
 			}
 		}
 	}

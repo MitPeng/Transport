@@ -77,6 +77,14 @@ function TransportGameMode:InitGameMode()
 	end
 	_G.first_spawn_xp = total_xp
 
+	--商店范围扩大
+	for num = 1, tonumber(_G.load_map["spawn_num"]) do
+		local spawn_point_good = Entities:FindByName(nil, "good_spawn_" .. num):GetOrigin()
+		SpawnDOTAShopTriggerRadiusApproximate(spawn_point_good, 800)
+		local spawn_point_bad = Entities:FindByName(nil, "bad_spawn_" .. num):GetOrigin()
+		SpawnDOTAShopTriggerRadiusApproximate(spawn_point_bad, 800)
+	end
+
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
 	-- 监听单位重生或者创建事件
@@ -167,6 +175,8 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 	-- 获取游戏进度
 	local newState = GameRules:State_Get()
 	if newState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
+	elseif newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
+		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 		Timers:CreateTimer(
 			1.0,
 			function()
@@ -183,50 +193,8 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 				)
 			end
 		)
-	elseif newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
-		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
-		--初次选择天赋技能
-		Timers:CreateTimer(
-			1.0,
-			function()
-				for i = 0, 9 do
-					local player = PlayerResource:GetPlayer(i)
-					if player then
-						local hero = player:GetAssignedHero()
-						--随机4个天赋技能
-						local abilities = {}
-						while true do
-							local rd = RandomInt(1, _G.abilities_num)
-							local isHave = false
-							for i = 0, #abilities do
-								if abilities[i] and abilities[i] == _G.talent_abilities[tostring(rd)] then
-									isHave = true
-									break
-								end
-							end
-							if not isHave then
-								table.insert(abilities, _G.talent_abilities[tostring(rd)])
-							end
-							if #abilities == 4 then
-								break
-							end
-						end
-						--选择天赋技能
-						CustomGameEventManager:Send_ServerToPlayer(
-							PlayerResource:GetPlayer(hero:GetPlayerID()),
-							"show_ability_selector",
-							{
-								PlayerID = hero:GetPlayerID(),
-								Abilities = abilities,
-								is_first = true
-							}
-						)
-					end
-				end
-			end
-		)
 		Timers:CreateTimer(
 			4.0,
 			function()
@@ -292,6 +260,8 @@ function TransportGameMode:OnNPCSpawned(keys)
 			hero.is_first_spawn = false
 			--升至指定等级
 			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
+			--加初始天赋药水
+			hero:AddItemByName("item_talent_potion_2")
 		end
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同
@@ -304,7 +274,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 		end
 		local vec = Entities:FindByName(nil, spawn_point):GetOrigin()
 		Timers:CreateTimer(
-			0.1,
+			0.2,
 			function()
 				hero:SetOrigin(vec)
 				--加个相位效果，防止英雄卡位
@@ -313,12 +283,12 @@ function TransportGameMode:OnNPCSpawned(keys)
 				end
 				--镜头聚焦英雄后取消
 				PlayerResource:SetCameraTarget(hero:GetPlayerID(), hero)
-				Timers:CreateTimer(
-					0.2,
-					function()
-						PlayerResource:SetCameraTarget(hero:GetPlayerID(), nil)
-					end
-				)
+			end
+		)
+		Timers:CreateTimer(
+			0.4,
+			function()
+				PlayerResource:SetCameraTarget(hero:GetPlayerID(), nil)
 			end
 		)
 	end

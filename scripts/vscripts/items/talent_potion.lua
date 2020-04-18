@@ -27,6 +27,12 @@ function talent_potion(keys)
             break
         end
     end
+    local is_first = false
+    if caster.talent_ability then
+        is_first = false
+    else
+        is_first = true
+    end
     --选择天赋技能
     CustomGameEventManager:Send_ServerToPlayer(
         PlayerResource:GetPlayer(caster:GetPlayerID()),
@@ -34,7 +40,7 @@ function talent_potion(keys)
         {
             PlayerID = caster:GetPlayerID(),
             Abilities = abilities,
-            is_first = false
+            is_first = is_first
         }
     )
 end

@@ -7,6 +7,8 @@
         "4" "corner_4"
         "5" "section_5"
         "6" "section_6"
+        //重生基地数
+        "spawn_num"      "3"
         //每个路段推进时间(秒)
         "push_time_1"    "9999"
         "push_time_2"    "9999"
