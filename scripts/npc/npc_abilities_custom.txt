@@ -325,7 +325,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"slow_percent"	"-80"
+				"slow_percent"	"-60"
 			}
 			"03"
 			{
@@ -407,17 +407,17 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"count_duration"	"5"
+				"count_duration"	"6"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"bloodthirsty_duration"	"5"
+				"bloodthirsty_duration"	"6"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lifesteal_percent"	"100"
+				"lifesteal_percent"	"120"
 			}
 		}
 	}
@@ -709,7 +709,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"1.8"
+				"duration"	"2.1"
 			}
 		}
 	}
@@ -740,7 +740,7 @@
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"600"
+		"AbilityCastRange"	"400"
 		"precache"
 		{
 			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
@@ -784,12 +784,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"600"
+				"radius"	"400"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_damage"	"4"
+				"lvl_damage"	"5"
 			}
 		}
 	}
@@ -893,7 +893,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_armor"	"1.2"
+				"lvl_armor"	"0.8"
 			}
 			"02"
 			{
@@ -918,7 +918,7 @@
 		"AbilityCastRange"	"300"
 		"precache"
 		{
-			"particle"	"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_burn.vpcf"
+			"particle"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
 		}
 		"Modifiers"
 		{
@@ -949,15 +949,11 @@
 			"modifier_boiling_blood_attackspeed"
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"-9999"
-					"MODIFIER_PROPERTY_BASE_ATTACK_TIME_CONSTANT"	"10.0"
-				}
+				"Properties"	{}
 				"Duration"	"%attack_speed_reduce_time"
 				"IsDebuff"	"1"
 				"TextureName"	"forged_spirit_melting_strike"
-				"EffectName"	"particles/units/heroes/hero_phoenix/phoenix_fire_spirit_burn.vpcf"
+				"EffectName"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
 				"EffectAttachType"	"attach_hitloc"
 				"OnCreated"
 				{
@@ -1004,6 +1000,7 @@
 					}
 				}
 				"ThinkInterval"	"1.0"
+				"States"	{}
 			}
 		}
 		"AbilitySpecial"
@@ -1016,22 +1013,22 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_burning_damage"	"10"
+				"lvl_burning_damage"	"15"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"attack_speed_reduce_time"	"8.0"
+				"attack_speed_reduce_time"	"3.0"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent_caster"	"15"
+				"hp_percent_caster"	"10"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent_target"	"30"
+				"hp_percent_target"	"10"
 			}
 		}
 	}
@@ -1213,12 +1210,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_cast_range"	"20"
+				"lvl_cast_range"	"15"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_cd"	"2"
+				"lvl_cd"	"1.5"
 			}
 		}
 	}
@@ -1283,7 +1280,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"all_stats"	"2.0"
+				"all_stats"	"2.5"
 			}
 		}
 	}
@@ -1415,6 +1412,32 @@
 			{
 				"var_type"	"FIELD_FLOAT"
 				"times"	"1.15"
+			}
+		}
+	}
+
+	"deal_talent"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"Modifiers"
+		{
+			"modifier_deal_talent"
+			{
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"Duration"	"-1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/deal_talent.lua"
+						"Function"	"deal_talent"
+					}
+				}
+				"ThinkInterval"	"0.5"
 			}
 		}
 	}

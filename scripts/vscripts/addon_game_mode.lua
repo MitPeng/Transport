@@ -267,6 +267,14 @@ function TransportGameMode:OnNPCSpawned(keys)
 					hero:AddItemByName("item_talent_potion_2")
 				end
 			)
+		-- if _G.map_name == "map_1" then
+		-- 	local ability = hero:AddAbility("keen")
+		-- 	ability:SetLevel(1)
+		-- 	hero.talent_ability = ability
+		-- end
+		--加个技能，处理存在多个英雄天赋技能的情况
+		-- local ability = hero:AddAbility("deal_talent")
+		-- ability:SetLevel(1)
 		end
 
 		--处理骷髅王大招
@@ -288,11 +296,11 @@ function TransportGameMode:OnNPCSpawned(keys)
 		elseif hero:GetTeam() == DOTA_TEAM_BADGUYS then
 			spawn_point = "bad_spawn_" .. _G.road_section_num
 		end
-		local vec = Entities:FindByName(nil, spawn_point):GetOrigin()
+		local vec = Entities:FindByName(nil, spawn_point):GetAbsOrigin()
 		Timers:CreateTimer(
 			0.2,
 			function()
-				hero:SetOrigin(vec)
+				hero:SetAbsOrigin(vec)
 				--加个相位效果，防止英雄卡位
 				if not hero:HasAbility("keen") and not hero:HasAbility("rebirth") then
 					hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})

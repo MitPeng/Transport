@@ -242,6 +242,8 @@ function is_push(keys)
             --推进时间耗尽,游戏结束,防守方胜利
             print("Push Failed! End Game!")
             GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
+            --防止一直弹队伍获胜
+            _G.push_time = _G.push_time - 1
         elseif _G.push_time > 0 then
             display_push_time()
             push_remain_30(caster)
@@ -283,7 +285,6 @@ function display_push_time()
         push_time_sec = push_time_sec
     }
     --推进时间UI显示
-    Notifications:ClearTopFromAll()
     CustomGameEventManager:Send_ServerToAllClients("show_push_time", show_push_time_event)
 end
 
