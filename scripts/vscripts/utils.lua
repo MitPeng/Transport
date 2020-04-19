@@ -35,6 +35,20 @@ function Utils:unit_abilities_lvlup(unit)
     return unit
 end
 
+--判断是否为真英雄本体
+function Utils:is_real_hero(hero)
+    local player = hero:GetPlayerOwner()
+    local owner_hero = PlayerResource:GetPlayer(hero:GetPlayerOwnerID()):GetAssignedHero()
+    print(hero:GetUnitName())
+    print_r(player:GetPlayerID())
+
+    if owner_hero:GetUnitName() == hero:GetUnitName() then
+        return true
+    else
+        return false
+    end
+end
+
 -- 计算两点间角度0-180
 function Utils:getAngleByPos(p1, p2)
     local x1 = p1.x

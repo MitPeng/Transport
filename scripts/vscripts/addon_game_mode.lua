@@ -78,12 +78,12 @@ function TransportGameMode:InitGameMode()
 	_G.first_spawn_xp = total_xp
 
 	--商店范围扩大
-	for num = 1, tonumber(_G.load_map["spawn_num"]) do
-		local spawn_point_good = Entities:FindByName(nil, "good_spawn_" .. num):GetOrigin()
-		SpawnDOTAShopTriggerRadiusApproximate(spawn_point_good, 800)
-		local spawn_point_bad = Entities:FindByName(nil, "bad_spawn_" .. num):GetOrigin()
-		SpawnDOTAShopTriggerRadiusApproximate(spawn_point_bad, 800)
-	end
+	-- for num = 1, tonumber(_G.load_map["spawn_num"]) do
+	-- 	local spawn_point_good = Entities:FindByName(nil, "good_spawn_" .. num):GetOrigin()
+	-- 	SpawnDOTAShopTriggerRadiusApproximate(spawn_point_good, 800)
+	-- 	local spawn_point_bad = Entities:FindByName(nil, "bad_spawn_" .. num):GetOrigin()
+	-- 	SpawnDOTAShopTriggerRadiusApproximate(spawn_point_bad, 800)
+	-- end
 
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
@@ -261,8 +261,27 @@ function TransportGameMode:OnNPCSpawned(keys)
 			--升至指定等级
 			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
 			--加初始天赋药水
-			hero:AddItemByName("item_talent_potion_2")
+			Timers:CreateTimer(
+				2.0,
+				function()
+					hero:AddItemByName("item_talent_potion_2")
+				end
+			)
 		end
+
+		--处理骷髅王大招
+		if hero:GetUnitName() == "npc_dota_hero_skeleton_king" then
+			print("skt")
+			local ability = hero:FindAbilityByName("skeleton_king_reincarnation")
+			local cd = ability:GetCooldownTimeRemaining()
+			local ability_level = ability:GetLevel()
+			print("ability_lvl:" .. ability_level)
+			print("cd:" .. cd)
+			if ability_level > 0 and cd > (ability:GetCooldown(ability_level) * hero:GetCooldownReduction() - 5) then
+				return
+			end
+		end
+
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同
 		local spawn_point

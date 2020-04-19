@@ -17,7 +17,7 @@
 		"ItemCastOnPickup"	"0"
 		"ItemCost"	"5000"
 		"ItemDroppable"	"0"
-		"ItemSellable"	"1"
+		"ItemSellable"	"0"
 		"ItemShareability"	"ITEM_NOT_SHAREABLE"
 		"ItemRequiresCharges"	"1"
 		"ItemInitialCharges"	"1"

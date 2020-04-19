@@ -1130,7 +1130,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_movespeed"	"4"
+				"lvl_movespeed"	"5"
 			}
 			"03"
 			{
