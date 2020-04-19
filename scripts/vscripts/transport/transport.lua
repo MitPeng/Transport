@@ -71,6 +71,9 @@ function is_transport(keys)
                 caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
             -- Path:find_path(caster, Path:get_path(caster))
             end
+            --推进时间小于保底推进时间，则增加推进时间
+            --若推进时间大于，则不变
+            overtime()
         end
     elseif good == 0 and bad == 0 then
         --双方都不在，在原地不动
@@ -88,6 +91,11 @@ function is_transport(keys)
         caster.is_bad_transport = false
         caster.is_good_transport = false
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
+        --若处于防御阶段，则结束防御阶段
+        if caster:HasModifier("modifier_transport_defend_road_section") then
+            caster:RemoveModifierByName("modifier_transport_defend_road_section")
+            caster.is_defend = false
+        end
     end
 
     --提供视野
@@ -162,20 +170,7 @@ function is_defend(keys)
             caster.is_defend = false
             --如果还存在下一个路点，则设置
             if _G.load_map[tostring(_G.next_corner + 1)] then
-                print("End defend,turn to next road section!")
-                Notifications:TopToAll(
-                    {text = "#defend_success", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
-                )
-                --成功音效
-                caster:EmitSound("Tutorial.TaskCompleted")
-                _G.pre_corner = _G.next_corner
-                _G.next_corner = _G.next_corner + 1
-                caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
-                Utils:unit_abilities_lvlup(caster)
-                --设置路段
-                _G.road_section_num = _G.road_section_num + 1
-                --重置推进时间
-                _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
+                denfend_success(caster)
             else
                 print("End Game!")
                 --如果已经到达最后一个路段终点并防御完成，则结束游戏，推进方获胜
@@ -183,25 +178,51 @@ function is_defend(keys)
                 caster.is_game_end = true
             end
         else
-            --开始前2秒给提示
-            if remaining_time == tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2 then
-                print("Start Defend!")
-                Notifications:TopToAll(
-                    {text = "#start_defend", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
-                )
-                --计时音效
-                caster:EmitSound("Tutorial.TaskProgress")
-            end
-            --开始倒计时
-            if remaining_time <= tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) then
-                print("Defend remaining time: " .. remaining_time)
-                Notifications:TopToAll(
-                    {text = remaining_time, duration = 0.9, style = {color = "yellow", ["font-size"] = "50px"}}
-                )
-                --计时音效
-                caster:EmitSound("Tutorial.TaskProgress")
-            end
+            start_defend(remaining_time, caster)
         end
+    end
+end
+
+--防御阶段成功
+function denfend_success(caster)
+    print("End defend,turn to next road section!")
+    Notifications:ClearTopFromAll()
+    Notifications:TopToAll(
+        {text = "#defend_success", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
+    )
+    --成功音效
+    caster:EmitSound("Tutorial.TaskCompleted")
+    _G.pre_corner = _G.next_corner
+    _G.next_corner = _G.next_corner + 1
+    caster:MoveToPosition(Path:get_corner(_G.next_corner):GetOrigin())
+    Utils:unit_abilities_lvlup(caster)
+    --设置路段
+    _G.road_section_num = _G.road_section_num + 1
+    --重置推进时间
+    _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
+end
+
+--防御阶段开始
+function start_defend(remaining_time, caster)
+    --开始前2秒给提示
+    if remaining_time == tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2 then
+        print("Start Defend!")
+        Notifications:ClearTopFromAll()
+        Notifications:TopToAll(
+            {text = "#start_defend", duration = 2.0, style = {color = "yellow", ["font-size"] = "50px"}}
+        )
+        --计时音效
+        caster:EmitSound("Tutorial.TaskProgress")
+    end
+    --开始倒计时
+    if remaining_time <= tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) then
+        print("Defend remaining time: " .. remaining_time)
+        Notifications:ClearTopFromAll()
+        Notifications:TopToAll(
+            {text = remaining_time, duration = 0.9, style = {color = "yellow", ["font-size"] = "50px"}}
+        )
+        --计时音效
+        caster:EmitSound("Tutorial.TaskProgress")
     end
 end
 
@@ -221,40 +242,9 @@ function is_push(keys)
             --推进时间耗尽,游戏结束,防守方胜利
             print("Push Failed! End Game!")
             GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
-            --剩余推进时间减1
-            _G.push_time = _G.push_time - 1
         elseif _G.push_time > 0 then
-            --获取推进时间分秒
-            local push_time_min = math.modf(_G.push_time / 60)
-            local push_time_sec = math.fmod(_G.push_time, 60)
-            if push_time_min < 10 then
-                push_time_min = "0" .. push_time_min
-            end
-            if push_time_sec < 10 then
-                push_time_sec = "0" .. push_time_sec
-            end
-            local show_push_time_event = {
-                push_time_min = push_time_min,
-                push_time_sec = push_time_sec
-            }
-            --推进时间UI显示
-            CustomGameEventManager:Send_ServerToAllClients("show_push_time", show_push_time_event)
-            --提前2秒文字提示
-            if _G.push_time == 32 then
-                Notifications:TopToAll(
-                    {text = "#push_remain_30", duration = 2.0, style = {color = "red", ["font-size"] = "50px"}}
-                )
-                --计时音效
-                caster:EmitSound("Tutorial.TaskProgress")
-            end
-            --倒数30秒数字提示
-            if _G.push_time <= 30 then
-                Notifications:TopToAll(
-                    {text = _G.push_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}}
-                )
-                --计时音效
-                caster:EmitSound("Tutorial.TaskProgress")
-            end
+            display_push_time()
+            push_remain_30(caster)
             print("Push remaining time: " .. _G.push_time)
             --剩余推进时间减1
             _G.push_time = _G.push_time - 1
@@ -262,9 +252,57 @@ function is_push(keys)
     else
         --若处于防御阶段，并且推进时间小于进入防守阶段保底推进时间，则增加推进时间
         --若推进时间大于，则不变
-        local shortest_push_time = tonumber(_G.load_map["shortest_push_time"])
-        if _G.push_time < shortest_push_time then
-            _G.push_time = shortest_push_time
-        end
+        overtime()
+        display_push_time()
+    end
+end
+
+--加时
+function overtime()
+    local shortest_push_time = tonumber(_G.load_map["shortest_push_time"])
+    if _G.push_time < shortest_push_time then
+        _G.push_time = shortest_push_time
+        Notifications:ClearTopFromAll()
+        Notifications:TopToAll({text = "#overtime", duration = 1.0, style = {color = "yellow", ["font-size"] = "50px"}})
+    end
+end
+
+--显示推进时间
+function display_push_time()
+    --获取推进时间分秒
+    local push_time_min = math.modf(_G.push_time / 60)
+    local push_time_sec = math.fmod(_G.push_time, 60)
+    if push_time_min < 10 then
+        push_time_min = "0" .. push_time_min
+    end
+    if push_time_sec < 10 then
+        push_time_sec = "0" .. push_time_sec
+    end
+    local show_push_time_event = {
+        push_time_min = push_time_min,
+        push_time_sec = push_time_sec
+    }
+    --推进时间UI显示
+    Notifications:ClearTopFromAll()
+    CustomGameEventManager:Send_ServerToAllClients("show_push_time", show_push_time_event)
+end
+
+--推进还剩30秒提示
+function push_remain_30(caster)
+    --提前2秒文字提示
+    if _G.push_time == 32 then
+        Notifications:ClearTopFromAll()
+        Notifications:TopToAll(
+            {text = "#push_remain_30", duration = 2.0, style = {color = "red", ["font-size"] = "50px"}}
+        )
+        --计时音效
+        caster:EmitSound("Tutorial.TaskProgress")
+    end
+    --倒数30秒数字提示
+    if _G.push_time <= 30 then
+        Notifications:ClearTopFromAll()
+        Notifications:TopToAll({text = _G.push_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}})
+        --计时音效
+        caster:EmitSound("Tutorial.TaskProgress")
     end
 end

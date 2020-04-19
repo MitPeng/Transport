@@ -12,4 +12,5 @@
     "random_one"    "随机天赋"
     "all_talent_abilities"  "所有天赋技能"
     "cancel_change" "取消"
+    "overtime"  "加时!"
 }
