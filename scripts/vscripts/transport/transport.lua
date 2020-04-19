@@ -7,7 +7,7 @@ function is_transport(keys)
     local good_hero = {}
     local bad_hero = {}
     for _, target in ipairs(target_entities) do
-        if target:IsRealHero() then
+        if Utils:is_real_hero(target) then
             local team = target:GetTeam()
             if team then
                 if team == DOTA_TEAM_GOODGUYS then

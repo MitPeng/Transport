@@ -37,13 +37,13 @@ end
 
 --判断是否为真英雄本体
 function Utils:is_real_hero(hero)
-    local player = hero:GetPlayerOwner()
-    local owner_hero = PlayerResource:GetPlayer(hero:GetPlayerOwnerID()):GetAssignedHero()
-    print(hero:GetUnitName())
-    print_r(player:GetPlayerID())
-
-    if owner_hero:GetUnitName() == hero:GetUnitName() then
-        return true
+    if hero:IsRealHero() then
+        local player_hero = PlayerResource:GetSelectedHeroEntity(hero:GetPlayerID())
+        if player_hero ~= nil and player_hero ~= hero then
+            return false
+        else
+            return true
+        end
     else
         return false
     end

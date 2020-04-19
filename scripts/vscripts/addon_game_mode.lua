@@ -254,7 +254,7 @@ end
 -- 单位出生
 function TransportGameMode:OnNPCSpawned(keys)
 	local hero = EntIndexToHScript(keys.entindex)
-	if hero:IsRealHero() then
+	if Utils:is_real_hero(hero) then
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
@@ -262,7 +262,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
 			--加初始天赋药水
 			Timers:CreateTimer(
-				2.0,
+				1.0,
 				function()
 					hero:AddItemByName("item_talent_potion_2")
 				end
@@ -271,12 +271,9 @@ function TransportGameMode:OnNPCSpawned(keys)
 
 		--处理骷髅王大招
 		if hero:GetUnitName() == "npc_dota_hero_skeleton_king" then
-			print("skt")
 			local ability = hero:FindAbilityByName("skeleton_king_reincarnation")
 			local cd = ability:GetCooldownTimeRemaining()
 			local ability_level = ability:GetLevel()
-			print("ability_lvl:" .. ability_level)
-			print("cd:" .. cd)
 			if ability_level > 0 and cd > (ability:GetCooldown(ability_level) * hero:GetCooldownReduction() - 5) then
 				return
 			end
