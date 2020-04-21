@@ -9,7 +9,7 @@ function talent_potion(keys)
         UTIL_RemoveImmediate(ability)
     end
     --调用天赋技能选择面板
-    --随机4个天赋技能
+    --随机5个天赋技能
     local abilities = {}
     while true do
         local rd = RandomInt(1, _G.abilities_num)
@@ -23,7 +23,7 @@ function talent_potion(keys)
         if not isHave then
             table.insert(abilities, _G.talent_abilities[tostring(rd)])
         end
-        if #abilities == 4 then
+        if #abilities == 5 then
             break
         end
     end

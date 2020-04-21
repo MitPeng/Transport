@@ -485,7 +485,7 @@ function TransportGameMode:PlayerChat(keys)
 				if not isHave then
 					table.insert(abilities, _G.talent_abilities[tostring(rd)])
 				end
-				if #abilities == 4 then
+				if #abilities == 5 then
 					break
 				end
 			end
