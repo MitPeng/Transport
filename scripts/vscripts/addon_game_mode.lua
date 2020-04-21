@@ -91,6 +91,8 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("npc_spawned", Dynamic_Wrap(TransportGameMode, "OnNPCSpawned"), self)
 	-- 监听玩家聊天事件
 	ListenToGameEvent("player_chat", Dynamic_Wrap(TransportGameMode, "PlayerChat"), self)
+	-- 设置伤害过滤器
+	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(TransportGameMode, "DamageFilter"), self)
 
 	CustomGameEventManager:RegisterListener(
 		"player_select_ability",
@@ -433,6 +435,13 @@ function TransportGameMode:PlayerChat(keys)
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end
+		-- 处决
+		if keys.text == "execution" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("execution")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
 		--删除天赋技能
 		if keys.text == "delete_talent" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
@@ -478,6 +487,35 @@ function TransportGameMode:PlayerChat(keys)
 			)
 		end
 	end
+end
+
+-- 伤害过滤器
+function TransportGameMode:DamageFilter(damageTable)
+	if not damageTable.entindex_attacker_const then
+		return true
+	end
+	if not damageTable.entindex_victim_const then
+		return true
+	end
+
+	local attacker = EntIndexToHScript(damageTable.entindex_attacker_const)
+	local victim = EntIndexToHScript(damageTable.entindex_victim_const)
+
+	--处理处决技能
+	if attacker:HasAbility("execution") and attacker:HasModifier("modifier_execution") and victim:IsRealHero() then
+		local ability = attacker:FindAbilityByName("execution")
+		local hp_percent = ability:GetSpecialValueFor("hp_percent")
+		--判断造成伤害后的血量
+		local hp = victim:GetHealth() - damageTable.damage
+		local percent = hp * 100 / victim:GetMaxHealth()
+		--小于等于处决血量百分比
+		if percent <= hp_percent then
+			-- damageTable.damage = 999999
+			ability:ApplyDataDrivenModifier(attacker, victim, "modifier_execution_apply", {duration = 0.1})
+		end
+	end
+
+	return true
 end
 
 -- Evaluate the state of the game

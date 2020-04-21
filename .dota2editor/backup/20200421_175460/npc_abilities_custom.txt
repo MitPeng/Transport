@@ -1458,26 +1458,13 @@
 				"Passive"	"1"
 				"IsHidden"	"1"
 			}
-			"modifier_execution_apply"
-			{
-				"IsHidden"	"1"
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"Target"	"TARGET"
-						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
-						"Function"	"execution"
-					}
-				}
-			}
 		}
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"15"
+				"hp_percent"	"12"
 			}
 		}
 	}

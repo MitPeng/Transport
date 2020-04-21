@@ -49,6 +49,7 @@
                 "13" "soul_harvest"
                 "14" "rebirth"
                 "15" "miser"
+                "16" "execution"
               //   "16"  "block_master"
         }
 }

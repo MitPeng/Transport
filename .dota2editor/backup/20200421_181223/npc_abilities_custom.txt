@@ -1449,6 +1449,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+		}
 		"Modifiers"
 		{
 			"modifier_execution"
@@ -1469,6 +1473,11 @@
 						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
 						"Function"	"execution"
 					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"Hero_Axe.Culling_Blade_Success"
+					}
 				}
 			}
 		}
@@ -1477,7 +1486,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"15"
+				"hp_percent"	"80"
 			}
 		}
 	}
