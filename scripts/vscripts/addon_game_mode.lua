@@ -442,6 +442,13 @@ function TransportGameMode:PlayerChat(keys)
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end
+		-- 巨人杀手
+		if keys.text == "giant_killer" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("giant_killer")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
 		--删除天赋技能
 		if keys.text == "delete_talent" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
@@ -512,6 +519,21 @@ function TransportGameMode:DamageFilter(damageTable)
 		if percent <= hp_percent then
 			-- damageTable.damage = 999999
 			ability:ApplyDataDrivenModifier(attacker, victim, "modifier_execution_apply", {duration = 0.1})
+		end
+	end
+
+	--处理巨人杀手技能
+	if attacker:HasAbility("giant_killer") and attacker:HasModifier("modifier_giant_killer") then
+		local ability = attacker:FindAbilityByName("giant_killer")
+		local hp_difference = ability:GetSpecialValueFor("hp_difference")
+		--计算差值提供的百分比伤害提升
+		local victim_hp = victim:GetMaxHealth()
+		local attacker_hp = attacker:GetMaxHealth()
+		local diff = victim_hp - attacker_hp
+		if diff > 0 then
+			local percent = math.ceil(diff / hp_difference) / 100
+			PopupDamage(victim, math.ceil(percent * damageTable.damage))
+			damageTable.damage = damageTable.damage * (1 + percent)
 		end
 	end
 

@@ -1447,6 +1447,8 @@
 		"BaseClass"	"ability_datadriven"
 		"AbilityTextureName"	"necronomicon_warrior_mana_burn"
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"	"1"
+		"RequiredLevel"	"1"
 		"Modifiers"
 		{
 			"modifier_execution"
@@ -1455,11 +1457,17 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Passive"	"1"
 				"IsHidden"	"1"
-				"OnDealDamage"
+			}
+			"modifier_execution_apply"
+			{
+				"IsHidden"	"1"
+				"OnCreated"
 				{
 					"RunScript"
 					{
 						"Target"	"TARGET"
+						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
+						"Function"	"execution"
 					}
 				}
 			}
@@ -1469,8 +1477,15 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"12"
+				"hp_percent"	"15"
 			}
 		}
+	}
+
+	"giant_killer"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"phantom_assassin_arcana_coup_de_grace"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 	}
 }
