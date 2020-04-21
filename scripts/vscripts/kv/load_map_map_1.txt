@@ -41,6 +41,7 @@
               "15" "miser"
               "16" "execution"
               "17" "giant_killer"
+              "18" "feral_aura"
               //   "16"  "block_master"
         }
 }
