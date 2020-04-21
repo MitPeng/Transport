@@ -1458,13 +1458,146 @@
 				"Passive"	"1"
 				"IsHidden"	"1"
 			}
+			"modifier_execution_apply"
+			{
+				"IsHidden"	"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
+						"Function"	"execution"
+					}
+				}
+			}
 		}
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"12"
+				"hp_percent"	"15"
+			}
+		}
+	}
+
+	"giant_killer"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"phantom_assassin_arcana_coup_de_grace"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"	"1"
+		"RequiredLevel"	"1"
+		"Modifiers"
+		{
+			"modifier_giant_killer"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"Passive"	"1"
+				"IsHidden"	"1"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"hp_difference"	"50"
+			}
+		}
+	}
+
+	"feral_aura"
+	{
+		"BaseClass"	"ability_datadriven"
+		"AbilityTextureName"	"alpha_wolf_command_aura"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
+		"MaxLevel"	"1"
+		"RequiredLevel"	"1"
+		"AbilityCastRange"	"1200"
+		"Modifiers"
+		{
+			"modifier_feral_aura"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
+				"Aura_Types"	"DOTA_UNIT_TARGET_BASIC"
+				"Aura_ApplyToCaster"	"0"
+				"Aura_Flags"	"DOTA_UNIT_TARGET_FLAG_PLAYER_CONTROLLED"
+				"Aura"	"modifier_feral_aura_apply"
+				"Aura_Radius"	"%radius"
+			}
+			"modifier_feral_aura_apply"
+			{
+				"TextureName"	"alpha_wolf_command_aura"
+				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"ApplyModifier"
+					{
+						"Target"	"TARGET"
+						"ModifierName"	"modifier_feral_aura_count"
+						"Duration"	"-1"
+					}
+				}
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"scripts/vscripts/talent/feral_aura.lua"
+						"Function"	"feral_aura"
+					}
+				}
+				"OnDestroy"
+				{
+					"RemoveModifier"
+					{
+						"Target"	"TARGET"
+						"ModifierName"	"modifier_feral_aura_count"
+					}
+				}
+				"ThinkInterval"	"0.1"
+			}
+			"modifier_feral_aura_count"
+			{
+				"Duration"	"-1"
+				"IsHidden"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_PREATTACK_BONUS_DAMAGE"	"%lvl_attack_damage"
+					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%lvl_attack_speed"
+					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_move_speed"
+				}
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+			}
+		}
+		"AbilitySpecial"
+		{
+			"01"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"radius"	"1200"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_attack_damage"	"3"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_attack_speed"	"3"
+			}
+			"04"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_move_speed"	"3"
 			}
 		}
 	}
