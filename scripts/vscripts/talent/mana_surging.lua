@@ -8,12 +8,11 @@ function apply_count(keys)
             local cd_reduction = caster:GetCooldownReduction()
             local ability_level = ability:GetLevel() - 1
             local ability_cooldown = ability:GetCooldown(ability_level) * cd_reduction
-            local count = caster:GetModifierStackCount("modifier_mana_surging_count", caster)
-            if not count then
-                count = 1
-            else
-                count = count + 1
-            end
+            local duration = ability:GetSpecialValueFor("duration")
+            local spend_mana = caster:GetMaxMana() - caster:GetMana()
+            local mana_regen_per_sec = ability:GetSpecialValueFor("mana_regen_percent") / duration / 100
+            local count = math.ceil(spend_mana * mana_regen_per_sec)
+            ability:ApplyDataDrivenModifier(caster, caster, "modifier_mana_surging_count", {duration = duration})
             caster:SetModifierStackCount("modifier_mana_surging_count", caster, count)
             ability:StartCooldown(ability_cooldown)
             local particle_name = "particles/items_fx/arcane_boots_recipient.vpcf"

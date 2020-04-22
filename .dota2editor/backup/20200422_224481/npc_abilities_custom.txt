@@ -1186,12 +1186,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"6.0"
+				"duration"	"5.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana_regen_percent"	"30.0"
+				"mana_regen_percent"	"60.0"
 			}
 		}
 	}
