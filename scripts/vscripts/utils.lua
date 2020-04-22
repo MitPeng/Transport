@@ -8,7 +8,7 @@ function Utils:create_unit_and_set_ability(sUnitName, vPosition, bClearSpace, hN
     local unit = CreateUnitByName(sUnitName, vPosition, bClearSpace, hNPCOwner, hUnitOwner, nTeamNumber)
     -- 设置技能等级
     local count = unit:GetAbilityCount()
-    for i = 0, count - 1 do
+    for i = 0, count do
         local ability = unit:GetAbilityByIndex(i)
         if ability then
             ability:SetLevel(1)
@@ -26,7 +26,7 @@ end
 function Utils:unit_abilities_lvlup(unit)
     -- 设置技能等级
     local count = unit:GetAbilityCount()
-    for i = 0, count - 1 do
+    for i = 0, count do
         local ability = unit:GetAbilityByIndex(i)
         if ability then
             ability:SetLevel(ability:GetLevel() + 1)

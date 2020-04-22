@@ -1,6 +1,6 @@
 function is_apply(keys)
     local caster = keys.caster
-    local target = keys.target
+    local target = keys.unit
     if target:IsRealHero() then
         local ability = keys.ability
         if caster:HasModifier("modifier_soul_harvest_count") then

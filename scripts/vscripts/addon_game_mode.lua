@@ -21,6 +21,7 @@ function Precache(context)
 			PrecacheResource( "particle_folder", "particles/folder", context )
 	]]
 	PrecacheResource("soundfile", "soundevents/game_sounds_ui_imported.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_undying.vsndevts", context)
 end
 
 -- Create the game mode when we activate
@@ -453,6 +454,13 @@ function TransportGameMode:PlayerChat(keys)
 		if keys.text == "feral_aura" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
 			local ability = hero:AddAbility("feral_aura")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
+		-- 召唤丧尸
+		if keys.text == "summon_zombie" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("summon_zombie")
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end

@@ -1668,7 +1668,7 @@
 		"precache"
 		{
 			"particle"	"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
-			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"particle"	"particles/econ/items/drow/drow_head_mania/mask_of_madness_mania.vpcf"
 		}
 		"Modifiers"
 		{
@@ -1716,7 +1716,7 @@
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_move_speed"
 				}
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
+				"EffectName"	"particles/econ/items/drow/drow_head_mania/mask_of_madness_mania.vpcf"
 				"EffectAttachType"	"attach_attack"
 				"IsHidden"	"1"
 			}
