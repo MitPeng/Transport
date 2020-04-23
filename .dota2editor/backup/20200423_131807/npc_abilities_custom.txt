@@ -871,12 +871,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_block_damage"	"30"
+				"base_block_damage"	"20"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_block_damage"	"1"
+				"lvl_block_damage"	"3"
 			}
 			"03"
 			{

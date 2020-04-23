@@ -842,7 +842,7 @@
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"-1"
-				"IsHidden"	"1"
+				"IsHidden"	"0"
 				"Properties"
 				{
 					"MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK"	"1"
@@ -853,7 +853,7 @@
 			"modifier_block_master_cd"
 			{
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"IsDebuff"	"0"
+				"IsDebuff"	"1"
 				"OnDestroy"
 				{
 					"RunScript"
@@ -863,7 +863,6 @@
 						"Function"	"init_count"
 					}
 				}
-				"IsHidden"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -871,22 +870,22 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_block_damage"	"30"
+				"base_block_damage"	"20"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_block_damage"	"1"
+				"lvl_block_damage"	"4"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"trigger_times"	"3.5"
+				"trigger_times"	"1.5"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"damage_times"	"5.0"
+				"damage_times"	"3.0"
 			}
 		}
 	}

@@ -871,22 +871,22 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_block_damage"	"30"
+				"base_block_damage"	"20"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_block_damage"	"1"
+				"lvl_block_damage"	"4"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"trigger_times"	"3.5"
+				"trigger_times"	"1.5"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"damage_times"	"5.0"
+				"damage_times"	"3.0"
 			}
 		}
 	}

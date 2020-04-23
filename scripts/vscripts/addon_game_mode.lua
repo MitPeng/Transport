@@ -552,6 +552,39 @@ function TransportGameMode:DamageFilter(damageTable)
 		end
 	end
 
+	--处理格挡大师技能
+	if victim:HasAbility("block_master") and victim:HasModifier("modifier_block_master") then
+		local ability = victim:FindAbilityByName("block_master")
+		--如果没cd
+		if not victim:HasModifier("modifier_block_master_cd") then
+			--计算剩余触发伤害
+			ability.trigger_damage = ability.trigger_damage - damageTable.damage
+			--触发伤害小于等于0
+			if ability.trigger_damage <= 0 then
+				--给攻击者反弹格挡伤害
+				local block_damage =
+					(ability:GetSpecialValueFor("base_block_damage") +
+					ability:GetSpecialValueFor("lvl_block_damage") * victim:GetLevel()) *
+					ability:GetSpecialValueFor("damage_times")
+				local damage_table = {
+					victim = attacker,
+					attacker = victim,
+					damage = block_damage,
+					damage_type = DAMAGE_TYPE_PURE
+				}
+				ApplyDamage(damage_table)
+				local amp = victim:GetSpellAmplification(false)
+				PopupDamage(attacker, math.ceil((1 + amp) * block_damage))
+				--去掉格挡buff
+				victim:RemoveModifierByName("modifier_block_master_block_damage")
+				--技能进入cd，cd好了以后，如果技能还在，加格挡buff
+				local cd = ability:GetCooldown(ability:GetLevel() - 1)
+				ability:ApplyDataDrivenModifier(victim, victim, "modifier_block_master_cd", {duration = cd})
+				ability:StartCooldown(cd)
+			end
+		end
+	end
+
 	return true
 end
 
