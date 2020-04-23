@@ -478,6 +478,13 @@ function TransportGameMode:PlayerChat(keys)
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end
+		-- 孤立无援
+		if keys.text == "isolated" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("isolated")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
 		--删除天赋技能
 		if keys.text == "delete_talent" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
@@ -596,6 +603,31 @@ function TransportGameMode:DamageFilter(damageTable)
 				ability:ApplyDataDrivenModifier(victim, victim, "modifier_block_master_cd", {duration = cd})
 				ability:StartCooldown(cd)
 			end
+		end
+	end
+
+	--处理孤立无援技能
+	if attacker:HasAbility("isolated") and attacker:HasModifier("modifier_isolated") then
+		local ability = attacker:FindAbilityByName("isolated")
+		local heroes =
+			FindUnitsInRadius(
+			attacker:GetTeamNumber(),
+			victim:GetAbsOrigin(),
+			victim,
+			ability:GetSpecialValueFor("radius"),
+			DOTA_UNIT_TARGET_TEAM_ENEMY,
+			DOTA_UNIT_TARGET_HERO,
+			0,
+			0,
+			false
+		)
+		--触发孤立无援
+		if #heroes == 1 then
+			local base_damage_percent = ability:GetSpecialValueFor("base_damage_percent")
+			local lvl_damage_percent = ability:GetSpecialValueFor("lvl_damage_percent")
+			local total_damage_percent = (base_damage_percent + lvl_damage_percent * attacker:GetLevel()) / 100
+			damageTable.damage = math.ceil(damageTable.damage * (1 + total_damage_percent))
+			PopupDamage(victim, math.ceil(damageTable.damage * total_damage_percent))
 		end
 	end
 

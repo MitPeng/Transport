@@ -1937,6 +1937,21 @@
 				"var_type"	"FIELD_INTEGER"
 				"duration"	"300"
 			}
+			"02"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_gold_1"	"1500"
+			}
+			"03"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_gold_2"	"3000"
+			}
+			"04"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"lvl_gold_3"	"4000"
+			}
 		}
 	}
 

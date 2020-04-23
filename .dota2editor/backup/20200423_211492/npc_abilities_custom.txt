@@ -1930,14 +1930,6 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"duration"	"300"
-			}
-		}
 	}
 
 	"isolated"
@@ -1955,24 +1947,6 @@
 				"Duration"	"-1"
 				"Passive"	"1"
 				"IsHidden"	"1"
-			}
-		}
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"radius"	"400"
-			}
-			"02"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"base_damage_percent"	"25.0"
-			}
-			"03"
-			{
-				"var_type"	"FIELD_FLOAT"
-				"lvl_damage_percent"	"0.5"
 			}
 		}
 	}
