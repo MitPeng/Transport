@@ -15,7 +15,7 @@
 		"ID"	"1500"
 		"ItemQuality"	"consumable"
 		"ItemCastOnPickup"	"0"
-		"ItemCost"	"5000"
+		"ItemCost"	"2500"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemShareability"	"ITEM_NOT_SHAREABLE"
