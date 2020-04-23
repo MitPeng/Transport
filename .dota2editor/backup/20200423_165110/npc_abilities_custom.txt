@@ -1814,8 +1814,8 @@
 			}
 			"02"
 			{
-				"var_type"	"FIELD_FLOAT"
-				"lvl_xp"	"1.2"
+				"var_type"	"FIELD_INTEGER"
+				"lvl_xp"	"2"
 			}
 			"03"
 			{

@@ -1814,18 +1814,8 @@
 			}
 			"02"
 			{
-				"var_type"	"FIELD_FLOAT"
-				"lvl_xp"	"1.2"
-			}
-			"03"
-			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_share_half"	"20"
-			}
-			"04"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"lvl_share_all"	"30"
+				"lvl_xp"	"2"
 			}
 		}
 	}

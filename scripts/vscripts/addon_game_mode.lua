@@ -464,6 +464,13 @@ function TransportGameMode:PlayerChat(keys)
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end
+		-- 侍奉
+		if keys.text == "serve" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("serve")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
 		--删除天赋技能
 		if keys.text == "delete_talent" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
