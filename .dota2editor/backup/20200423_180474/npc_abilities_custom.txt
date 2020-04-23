@@ -1837,7 +1837,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"800"
+		"AbilityCastRange"	"600"
 		"Modifiers"
 		{
 			"modifier_mist"
@@ -1873,7 +1873,7 @@
 						"Function"	"broken_mist"
 					}
 				}
-				"ThinkInterval"	"1.0"
+				"ThinkInterval"	"0.3"
 			}
 			"modifier_mist_apply"
 			{
@@ -1887,7 +1887,7 @@
 					}
 				}
 				"TextureName"	"mist"
-				"IsBuff"	"0"
+				"IsBuff"	"1"
 				"OnDestroy"
 				{
 					"RemoveModifier"
@@ -1896,11 +1896,6 @@
 						"ModifierName"	"modifier_smoke_of_deceit"
 					}
 				}
-				"IsHidden"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MOVESPEED_BONUS_PERCENTAGE"	"%move_speed_percent"
-				}
 			}
 		}
 		"AbilitySpecial"
@@ -1908,17 +1903,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"900"
+				"radius"	"1000"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
 				"broken_radius"	"800"
-			}
-			"03"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"move_speed_percent"	"20"
 			}
 		}
 	}

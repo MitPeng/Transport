@@ -471,6 +471,13 @@ function TransportGameMode:PlayerChat(keys)
 			ability:SetLevel(1)
 			hero.talent_ability = ability
 		end
+		-- 迷雾
+		if keys.text == "mist" then
+			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()
+			local ability = hero:AddAbility("mist")
+			ability:SetLevel(1)
+			hero.talent_ability = ability
+		end
 		--删除天赋技能
 		if keys.text == "delete_talent" then
 			local hero = PlayerResource:GetPlayer(keys.userid - 1):GetAssignedHero()

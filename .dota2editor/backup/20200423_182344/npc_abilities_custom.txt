@@ -1837,7 +1837,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"800"
+		"AbilityCastRange"	"600"
 		"Modifiers"
 		{
 			"modifier_mist"
@@ -1873,7 +1873,7 @@
 						"Function"	"broken_mist"
 					}
 				}
-				"ThinkInterval"	"1.0"
+				"ThinkInterval"	"0.8"
 			}
 			"modifier_mist_apply"
 			{
