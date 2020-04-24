@@ -290,6 +290,18 @@ function TransportGameMode:OnNPCSpawned(keys)
 			end
 		end
 
+		--处理尸王重生
+		if hero:GetUnitName() == "npc_dota_hero_undying" then
+			local ability = hero:FindAbilityByName("special_bonus_reincarnation_250")
+			if ability:GetLevel() == 1 then
+				local cd = hero:FindModifierByName("modifier_special_bonus_reincarnation"):GetRemainingTime()
+				print(cd)
+				if cd > 244.8 then
+					return
+				end
+			end
+		end
+
 		--根据当前路段设置重生点
 		--天辉夜魇重生点不同
 		local spawn_point
@@ -299,11 +311,18 @@ function TransportGameMode:OnNPCSpawned(keys)
 		elseif hero:GetTeam() == DOTA_TEAM_BADGUYS then
 			spawn_point = "bad_spawn_" .. _G.road_section_num
 		end
-		local vec = Entities:FindByName(nil, spawn_point):GetAbsOrigin()
+		local vec_1 = Entities:FindByName(nil, spawn_point):GetAbsOrigin()
+		local vec_2 = vec_1 + RandomVector(800)
 		Timers:CreateTimer(
 			0.2,
 			function()
-				hero:SetAbsOrigin(vec)
+				hero:SetAbsOrigin(vec_2)
+			end
+		)
+		Timers:CreateTimer(
+			0.4,
+			function()
+				hero:SetAbsOrigin(vec_1)
 				--加个相位效果，防止英雄卡位
 				if not hero:HasAbility("keen") and not hero:HasAbility("rebirth") then
 					hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})
@@ -313,7 +332,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 			end
 		)
 		Timers:CreateTimer(
-			0.4,
+			0.5,
 			function()
 				PlayerResource:SetCameraTarget(hero:GetPlayerID(), nil)
 			end
