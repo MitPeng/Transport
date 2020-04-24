@@ -842,6 +842,7 @@
 					"MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK"	"1"
 				}
 				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_block_master_cd"
 			{

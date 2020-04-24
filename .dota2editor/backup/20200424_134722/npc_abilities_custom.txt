@@ -804,7 +804,7 @@
 		"AbilityCooldown"	"4.0"
 		"precache"
 		{
-			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+			"particle"	"particles/units/heroes/hero_pangolier/pangolier_tailthump_buff.vpcf"
 		}
 		"Modifiers"
 		{
@@ -841,7 +841,8 @@
 				{
 					"MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK"	"1"
 				}
-				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"EffectName"	"particles/units/heroes/hero_pangolier/pangolier_tailthump_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_block_master_cd"
 			{
