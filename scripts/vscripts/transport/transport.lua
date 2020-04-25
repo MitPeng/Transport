@@ -91,11 +91,11 @@ function is_transport(keys)
         caster.is_bad_transport = false
         caster.is_good_transport = false
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
-        --若处于防御阶段，则结束防御阶段
-        if caster:HasModifier("modifier_transport_defend_road_section") then
-            caster:RemoveModifierByName("modifier_transport_defend_road_section")
-            caster.is_defend = false
-        end
+    --若处于防御阶段，则结束防御阶段
+    -- if caster:HasModifier("modifier_transport_defend_road_section") then
+    --     caster:RemoveModifierByName("modifier_transport_defend_road_section")
+    --     caster.is_defend = false
+    -- end
     end
 
     --提供视野

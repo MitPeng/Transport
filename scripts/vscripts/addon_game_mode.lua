@@ -257,19 +257,22 @@ end
 -- 单位出生
 function TransportGameMode:OnNPCSpawned(keys)
 	local hero = EntIndexToHScript(keys.entindex)
-	if Utils:is_real_hero(hero) then
+	if Utils:is_real_hero(hero) or hero:IsClone() then
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
-			--升至指定等级
-			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
-			--加初始天赋药水
-			Timers:CreateTimer(
-				1.0,
-				function()
-					hero:AddItemByName("item_talent_potion_2")
-				end
-			)
+			if not hero:IsClone() then
+				--升至指定等级
+				hero:AddExperience(_G.first_spawn_xp, 0, false, false)
+				--加初始天赋药水
+				Timers:CreateTimer(
+					1.0,
+					function()
+						hero:AddItemByName("item_talent_potion_2")
+					end
+				)
+			end
+
 		-- if _G.map_name == "map_1" then
 		-- 	local ability = hero:AddAbility("keen")
 		-- 	ability:SetLevel(1)
@@ -312,15 +315,8 @@ function TransportGameMode:OnNPCSpawned(keys)
 			spawn_point = "bad_spawn_" .. _G.road_section_num
 		end
 		local vec_1 = Entities:FindByName(nil, spawn_point):GetAbsOrigin()
-		local vec_2 = vec_1 + RandomVector(800)
 		Timers:CreateTimer(
 			0.2,
-			function()
-				hero:SetAbsOrigin(vec_2)
-			end
-		)
-		Timers:CreateTimer(
-			0.4,
 			function()
 				hero:SetAbsOrigin(vec_1)
 				--加个相位效果，防止英雄卡位
@@ -332,7 +328,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 			end
 		)
 		Timers:CreateTimer(
-			0.5,
+			0.3,
 			function()
 				PlayerResource:SetCameraTarget(hero:GetPlayerID(), nil)
 			end
@@ -572,6 +568,10 @@ function TransportGameMode:DamageFilter(damageTable)
 
 	--处理处决技能
 	if attacker:HasAbility("execution") and attacker:HasModifier("modifier_execution") and victim:IsRealHero() then
+		--自己打自己不触发
+		if attacker:GetOwnerEntity() == victim:GetOwnerEntity() then
+			return true
+		end
 		local ability = attacker:FindAbilityByName("execution")
 		local hp_percent = ability:GetSpecialValueFor("hp_percent")
 		--判断造成伤害后的血量

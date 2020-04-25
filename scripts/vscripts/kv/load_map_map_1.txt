@@ -18,7 +18,7 @@
         "defend_time_2" "9"
         "defend_time_3" "8"
         //进入防守阶段后，最短推进时间
-        "shortest_push_time"    "60"
+        "shortest_push_time"    "45"
         //运输车名
         "car_name"      "car_1"
         //该地图的天赋技能
