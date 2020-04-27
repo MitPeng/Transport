@@ -572,6 +572,10 @@ function TransportGameMode:DamageFilter(damageTable)
 		if attacker:GetOwnerEntity() == victim:GetOwnerEntity() then
 			return true
 		end
+		--还在cd不触发
+		if attacker:HasModifier("modifier_execution_cd") then
+			return true
+		end
 		local ability = attacker:FindAbilityByName("execution")
 		local hp_percent = ability:GetSpecialValueFor("hp_percent")
 		--判断造成伤害后的血量
@@ -579,7 +583,6 @@ function TransportGameMode:DamageFilter(damageTable)
 		local percent = hp * 100 / victim:GetMaxHealth()
 		--小于等于处决血量百分比
 		if percent <= hp_percent then
-			-- damageTable.damage = 999999
 			ability:ApplyDataDrivenModifier(attacker, victim, "modifier_execution_apply", {duration = 0.1})
 		end
 	end

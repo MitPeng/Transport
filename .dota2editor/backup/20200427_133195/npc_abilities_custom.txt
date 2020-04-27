@@ -1487,7 +1487,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"12"
+				"hp_percent"	"10"
 			}
 			"02"
 			{

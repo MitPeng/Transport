@@ -48,6 +48,7 @@ function is_transport(keys)
             caster:MoveToPosition(Path:get_corner(_G.pre_corner):GetOrigin())
         -- Path:find_path(caster, Path:get_path(caster))
         end
+        caster.is_stop_time = false
     elseif good ~= 0 and bad == 0 then
         --根据人数设置移速
         if caster:HasModifier("modifier_transport_move_speed") then
@@ -75,6 +76,7 @@ function is_transport(keys)
             --若推进时间大于，则不变
             overtime()
         end
+        caster.is_stop_time = false
     elseif good == 0 and bad == 0 then
         --双方都不在，在原地不动
         caster.is_bad_transport = false
@@ -85,17 +87,17 @@ function is_transport(keys)
             caster:RemoveModifierByName("modifier_transport_defend_road_section")
             caster.is_defend = false
         end
+        caster.is_stop_time = false
     elseif good ~= 0 and bad ~= 0 then
         --防御阶段不变
         --双方都在,在原地不动
         caster.is_bad_transport = false
         caster.is_good_transport = false
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
-    --若处于防御阶段，则结束防御阶段
-    -- if caster:HasModifier("modifier_transport_defend_road_section") then
-    --     caster:RemoveModifierByName("modifier_transport_defend_road_section")
-    --     caster.is_defend = false
-    -- end
+        --若处于防御阶段，则暂停时间
+        if caster:HasModifier("modifier_transport_defend_road_section") then
+            caster.is_stop_time = true
+        end
     end
 
     --提供视野
@@ -130,7 +132,7 @@ function change_corner(keys)
                         caster,
                         caster,
                         "modifier_transport_defend_road_section",
-                        {duration = tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2}
+                        {duration = -1}
                     )
                     caster:RemoveModifierByName("modifier_transport_road_section")
                     caster.is_defend = true
@@ -161,11 +163,13 @@ function is_defend(keys)
     local caster = keys.caster
     local ability = keys.ability
     local modifier = caster:FindModifierByName("modifier_transport_defend_road_section")
-    local remaining_time = math.ceil(modifier:GetRemainingTime())
+    if ability.remaining_time == nil then
+        ability.remaining_time = tonumber(_G.load_map["defend_time_" .. _G.road_section_num]) + 2
+    end
     --游戏没结束才运行
     if not caster.is_game_end then
         --剩余时间为0
-        if remaining_time == 0 then
+        if ability.remaining_time == 0 then
             --防御阶段结束
             caster.is_defend = false
             --如果还存在下一个路点，则设置
@@ -177,8 +181,12 @@ function is_defend(keys)
                 GameRules:SetGameWinner(DOTA_TEAM_GOODGUYS)
                 caster.is_game_end = true
             end
+            ability.remaining_time = nil
         else
-            start_defend(remaining_time, caster)
+            start_defend(ability.remaining_time, caster)
+            if not caster.is_stop_time then
+                ability.remaining_time = ability.remaining_time - 1
+            end
         end
     end
 end
@@ -200,6 +208,11 @@ function denfend_success(caster)
     _G.road_section_num = _G.road_section_num + 1
     --重置推进时间
     _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
+    --若处于防御阶段，则结束防御阶段
+    if caster:HasModifier("modifier_transport_defend_road_section") then
+        caster:RemoveModifierByName("modifier_transport_defend_road_section")
+        caster.is_defend = false
+    end
 end
 
 --防御阶段开始
@@ -231,6 +244,7 @@ function stop_defend(keys)
     local caster = keys.caster
     local ability = keys.ability
     ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_road_section", {duration = -1})
+    ability.remaining_time = nil
 end
 
 --推进阶段每秒事件
