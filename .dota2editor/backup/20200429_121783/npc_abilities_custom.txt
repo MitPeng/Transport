@@ -1475,13 +1475,24 @@
 					}
 				}
 			}
+			"modifier_execution_cd"
+			{
+				"Duration"	"%cd"
+				"IsHidden"	"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+			}
 		}
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"15"
+				"hp_percent"	"12"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"cd"	"15.0"
 			}
 		}
 	}

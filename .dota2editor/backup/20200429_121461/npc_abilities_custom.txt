@@ -1475,13 +1475,24 @@
 					}
 				}
 			}
+			"modifier_execution_cd"
+			{
+				"Duration"	"%cd"
+				"IsHidden"	"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+			}
 		}
 		"AbilitySpecial"
 		{
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"15"
+				"hp_percent"	"12"
+			}
+			"02"
+			{
+				"var_type"	"FIELD_FLOAT"
+				"cd"	"15.0"
 			}
 		}
 	}
@@ -1850,6 +1861,7 @@
 							"Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Center"	"CASTER"
 							"Radius"	"%radius"
+							"Flags"	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 						}
 						"ScriptFile"	"scripts/vscripts/talent/mist.lua"
 						"Function"	"mist"
@@ -1862,6 +1874,7 @@
 							"Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 							"Center"	"CASTER"
 							"Radius"	"%broken_radius"
+							"Flags"	"DOTA_UNIT_TARGET_FLAG_MAGIC_IMMUNE_ENEMIES"
 						}
 						"ScriptFile"	"scripts/vscripts/talent/mist.lua"
 						"Function"	"broken_mist"
