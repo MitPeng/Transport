@@ -295,11 +295,11 @@ function TransportGameMode:OnNPCSpawned(keys)
 
 		--处理尸王重生
 		if hero:GetUnitName() == "npc_dota_hero_undying" then
-			local ability = hero:FindAbilityByName("special_bonus_reincarnation_250")
+			local ability = hero:FindAbilityByName("special_bonus_reincarnation_300")
 			if ability:GetLevel() == 1 then
 				local cd = hero:FindModifierByName("modifier_special_bonus_reincarnation"):GetRemainingTime()
 				print(cd)
-				if cd > 244.8 then
+				if cd > 294.8 then
 					return
 				end
 			end

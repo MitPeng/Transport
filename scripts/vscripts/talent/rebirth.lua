@@ -11,11 +11,11 @@ function set_respawn_time(keys)
     end
     --处理尸王重生
     if caster:GetUnitName() == "npc_dota_hero_undying" then
-        local ability = caster:FindAbilityByName("special_bonus_reincarnation_250")
+        local ability = caster:FindAbilityByName("special_bonus_reincarnation_300")
         if ability:GetLevel() == 1 then
             local cd = caster:FindModifierByName("modifier_special_bonus_reincarnation"):GetRemainingTime()
             print(cd)
-            if cd > 244.8 then
+            if cd > 294.8 then
                 return
             end
         end
