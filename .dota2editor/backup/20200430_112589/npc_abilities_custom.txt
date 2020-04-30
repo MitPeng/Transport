@@ -793,7 +793,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"550"
+				"radius"	"400"
 			}
 			"02"
 			{
@@ -803,7 +803,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"healing_percent"	"40"
+				"healing_percent"	"30"
 			}
 		}
 	}

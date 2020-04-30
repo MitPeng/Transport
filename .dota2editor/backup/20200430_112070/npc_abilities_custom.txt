@@ -313,7 +313,6 @@
 						"EffectAttachType"	"attach_hitloc"
 					}
 				}
-				"IsPurgable"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -379,7 +378,6 @@
 				"Duration"	"%count_duration"
 				"TextureName"	"bloodthirsty_count"
 				"IsBuff"	"1"
-				"IsPurgable"	"1"
 			}
 			"modifier_bloodthirsty_apply"
 			{
@@ -397,7 +395,6 @@
 						"LifestealPercent"	"%lifesteal_percent"
 					}
 				}
-				"IsPurgable"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -793,7 +790,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"550"
+				"radius"	"400"
 			}
 			"02"
 			{
@@ -803,7 +800,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"healing_percent"	"40"
+				"healing_percent"	"30"
 			}
 		}
 	}
@@ -969,7 +966,7 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Properties"	{}
 				"Duration"	"%attack_speed_reduce_time"
-				"IsDebuff"	"0"
+				"IsDebuff"	"1"
 				"TextureName"	"forged_spirit_melting_strike"
 				"EffectName"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
 				"EffectAttachType"	"attach_hitloc"
@@ -1019,8 +1016,6 @@
 				}
 				"ThinkInterval"	"1.0"
 				"States"	{}
-				"IsBuff"	"1"
-				"IsPurgable"	"1"
 			}
 		}
 		"AbilitySpecial"

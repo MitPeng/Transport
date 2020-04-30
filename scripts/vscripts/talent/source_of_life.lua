@@ -12,6 +12,7 @@ function source_of_life(keys)
         }
         ApplyDamage(damage_table)
         caster:Heal(math.ceil(damage), caster)
-        PopupHealing(caster, math.ceil(damage))
+        local healing_percent = ability:GetSpecialValueFor("healing_percent") / 100
+        PopupHealing(caster, math.ceil(damage * healing_percent))
     end
 end

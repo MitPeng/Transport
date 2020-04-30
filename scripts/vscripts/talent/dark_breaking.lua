@@ -49,13 +49,13 @@ function breaking(keys)
     if target:HasModifier("modifier_dark_breaking_armor") then
         target:SetModifierStackCount("modifier_dark_breaking_armor", caster, total_break_armor_count)
     else
-        ability:ApplyDataDrivenModifier(caster, target, "modifier_dark_breaking_armor", {duration = -1})
+        ability:ApplyDataDrivenModifier(caster, target, "modifier_dark_breaking_armor", {})
         target:SetModifierStackCount("modifier_dark_breaking_armor", caster, total_break_armor_count)
     end
     if target:HasModifier("modifier_dark_breaking_magic_resist") then
         target:SetModifierStackCount("modifier_dark_breaking_magic_resist", caster, total_break_magic_resistance_count)
     else
-        ability:ApplyDataDrivenModifier(caster, target, "modifier_dark_breaking_magic_resist", {duration = -1})
+        ability:ApplyDataDrivenModifier(caster, target, "modifier_dark_breaking_magic_resist", {})
         target:SetModifierStackCount("modifier_dark_breaking_magic_resist", caster, total_break_magic_resistance_count)
     end
 end
