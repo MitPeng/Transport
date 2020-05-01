@@ -5,5 +5,4 @@ function miser(keys)
     local add_gold = math.ceil(gold * (ability:GetSpecialValueFor("times") - 1))
     PlayerResource:SetGold(caster:GetPlayerID(), gold + add_gold, false)
     PopupGoldGain(caster, add_gold)
-    ability:StartCooldown(ability:GetSpecialValueFor("interval"))
 end
