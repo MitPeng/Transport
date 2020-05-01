@@ -94,10 +94,8 @@ function is_transport(keys)
         caster.is_bad_transport = false
         caster.is_good_transport = false
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_transport_stun", {duration = -1})
-        --若处于防御阶段，则暂停时间
-        if caster:HasModifier("modifier_transport_defend_road_section") then
-            caster.is_stop_time = true
-        end
+        --暂停时间
+        caster.is_stop_time = true
     end
 
     --提供视野
@@ -259,11 +257,26 @@ function is_push(keys)
             --防止一直弹队伍获胜
             _G.push_time = _G.push_time - 1
         elseif _G.push_time > 0 then
-            display_push_time()
-            push_remain_30(caster)
-            print("Push remaining time: " .. _G.push_time)
-            --剩余推进时间减1
-            _G.push_time = _G.push_time - 1
+            local shortest_push_time = tonumber(_G.load_map["shortest_push_time"])
+            if _G.push_time >= shortest_push_time then
+                display_push_time()
+                push_remain_30(caster)
+                print("Push remaining time: " .. _G.push_time)
+                --剩余推进时间减1
+                _G.push_time = _G.push_time - 1
+            else
+                if caster.is_stop_time then
+                    display_push_time()
+                    push_remain_30(caster)
+                    print("Push remaining time: " .. _G.push_time)
+                else
+                    display_push_time()
+                    push_remain_30(caster)
+                    print("Push remaining time: " .. _G.push_time)
+                    --剩余推进时间减1
+                    _G.push_time = _G.push_time - 1
+                end
+            end
         end
     else
         --若处于防御阶段，并且推进时间小于进入防守阶段保底推进时间，则增加推进时间
