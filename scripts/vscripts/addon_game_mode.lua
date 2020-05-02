@@ -92,6 +92,8 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("npc_spawned", Dynamic_Wrap(TransportGameMode, "OnNPCSpawned"), self)
 	-- 监听玩家聊天事件
 	ListenToGameEvent("player_chat", Dynamic_Wrap(TransportGameMode, "PlayerChat"), self)
+	-- 重连事件
+	ListenToGameEvent("player_reconnected", Dynamic_Wrap(TransportGameMode, "OnPlayerReconnected"), self)
 	-- 设置伤害过滤器
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(TransportGameMode, "DamageFilter"), self)
 
@@ -176,6 +178,23 @@ function TransportGameMode:OnPlayerSelectAbility(keys)
 	local ability = hero:AddAbility(abilityName)
 	ability:SetLevel(1)
 	hero.talent_ability = ability
+end
+
+-- 重连事件
+function TransportGameMode:OnPlayerReconnected(event)
+	-- 判断游戏进度
+	if GameRules:State_Get() == DOTA_GAMERULES_STATE_GAME_IN_PROGRESS then
+		local hPlayer = PlayerResource:GetPlayer(event.PlayerID)
+		if hPlayer ~= nil then
+			-- 获取英雄
+			local hPlayerHero = hPlayer:GetAssignedHero()
+			-- 如果没金钱buff则加金钱buff
+			if not hPlayerHero:HasAbility("hero_gold_xp") then
+				local ability = hPlayerHero:AddAbility("hero_gold_xp")
+				ability:SetLevel(1)
+			end
+		end
+	end
 end
 
 function TransportGameMode:OnGameRulesStateChange(keys)
