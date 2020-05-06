@@ -185,5 +185,28 @@ function hammering(keys)
             caster:RemoveModifierByName("modifier_hammering_cd")
         end
         ability:ApplyDataDrivenModifier(caster, caster, "modifier_hammering_cd", {})
+        caster:EmitSound("ui.treasure_03")
+        local caster_location = caster:GetOrigin()
+        local particle =
+            ParticleManager:CreateParticle("particles/ui/ui_generic_treasure_impact.vpcf", PATTACH_CUSTOMORIGIN, caster)
+        ParticleManager:SetParticleControlEnt(
+            particle,
+            0,
+            caster,
+            PATTACH_POINT_FOLLOW,
+            "attach_hitloc",
+            caster_location,
+            true
+        )
+        ParticleManager:SetParticleControlEnt(
+            particle,
+            1,
+            caster,
+            PATTACH_POINT_FOLLOW,
+            "attach_hitloc",
+            caster_location,
+            true
+        )
+        ParticleManager:ReleaseParticleIndex(particle)
     end
 end

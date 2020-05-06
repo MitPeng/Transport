@@ -1495,10 +1495,10 @@
 			}
 			"modifier_miser_cd"
 			{
-				"IsDebuff"	"0"
+				"IsDebuff"	"1"
 				"Duration"	"%interval"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"IsBuff"	"1"
+				"IsBuff"	"0"
 				"OnCreated"
 				{
 					"FireEffect"
@@ -1582,30 +1582,40 @@
 				"IsHidden"	"1"
 				"OnCreated"
 				{
-					"RunScript"
-					{
-						"Target"	"TARGET"
-						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
-						"Function"	"execution"
-					}
 					"FireEffect"
 					{
 						"Target"	"TARGET"
 						"EffectName"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
-						"EffectAttachType"	"follow_origin"
+						"EffectAttachType"	"follow_hitloc"
+						"ControlPointEntities"
+						{
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+						}
 					}
 					"FireSound"
 					{
 						"Target"	"TARGET"
 						"EffectName"	"Hero_Axe.Culling_Blade_Success"
 					}
+					"RunScript"
+					{
+						"Target"	"TARGET"
+						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
+						"Function"	"execution"
+					}
 				}
 			}
 			"modifier_execution_cd"
 			{
 				"Duration"	"%cd"
-				"IsHidden"	"1"
+				"IsHidden"	"0"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"IsBuff"	"0"
+				"IsDebuff"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -2087,6 +2097,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/ui/ui_generic_treasure_impact.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_hammering"
@@ -2117,9 +2131,20 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%duration"
 				"TextureName"	"hammering"
-				"IsBuff"	"1"
+				"IsBuff"	"0"
 				"OnDestroy"
 				{
+					"FireEffect"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"particles/ui/ui_generic_treasure_impact.vpcf"
+						"EffectAttachType"	"attach_origin"
+						"ControlPointEntities"
+						{
+							"CASTER"	"attach_hitloc"
+							"CASTER"	"attach_hitloc"
+						}
+					}
 					"RunScript"
 					{
 						"Target"	"CASTER"
@@ -2127,6 +2152,7 @@
 						"Function"	"hammering"
 					}
 				}
+				"IsDebuff"	"1"
 			}
 		}
 		"AbilitySpecial"
