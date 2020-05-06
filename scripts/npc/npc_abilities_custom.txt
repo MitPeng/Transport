@@ -697,6 +697,7 @@
 		"precache"
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -732,6 +733,14 @@
 				"TextureName"	"blue_dragonspawn_overseer_devotion_aura"
 				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
 				"EffectAttachType"	"follow_origin"
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.MaskOfMadness.Activate"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1288,6 +1297,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"700"
+		"precache"
+		{
+			"particle"	"particles/soul_harvest.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_soul_harvest_count"
@@ -1313,6 +1326,8 @@
 				"Aura_Radius"	"%radius"
 				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types"	"DOTA_UNIT_TARGET_HERO"
+				"EffectName"	"particles/soul_harvest.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_soul_harvest_apply"
 			{
