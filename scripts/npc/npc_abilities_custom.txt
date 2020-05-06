@@ -579,7 +579,7 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
-			"particle"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
+			"particle"	"particles/units/heroes/hero_legion_commander/legion_commander_press_owner.vpcf"
 		}
 		"Modifiers"
 		{
@@ -646,7 +646,7 @@
 						"ModifierName"	"modifier_charge_damage_amp"
 					}
 				}
-				"EffectName"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
+				"EffectName"	"particles/units/heroes/hero_legion_commander/legion_commander_press_owner.vpcf"
 				"EffectAttachType"	"attach_origin"
 			}
 			"modifier_charge_damage_amp"
