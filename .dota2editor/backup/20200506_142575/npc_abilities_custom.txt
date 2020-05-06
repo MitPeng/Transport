@@ -579,7 +579,7 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
-			"particle"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
+			"particle"	"particles/units/heroes/hero_legion_commander/legion_commander_press_owner.vpcf"
 		}
 		"Modifiers"
 		{
@@ -646,7 +646,7 @@
 						"ModifierName"	"modifier_charge_damage_amp"
 					}
 				}
-				"EffectName"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
+				"EffectName"	"particles/units/heroes/hero_legion_commander/legion_commander_press_owner.vpcf"
 				"EffectAttachType"	"attach_origin"
 			}
 			"modifier_charge_damage_amp"
@@ -697,6 +697,7 @@
 		"precache"
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -732,6 +733,14 @@
 				"TextureName"	"blue_dragonspawn_overseer_devotion_aura"
 				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
 				"EffectAttachType"	"follow_origin"
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.MaskOfMadness.Activate"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1288,6 +1297,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"700"
+		"precache"
+		{
+			"particle"	"particles/soul_harvest.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_soul_harvest_count"
@@ -1313,6 +1326,8 @@
 				"Aura_Radius"	"%radius"
 				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types"	"DOTA_UNIT_TARGET_HERO"
+				"EffectName"	"particles/soul_harvest.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_soul_harvest_apply"
 			{
@@ -1548,6 +1563,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+		}
 		"Modifiers"
 		{
 			"modifier_execution"
@@ -1562,6 +1582,17 @@
 				"IsHidden"	"1"
 				"OnCreated"
 				{
+					"FireEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"Hero_Axe.Culling_Blade_Success"
+					}
 					"RunScript"
 					{
 						"Target"	"TARGET"
@@ -1573,8 +1604,10 @@
 			"modifier_execution_cd"
 			{
 				"Duration"	"%cd"
-				"IsHidden"	"1"
+				"IsHidden"	"0"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"IsBuff"	"0"
+				"IsDebuff"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -1627,6 +1660,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"1200"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_lycan/lycan_howl_buff.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_feral_aura"
@@ -1697,6 +1734,8 @@
 				"IsBuff"	"1"
 				"Duration"	"-1"
 				"TextureName"	"alpha_wolf_command_aura"
+				"EffectName"	"particles/units/heroes/hero_lycan/lycan_howl_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -1891,6 +1930,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"600"
+		"precache"
+		{
+			"particle"	"particles/serve.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_serve"
@@ -1915,6 +1958,8 @@
 					}
 				}
 				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/serve.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"

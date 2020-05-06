@@ -1563,6 +1563,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
+		}
 		"Modifiers"
 		{
 			"modifier_execution"
@@ -1582,6 +1587,17 @@
 						"Target"	"TARGET"
 						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
 						"Function"	"execution"
+					}
+					"FireEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"Hero_Axe.Culling_Blade_Success"
 					}
 				}
 			}
@@ -1912,6 +1928,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"600"
+		"precache"
+		{
+			"particle"	"particles/serve.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_serve"
@@ -1936,6 +1956,8 @@
 					}
 				}
 				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/serve.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"

@@ -1495,10 +1495,10 @@
 			}
 			"modifier_miser_cd"
 			{
-				"IsDebuff"	"1"
+				"IsDebuff"	"0"
 				"Duration"	"%interval"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"IsBuff"	"0"
+				"IsBuff"	"1"
 				"OnCreated"
 				{
 					"FireEffect"
@@ -1582,30 +1582,22 @@
 				"IsHidden"	"1"
 				"OnCreated"
 				{
-					"FireEffect"
-					{
-						"Target"	"TARGET"
-						"EffectName"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
-						"EffectAttachType"	"follow_hitloc"
-						"ControlPointEntities"
-						{
-							"TARGET"	"attach_hitloc"
-							"TARGET"	"attach_hitloc"
-							"TARGET"	"attach_hitloc"
-							"TARGET"	"attach_hitloc"
-							"TARGET"	"attach_hitloc"
-						}
-					}
-					"FireSound"
-					{
-						"Target"	"TARGET"
-						"EffectName"	"Hero_Axe.Culling_Blade_Success"
-					}
 					"RunScript"
 					{
 						"Target"	"TARGET"
 						"ScriptFile"	"scripts/vscripts/talent/execution.lua"
 						"Function"	"execution"
+					}
+					"FireEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"Hero_Axe.Culling_Blade_Success"
 					}
 				}
 			}
