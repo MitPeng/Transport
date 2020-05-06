@@ -753,7 +753,7 @@
 		"precache"
 		{
 			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
-			"particle"	"particles/items5_fx/essence_ring.vpcf"
+			"particle"	"particles/items5_fx/essence_ring_overhead.vpcf"
 		}
 		"Modifiers"
 		{
@@ -794,8 +794,8 @@
 				"Duration"	"-1"
 				"Passive"	"1"
 				"IsHidden"	"1"
-				"EffectName"	"particles/items5_fx/essence_ring.vpcf"
-				"EffectAttachType"	"follow_origin"
+				"EffectName"	"particles/items5_fx/essence_ring_overhead.vpcf"
+				"EffectAttachType"	"follow_overhead"
 			}
 		}
 		"AbilitySpecial"

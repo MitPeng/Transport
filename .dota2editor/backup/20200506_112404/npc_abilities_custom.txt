@@ -410,7 +410,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"count_duration"	"5"
+				"count_duration"	"6"
 			}
 			"03"
 			{
@@ -718,7 +718,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"1.7"
+				"duration"	"1.75"
 			}
 		}
 	}
@@ -753,6 +753,7 @@
 		"precache"
 		{
 			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+			"particle"	"particles/items5_fx/essence_ring_overhead.vpcf"
 		}
 		"Modifiers"
 		{
@@ -761,6 +762,22 @@
 				"Passive"	"1"
 				"Duration"	"-1"
 				"TextureName"	"forest_troll_high_priest_heal"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"particles/items5_fx/essence_ring_overhead.vpcf"
+						"EffectAttachType"	"follow_overhead"
+						"ControlPointEntities"
+						{
+							"01"	"CASTER"
+						}
+					}
+				}
+				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+				"EffectAttachType"	"follow_origin"
 				"OnIntervalThink"
 				{
 					"ActOnTargets"
@@ -783,9 +800,6 @@
 						}
 					}
 				}
-				"ThinkInterval"	"1.0"
-				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
-				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -1610,6 +1624,11 @@
 						"Target"	"TARGET"
 						"ModifierName"	"modifier_feral_aura_count"
 					}
+					"RemoveModifier"
+					{
+						"Target"	"TARGET"
+						"ModifierName"	"modifier_feral_aura_display"
+					}
 				}
 				"ThinkInterval"	"0.1"
 				"IsHidden"	"1"
@@ -1625,6 +1644,13 @@
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_move_speed"
 				}
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+			}
+			"modifier_feral_aura_display"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"IsBuff"	"1"
+				"Duration"	"-1"
+				"TextureName"	"alpha_wolf_command_aura"
 			}
 		}
 		"AbilitySpecial"
