@@ -2,11 +2,8 @@ function count_buff(keys)
     local caster = keys.caster
     local ability = keys.ability
     local attack_times = ability:GetSpecialValueFor("attack_times")
-    --如果有嗜血buff则刷新持续时间
-    if caster:HasModifier("modifier_bloodthirsty_apply") then
-        caster:RemoveModifierByName("modifier_bloodthirsty_apply")
-        ability:ApplyDataDrivenModifier(caster, caster, "modifier_bloodthirsty_apply", {})
-    else
+    --如果没有嗜血buff
+    if not caster:HasModifier("modifier_bloodthirsty_apply") then
         --如果有计数buff
         if caster:HasModifier("modifier_bloodthirsty_count") then
             --计数buff层数

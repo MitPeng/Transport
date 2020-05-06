@@ -272,7 +272,7 @@
 		"precache"
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
-			"particle"	"particles/units/heroes/hero_pangolier/pangolier_luckyshot_disarm_cast.vpcf"
+			"particle"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_impact_burst.vpcf"
 		}
 		"Modifiers"
 		{
@@ -309,8 +309,12 @@
 					"FireEffect"
 					{
 						"Target"	"TARGET"
-						"EffectName"	"particles/units/heroes/hero_pangolier/pangolier_luckyshot_disarm_cast.vpcf"
+						"EffectName"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_impact_burst.vpcf"
 						"EffectAttachType"	"attach_hitloc"
+						"ControlPointEntities"
+						{
+							"03"	"TARGET"
+						}
 					}
 				}
 				"IsPurgable"	"1"
@@ -1400,6 +1404,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
+			"soundfile"	"soundevents/game_sounds_ui.vsndevts"
+		}
 		"Modifiers"
 		{
 			"modifier_miser"
@@ -1448,6 +1457,20 @@
 				"Duration"	"%interval"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"General.CoinsBig"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"

@@ -272,7 +272,8 @@
 		"precache"
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
-			"particle"	"particles/units/heroes/hero_pangolier/pangolier_luckyshot_disarm_cast.vpcf"
+			"particle"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -309,8 +310,13 @@
 					"FireEffect"
 					{
 						"Target"	"TARGET"
-						"EffectName"	"particles/units/heroes/hero_pangolier/pangolier_luckyshot_disarm_cast.vpcf"
-						"EffectAttachType"	"attach_hitloc"
+						"EffectName"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
+						"EffectAttachType"	"attach_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"DOTA_Item.SkullBasher"
 					}
 				}
 				"IsPurgable"	"1"
@@ -352,6 +358,7 @@
 		{
 			"particle"	"particles/units/heroes/hero_huskar/huskar_berserkers_blood_glow.vpcf"
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -370,8 +377,6 @@
 						"Function"	"count_buff"
 					}
 				}
-				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
-				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_bloodthirsty_count"
 			{
@@ -389,6 +394,15 @@
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.MaskOfMadness.Activate"
+					}
+				}
+				"IsPurgable"	"1"
 				"OnAttackLanded"
 				{
 					"Lifesteal"
@@ -397,7 +411,8 @@
 						"LifestealPercent"	"%lifesteal_percent"
 					}
 				}
-				"IsPurgable"	"1"
+				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -1403,7 +1418,7 @@
 		"precache"
 		{
 			"particle"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
-			"soundfile"	"soundevents/game_sounds.vsndevts"
+			"soundfile"	"soundevents/game_sounds_ui.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -1464,7 +1479,7 @@
 					"FireSound"
 					{
 						"Target"	"CASTER"
-						"EffectName"	"lockjaw_Courier.gold_big"
+						"EffectName"	"General.CoinsBig"
 					}
 				}
 			}
