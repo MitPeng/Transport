@@ -1912,6 +1912,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"600"
+		"precache"
+		{
+			"particle"	"particles/serve.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_serve"
@@ -1936,6 +1940,8 @@
 					}
 				}
 				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/serve.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
