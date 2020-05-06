@@ -15,6 +15,9 @@ function apply_count(keys)
         ability:ApplyDataDrivenModifier(caster, target, "modifier_dark_breaking_target_count", {})
         target:SetModifierStackCount("modifier_dark_breaking_target_count", caster, count)
     else --如果没有计数buff则加上并设置层数为1
+        --记录总护甲和魔抗
+        target.target_armor = target:GetPhysicalArmorValue(false)
+        target.target_magic_resistance = target:GetMagicalArmorValue()
         ability:ApplyDataDrivenModifier(caster, target, "modifier_dark_breaking_target_count", {})
         target:SetModifierStackCount("modifier_dark_breaking_target_count", caster, 1)
     end
@@ -32,8 +35,8 @@ function breaking(keys)
     local target = keys.target
     local ability = keys.ability
     local caster = keys.caster
-    local target_armor = target:GetPhysicalArmorValue(false)
-    local target_magic_resistance = target:GetMagicalArmorValue()
+    local target_armor = target.target_armor
+    local target_magic_resistance = target.target_magic_resistance
     local max_count = ability:GetSpecialValueFor("max_count")
     local break_percent = ability:GetSpecialValueFor("break_percent") / 100
     local count = target:GetModifierStackCount("modifier_dark_breaking_target_count", caster)

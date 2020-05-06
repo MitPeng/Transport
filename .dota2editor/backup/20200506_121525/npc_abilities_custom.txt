@@ -273,6 +273,7 @@
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
 			"particle"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -311,6 +312,11 @@
 						"Target"	"TARGET"
 						"EffectName"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
 						"EffectAttachType"	"attach_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"DOTA_Item.SkullBasher"
 					}
 				}
 				"IsPurgable"	"1"
@@ -352,6 +358,7 @@
 		{
 			"particle"	"particles/units/heroes/hero_huskar/huskar_berserkers_blood_glow.vpcf"
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -370,8 +377,6 @@
 						"Function"	"count_buff"
 					}
 				}
-				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
-				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_bloodthirsty_count"
 			{
@@ -389,6 +394,15 @@
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.Satanic.Activate"
+					}
+				}
+				"IsPurgable"	"1"
 				"OnAttackLanded"
 				{
 					"Lifesteal"
@@ -397,7 +411,8 @@
 						"LifestealPercent"	"%lifesteal_percent"
 					}
 				}
-				"IsPurgable"	"1"
+				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -405,22 +420,22 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_times"	"6"
+				"attack_times"	"5"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"count_duration"	"6"
+				"count_duration"	"7"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"bloodthirsty_duration"	"5"
+				"bloodthirsty_duration"	"7"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lifesteal_percent"	"75"
+				"lifesteal_percent"	"100"
 			}
 		}
 	}
@@ -435,6 +450,7 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 			"particle"	"particles/units/heroes/hero_snapfire/hero_snapfire_shells_debuff.vpcf"
 		}
 		"Modifiers"
@@ -452,6 +468,11 @@
 						"Target"	"TARGET"
 						"ScriptFile"	"scripts/vscripts/talent/dark_breaking.lua"
 						"Function"	"apply_count"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"Item_Desolator.Target"
 					}
 				}
 			}

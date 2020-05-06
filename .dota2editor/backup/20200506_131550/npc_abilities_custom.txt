@@ -272,7 +272,8 @@
 		"precache"
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
-			"particle"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_impact_burst.vpcf"
+			"particle"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -309,12 +310,13 @@
 					"FireEffect"
 					{
 						"Target"	"TARGET"
-						"EffectName"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_impact_burst.vpcf"
-						"EffectAttachType"	"attach_hitloc"
-						"ControlPointEntities"
-						{
-							"03"	"TARGET"
-						}
+						"EffectName"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
+						"EffectAttachType"	"attach_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"DOTA_Item.SkullBasher"
 					}
 				}
 				"IsPurgable"	"1"
@@ -356,6 +358,7 @@
 		{
 			"particle"	"particles/units/heroes/hero_huskar/huskar_berserkers_blood_glow.vpcf"
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -374,8 +377,6 @@
 						"Function"	"count_buff"
 					}
 				}
-				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
-				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_bloodthirsty_count"
 			{
@@ -393,6 +394,15 @@
 				"IsBuff"	"1"
 				"Properties"	{}
 				"States"	{}
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.Satanic.Activate"
+					}
+				}
+				"IsPurgable"	"1"
 				"OnAttackLanded"
 				{
 					"Lifesteal"
@@ -401,7 +411,8 @@
 						"LifestealPercent"	"%lifesteal_percent"
 					}
 				}
-				"IsPurgable"	"1"
+				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -409,22 +420,22 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_times"	"6"
+				"attack_times"	"5"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"count_duration"	"6"
+				"count_duration"	"7"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"bloodthirsty_duration"	"5"
+				"bloodthirsty_duration"	"7"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lifesteal_percent"	"75"
+				"lifesteal_percent"	"100"
 			}
 		}
 	}
@@ -439,7 +450,9 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
-			"particle"	"particles/units/heroes/hero_snapfire/hero_snapfire_shells_debuff.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
+			"particle"	"particles/units/heroes/hero_dazzle/dazzle_armor_enemy_shield.vpcf"
+			"particle"	"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror_recipient.vpcf"
 		}
 		"Modifiers"
 		{
@@ -457,6 +470,11 @@
 						"ScriptFile"	"scripts/vscripts/talent/dark_breaking.lua"
 						"Function"	"apply_count"
 					}
+					"FireSound"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"Item_Desolator.Target"
+					}
 				}
 			}
 			"modifier_dark_breaking_target_count"
@@ -465,9 +483,18 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
 				"TextureName"	"dark_breaking"
 				"IsDebuff"	"1"
-				"EffectName"	"particles/units/heroes/hero_snapfire/hero_snapfire_shells_debuff.vpcf"
+				"EffectName"	"particles/units/heroes/hero_dazzle/dazzle_armor_enemy_shield.vpcf"
 				"EffectAttachType"	"follow_overhead"
 				"IsPurgable"	"1"
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror_recipient.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+				}
 			}
 			"modifier_dark_breaking_target_apply"
 			{
@@ -528,17 +555,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"duration"	"8"
+				"duration"	"7"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"break_percent"	"25"
+				"break_percent"	"12"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"max_count"	"8"
+				"max_count"	"10"
 			}
 		}
 	}
