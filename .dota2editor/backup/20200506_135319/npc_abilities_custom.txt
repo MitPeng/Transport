@@ -452,6 +452,7 @@
 		{
 			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 			"particle"	"particles/units/heroes/hero_dazzle/dazzle_armor_enemy_shield.vpcf"
+			"particle"	"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror_recipient.vpcf"
 		}
 		"Modifiers"
 		{
@@ -485,6 +486,15 @@
 				"EffectName"	"particles/units/heroes/hero_dazzle/dazzle_armor_enemy_shield.vpcf"
 				"EffectAttachType"	"follow_overhead"
 				"IsPurgable"	"1"
+				"OnCreated"
+				{
+					"AttachEffect"
+					{
+						"Target"	"TARGET"
+						"EffectName"	"particles/units/heroes/hero_vengeful/vengeful_wave_of_terror_recipient.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+				}
 			}
 			"modifier_dark_breaking_target_apply"
 			{
@@ -545,17 +555,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"duration"	"8"
+				"duration"	"7"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"break_percent"	"25"
+				"break_percent"	"12"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"max_count"	"8"
+				"max_count"	"10"
 			}
 		}
 	}
@@ -569,7 +579,7 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
-			"particle"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
+			"particle"	"particles/units/heroes/hero_legion_commander/legion_commander_press_owner.vpcf"
 		}
 		"Modifiers"
 		{
@@ -636,7 +646,7 @@
 						"ModifierName"	"modifier_charge_damage_amp"
 					}
 				}
-				"EffectName"	"particles/units/heroes/hero_bloodseeker/bloodseeker_bloodrage.vpcf"
+				"EffectName"	"particles/units/heroes/hero_legion_commander/legion_commander_press_owner.vpcf"
 				"EffectAttachType"	"attach_origin"
 			}
 			"modifier_charge_damage_amp"
@@ -687,6 +697,7 @@
 		"precache"
 		{
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -722,6 +733,14 @@
 				"TextureName"	"blue_dragonspawn_overseer_devotion_aura"
 				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
 				"EffectAttachType"	"follow_origin"
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.MaskOfMadness.Activate"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1278,6 +1297,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"700"
+		"precache"
+		{
+			"particle"	"particles/soul_harvest.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_soul_harvest_count"
@@ -1303,6 +1326,8 @@
 				"Aura_Radius"	"%radius"
 				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types"	"DOTA_UNIT_TARGET_HERO"
+				"EffectName"	"particles/soul_harvest.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_soul_harvest_apply"
 			{
@@ -1617,6 +1642,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"1200"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_lycan/lycan_howl_buff.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_feral_aura"
@@ -1687,6 +1716,8 @@
 				"IsBuff"	"1"
 				"Duration"	"-1"
 				"TextureName"	"alpha_wolf_command_aura"
+				"EffectName"	"particles/units/heroes/hero_lycan/lycan_howl_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"

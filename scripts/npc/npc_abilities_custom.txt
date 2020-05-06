@@ -1642,6 +1642,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"1200"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_lycan/lycan_howl_buff.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_feral_aura"
@@ -1712,6 +1716,8 @@
 				"IsBuff"	"1"
 				"Duration"	"-1"
 				"TextureName"	"alpha_wolf_command_aura"
+				"EffectName"	"particles/units/heroes/hero_lycan/lycan_howl_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"

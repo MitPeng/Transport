@@ -3,7 +3,7 @@ function feral_aura(keys)
     local target = keys.target
     local ability = keys.ability
     local lvl = caster:GetLevel()
-    if not target:IsRealHero() then
+    if not target:IsRealHero() and not target:IsIllusion() then
         if not target:HasModifier("modifier_feral_aura_count") then
             ability:ApplyDataDrivenModifier(caster, target, "modifier_feral_aura_count", {duration = -1})
         end
