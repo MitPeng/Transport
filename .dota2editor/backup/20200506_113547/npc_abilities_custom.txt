@@ -753,6 +753,7 @@
 		"precache"
 		{
 			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+			"particle"	"particles/items5_fx/essence_ring.vpcf"
 		}
 		"Modifiers"
 		{
@@ -761,6 +762,9 @@
 				"Passive"	"1"
 				"Duration"	"-1"
 				"TextureName"	"forest_troll_high_priest_heal"
+				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+				"EffectAttachType"	"follow_origin"
 				"OnIntervalThink"
 				{
 					"ActOnTargets"
@@ -783,8 +787,14 @@
 						}
 					}
 				}
-				"ThinkInterval"	"1.0"
-				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+			}
+			"modifier_source_of_life_effect"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"EffectName"	"particles/items5_fx/essence_ring.vpcf"
 				"EffectAttachType"	"follow_origin"
 			}
 		}
@@ -1390,6 +1400,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
+			"soundfile"	"soundevents/game_sounds.vsndevts"
+		}
 		"Modifiers"
 		{
 			"modifier_miser"
@@ -1438,6 +1453,20 @@
 				"Duration"	"%interval"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"lockjaw_Courier.gold_big"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1610,6 +1639,11 @@
 						"Target"	"TARGET"
 						"ModifierName"	"modifier_feral_aura_count"
 					}
+					"RemoveModifier"
+					{
+						"Target"	"TARGET"
+						"ModifierName"	"modifier_feral_aura_display"
+					}
 				}
 				"ThinkInterval"	"0.1"
 				"IsHidden"	"1"
@@ -1625,6 +1659,13 @@
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%lvl_move_speed"
 				}
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
+			}
+			"modifier_feral_aura_display"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"IsBuff"	"1"
+				"Duration"	"-1"
+				"TextureName"	"alpha_wolf_command_aura"
 			}
 		}
 		"AbilitySpecial"

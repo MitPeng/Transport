@@ -753,6 +753,7 @@
 		"precache"
 		{
 			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+			"particle"	"particles/items5_fx/essence_ring.vpcf"
 		}
 		"Modifiers"
 		{
@@ -761,6 +762,9 @@
 				"Passive"	"1"
 				"Duration"	"-1"
 				"TextureName"	"forest_troll_high_priest_heal"
+				"ThinkInterval"	"1.0"
+				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+				"EffectAttachType"	"follow_origin"
 				"OnIntervalThink"
 				{
 					"ActOnTargets"
@@ -783,8 +787,14 @@
 						}
 					}
 				}
-				"ThinkInterval"	"1.0"
-				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
+			}
+			"modifier_source_of_life_effect"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"Passive"	"1"
+				"IsHidden"	"1"
+				"EffectName"	"particles/items5_fx/essence_ring.vpcf"
 				"EffectAttachType"	"follow_origin"
 			}
 		}
@@ -1390,6 +1400,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_miser"
@@ -1438,6 +1452,15 @@
 				"Duration"	"%interval"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"particles/units/heroes/hero_furion/furion_tnt_rain.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
