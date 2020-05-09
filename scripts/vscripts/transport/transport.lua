@@ -204,6 +204,22 @@ function denfend_success(caster)
     Utils:unit_abilities_lvlup(caster)
     --设置路段
     _G.road_section_num = _G.road_section_num + 1
+    --设置双方重生点
+    -- local good_spawn_point = Entities:FindByName(nil, "ent_dota_fountain_good"):GetAbsOrigin()
+    -- local bad_spawn_point = Entities:FindByName(nil, "ent_dota_fountain_bad"):GetAbsOrigin()
+    local good_change = Entities:FindByName(nil, "good_spawn_" .. _G.road_section_num):GetAbsOrigin()
+    -- good_spawn_point:SetOrigin(good_change:GetOrigin())
+    local bad_change = Entities:FindByName(nil, "bad_spawn_" .. _G.road_section_num):GetAbsOrigin()
+    -- bad_spawn_point:SetOrigin(bad_change:GetOrigin())
+    local good_starts = Entities:FindAllByClassname("info_player_start_goodguys")
+    for _, good_start in pairs(good_starts) do
+        good_start:SetOrigin(good_change)
+    end
+    local bad_starts = Entities:FindAllByClassname("info_player_start_badguys")
+    for _, bad_start in pairs(bad_starts) do
+        bad_start:SetOrigin(bad_change)
+    end
+
     --重置推进时间
     _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
     --若处于防御阶段，则结束防御阶段

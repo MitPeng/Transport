@@ -1589,11 +1589,11 @@
 						"EffectAttachType"	"follow_hitloc"
 						"ControlPointEntities"
 						{
-							"00"	"TARGET"
-							"01"	"TARGET"
-							"02"	"TARGET"
-							"04"	"TARGET"
-							"08"	"TARGET"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
 						}
 					}
 					"FireSound"
@@ -2127,7 +2127,7 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%duration"
 				"TextureName"	"hammering"
-				"IsBuff"	"1"
+				"IsBuff"	"0"
 				"OnDestroy"
 				{
 					"RunScript"
@@ -2137,6 +2137,7 @@
 						"Function"	"hammering"
 					}
 				}
+				"IsDebuff"	"1"
 			}
 		}
 		"AbilitySpecial"
