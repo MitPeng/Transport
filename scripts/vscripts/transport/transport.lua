@@ -205,12 +205,8 @@ function denfend_success(caster)
     --设置路段
     _G.road_section_num = _G.road_section_num + 1
     --设置双方重生点
-    -- local good_spawn_point = Entities:FindByName(nil, "ent_dota_fountain_good"):GetAbsOrigin()
-    -- local bad_spawn_point = Entities:FindByName(nil, "ent_dota_fountain_bad"):GetAbsOrigin()
     local good_change = Entities:FindByName(nil, "good_spawn_" .. _G.road_section_num):GetAbsOrigin()
-    -- good_spawn_point:SetOrigin(good_change:GetOrigin())
     local bad_change = Entities:FindByName(nil, "bad_spawn_" .. _G.road_section_num):GetAbsOrigin()
-    -- bad_spawn_point:SetOrigin(bad_change:GetOrigin())
     local good_starts = Entities:FindAllByClassname("info_player_start_goodguys")
     for _, good_start in pairs(good_starts) do
         good_start:SetOrigin(good_change)

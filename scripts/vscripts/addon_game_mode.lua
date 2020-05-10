@@ -1,5 +1,3 @@
--- Generated from template
-
 if TransportGameMode == nil then
 	TransportGameMode = class({})
 end
@@ -78,14 +76,6 @@ function TransportGameMode:InitGameMode()
 		total_xp = total_xp + lvlup_xp
 	end
 	_G.first_spawn_xp = total_xp
-
-	--商店范围扩大
-	-- for num = 1, tonumber(_G.load_map["spawn_num"]) do
-	-- 	local spawn_point_good = Entities:FindByName(nil, "good_spawn_" .. num):GetOrigin()
-	-- 	SpawnDOTAShopTriggerRadiusApproximate(spawn_point_good, 800)
-	-- 	local spawn_point_bad = Entities:FindByName(nil, "bad_spawn_" .. num):GetOrigin()
-	-- 	SpawnDOTAShopTriggerRadiusApproximate(spawn_point_bad, 800)
-	-- end
 
 	-- 监听事件
 	ListenToGameEvent("game_rules_state_change", Dynamic_Wrap(TransportGameMode, "OnGameRulesStateChange"), self)
@@ -328,35 +318,15 @@ function TransportGameMode:OnNPCSpawned(keys)
 				end
 			end
 		end
-
-		--根据当前路段设置重生点
-		-- --天辉夜魇重生点不同
-		-- local spawn_point
-		-- if hero:GetTeam() == DOTA_TEAM_GOODGUYS then
-		-- 	--获取重生点位置
-		-- 	spawn_point = "good_spawn_" .. _G.road_section_num
-		-- elseif hero:GetTeam() == DOTA_TEAM_BADGUYS then
-		-- 	spawn_point = "bad_spawn_" .. _G.road_section_num
-		-- end
-		-- local vec_1 = Entities:FindByName(nil, spawn_point):GetAbsOrigin()
 		Timers:CreateTimer(
 			0.1,
 			function()
-				-- hero:SetAbsOrigin(vec_1)
 				--加个相位效果，防止英雄卡位
 				if not hero:HasAbility("keen") and not hero:HasAbility("rebirth") then
 					hero:AddNewModifier(hero, nil, "modifier_phased", {duration = 0.1})
 				end
-				--镜头聚焦英雄后取消
-				-- PlayerResource:SetCameraTarget(hero:GetPlayerID(), hero)
 			end
 		)
-	-- Timers:CreateTimer(
-	-- 	0.3,
-	-- 	function()
-	-- 		PlayerResource:SetCameraTarget(hero:GetPlayerID(), nil)
-	-- 	end
-	-- )
 	end
 end
 
