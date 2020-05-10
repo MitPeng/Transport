@@ -1240,6 +1240,7 @@
 		"precache"
 		{
 			"particle"	"particles/items_fx/arcane_boots_recipient.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -1271,6 +1272,30 @@
 				}
 				"TextureName"	"filler_ability"
 				"IsHidden"	"1"
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.ArcaneBoots.Activate"
+					}
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/mana_surging.lua"
+						"Function"	"fire_effect"
+					}
+				}
+				"ThinkInterval"	"0.8"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/mana_surging.lua"
+						"Function"	"fire_effect"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"

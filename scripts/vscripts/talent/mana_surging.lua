@@ -15,8 +15,12 @@ function apply_count(keys)
             ability:ApplyDataDrivenModifier(caster, caster, "modifier_mana_surging_count", {duration = duration})
             caster:SetModifierStackCount("modifier_mana_surging_count", caster, count)
             ability:StartCooldown(ability_cooldown)
-            local particle_name = "particles/items_fx/arcane_boots_recipient.vpcf"
-            ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, caster)
         end
     end
+end
+
+function fire_effect(keys)
+    local particle_name = "particles/items_fx/arcane_boots_recipient.vpcf"
+    local particle = ParticleManager:CreateParticle(particle_name, PATTACH_ABSORIGIN_FOLLOW, keys.caster)
+    ParticleManager:ReleaseParticleIndex(particle)
 end

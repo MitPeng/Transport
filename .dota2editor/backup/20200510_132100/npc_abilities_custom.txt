@@ -696,7 +696,7 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
-			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
+			"particle"	"particles/units/heroes/hero_centaur/centaur_return_buff.vpcf"
 			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
@@ -731,8 +731,8 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"IsBuff"	"1"
 				"TextureName"	"blue_dragonspawn_overseer_devotion_aura"
-				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
-				"EffectAttachType"	"follow_origin"
+				"EffectName"	"particles/units/heroes/hero_centaur/centaur_return_buff.vpcf"
+				"EffectAttachType"	"attach_attack"
 				"OnCreated"
 				{
 					"FireSound"
@@ -771,6 +771,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/unyielding.vpcf"
+		}
 		"AbilitySpecial"
 		{
 			"01"
@@ -868,7 +872,8 @@
 		"AbilityCooldown"	"4.0"
 		"precache"
 		{
-			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+			"particle"	"particles/units/heroes/hero_centaur/centaur_return.vpcf"
+			"particle"	"particles/units/heroes/hero_pangolier/pangolier_tailthump_buff.vpcf"
 		}
 		"Modifiers"
 		{
@@ -905,7 +910,24 @@
 				{
 					"MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK"	"1"
 				}
-				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/block_master.lua"
+						"Function"	"fire_effect"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/block_master.lua"
+						"Function"	"destroy_effect"
+					}
+				}
 			}
 			"modifier_block_master_cd"
 			{
@@ -1218,6 +1240,7 @@
 		"precache"
 		{
 			"particle"	"particles/items_fx/arcane_boots_recipient.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -1249,6 +1272,30 @@
 				}
 				"TextureName"	"filler_ability"
 				"IsHidden"	"1"
+				"OnCreated"
+				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.ArcaneBoots.Activate"
+					}
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/mana_surging.lua"
+						"Function"	"fire_effect"
+					}
+				}
+				"ThinkInterval"	"0.8"
+				"OnIntervalThink"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/mana_surging.lua"
+						"Function"	"fire_effect"
+					}
+				}
 			}
 		}
 		"AbilitySpecial"
@@ -1274,6 +1321,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/generic_gameplay/rune_arcane_owner.vpcf"
+		}
 		"AbilitySpecial"
 		{
 			"01"
