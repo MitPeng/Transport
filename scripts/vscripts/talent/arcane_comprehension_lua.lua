@@ -16,18 +16,26 @@ function modifier_arcane_comprehension_lua:GetDuration()
     return -1
 end
 
+function modifier_arcane_comprehension_lua:GetEffectName()
+    return "particles/generic_gameplay/rune_arcane_owner.vpcf"
+end
+
+function modifier_arcane_comprehension_lua:GetEffectAttachType()
+    return PATTACH_ABSORIGIN_FOLLOW
+end
+
 function modifier_arcane_comprehension_lua:IsPassive()
     return 1
 end
 
 function modifier_arcane_comprehension_lua:DeclareFunctions()
     return {
-        MODIFIER_PROPERTY_CAST_RANGE_BONUS,
+        MODIFIER_PROPERTY_CAST_RANGE_BONUS_STACKING,
         MODIFIER_PROPERTY_COOLDOWN_PERCENTAGE
     }
 end
 
-function modifier_arcane_comprehension_lua:GetModifierCastRangeBonus()
+function modifier_arcane_comprehension_lua:GetModifierCastRangeBonusStacking()
     return self.cast_range_count
 end
 

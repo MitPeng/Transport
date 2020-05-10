@@ -1296,6 +1296,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/generic_gameplay/rune_arcane_owner.vpcf"
+		}
 		"AbilitySpecial"
 		{
 			"01"
