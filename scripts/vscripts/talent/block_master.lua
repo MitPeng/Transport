@@ -10,3 +10,22 @@ function init_count(keys)
     caster:SetModifierStackCount("modifier_block_master_block_damage", caster, block_count)
     ability.trigger_damage = block_count * ability:GetSpecialValueFor("trigger_times")
 end
+
+function fire_effect(keys)
+    local caster = keys.caster
+    local particle =
+        ParticleManager:CreateParticle(
+        "particles/units/heroes/hero_pangolier/pangolier_tailthump_buff.vpcf",
+        PATTACH_ABSORIGIN_FOLLOW,
+        caster
+    )
+    ParticleManager:SetParticleControlEnt(particle, 1, caster, PATTACH_ABSORIGIN_FOLLOW, nil, Vector(0, 0, 0), false) --origin
+    local modifier = caster:FindModifierByName("modifier_block_master_block_damage")
+    modifier:AddParticle(particle, false, false, -1, true, false)
+    keys.ability.particle = particle
+end
+
+function destroy_effect(keys)
+    print_r(keys)
+    ParticleManager:DestroyParticle(keys.ability.particle, true)
+end

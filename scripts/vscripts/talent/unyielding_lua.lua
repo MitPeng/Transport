@@ -20,10 +20,38 @@ function modifier_unyielding:IsPassive()
     return 1
 end
 
+function modifier_unyielding:OnCreated()
+    self.ability = self:GetAbility()
+    self.caster = self:GetCaster()
+    self.parent = self:GetParent()
+
+    -- AbilitySpecials
+    self.hp_threshold_max = 1
+
+    self.range = 100 - self.hp_threshold_max
+
+    -- Max size in pct that Huskar increases to
+    self.max_size = 35
+
+    if not IsServer() then
+        return
+    end
+
+    -- Create the Berserker's Blood particle (glow + heal)
+    self.particle = ParticleManager:CreateParticle("particles/unyielding.vpcf", PATTACH_ABSORIGIN_FOLLOW, self.parent)
+
+    self:StartIntervalThink(0.1)
+end
+
+function modifier_unyielding:OnDestroy()
+    ParticleManager:DestroyParticle(self.particle, true)
+end
+
 function modifier_unyielding:DeclareFunctions()
     return {
         MODIFIER_PROPERTY_STATUS_RESISTANCE,
-        MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE
+        MODIFIER_PROPERTY_INCOMING_DAMAGE_PERCENTAGE,
+        MODIFIER_PROPERTY_MODEL_SCALE
     }
 end
 
@@ -33,6 +61,13 @@ end
 
 function modifier_unyielding:GetModifierIncomingDamage_Percentage()
     return -self.buff_count
+end
+
+function modifier_unyielding:GetModifierModelScale()
+    local pct = math.max((self.parent:GetHealthPercent() - self.hp_threshold_max) / self.range, 0)
+    ParticleManager:SetParticleControl(self.particle, 1, Vector((1 - pct) * 100, 0, 0))
+    self.parent:SetRenderColor(255, 255 * pct, 255 * pct)
+    return (1 - pct) * 60
 end
 
 function modifier_unyielding:IsDebuff()
@@ -49,10 +84,6 @@ end
 
 function modifier_unyielding:GetAttributes()
     return MODIFIER_ATTRIBUTE_PERMANENT + MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
-end
-
-function modifier_unyielding:OnCreated(keys)
-    self:StartIntervalThink(0.1)
 end
 
 function modifier_unyielding:OnIntervalThink()

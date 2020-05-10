@@ -651,6 +651,32 @@ function TransportGameMode:DamageFilter(damageTable)
 				PopupDamage(attacker, math.ceil((1 + amp) * block_damage))
 				--去掉格挡buff
 				victim:RemoveModifierByName("modifier_block_master_block_damage")
+				--反击特效
+				local particle_return_fx =
+					ParticleManager:CreateParticle(
+					"particles/units/heroes/hero_centaur/centaur_return.vpcf",
+					PATTACH_ABSORIGIN,
+					victim
+				)
+				ParticleManager:SetParticleControlEnt(
+					particle_return_fx,
+					0,
+					victim,
+					PATTACH_POINT_FOLLOW,
+					"attach_hitloc",
+					victim:GetAbsOrigin(),
+					true
+				)
+				ParticleManager:SetParticleControlEnt(
+					particle_return_fx,
+					1,
+					attacker,
+					PATTACH_POINT_FOLLOW,
+					"attach_hitloc",
+					attacker:GetAbsOrigin(),
+					true
+				)
+				ParticleManager:ReleaseParticleIndex(particle_return_fx)
 				--技能进入cd，cd好了以后，如果技能还在，加格挡buff
 				local cd = ability:GetCooldown(ability:GetLevel() - 1)
 				ability:ApplyDataDrivenModifier(victim, victim, "modifier_block_master_cd", {duration = cd})

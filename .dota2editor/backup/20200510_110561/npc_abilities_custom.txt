@@ -868,7 +868,8 @@
 		"AbilityCooldown"	"4.0"
 		"precache"
 		{
-			"particle"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+			"particle"	"particles/units/heroes/hero_centaur/centaur_return.vpcf"
+			"particle"	"particles/units/heroes/hero_pangolier/pangolier_tailthump_buff.vpcf"
 		}
 		"Modifiers"
 		{
@@ -905,7 +906,24 @@
 				{
 					"MODIFIER_PROPERTY_TOTAL_CONSTANT_BLOCK"	"1"
 				}
-				"EffectName"	"particles/econ/items/medusa/medusa_daughters/medusa_daughters_mana_shield_e.vpcf"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/block_master.lua"
+						"Function"	"fire_effect"
+					}
+				}
+				"OnDestroy"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/talent/block_master.lua"
+						"Function"	"destroy_effect"
+					}
+				}
 			}
 			"modifier_block_master_cd"
 			{
@@ -1495,10 +1513,10 @@
 			}
 			"modifier_miser_cd"
 			{
-				"IsDebuff"	"0"
+				"IsDebuff"	"1"
 				"Duration"	"%interval"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"IsBuff"	"1"
+				"IsBuff"	"0"
 				"OnCreated"
 				{
 					"FireEffect"
@@ -1589,11 +1607,11 @@
 						"EffectAttachType"	"follow_hitloc"
 						"ControlPointEntities"
 						{
-							"00"	"TARGET"
-							"01"	"TARGET"
-							"02"	"TARGET"
-							"04"	"TARGET"
-							"08"	"TARGET"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
+							"TARGET"	"attach_hitloc"
 						}
 					}
 					"FireSound"
@@ -2127,7 +2145,7 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%duration"
 				"TextureName"	"hammering"
-				"IsBuff"	"1"
+				"IsBuff"	"0"
 				"OnDestroy"
 				{
 					"RunScript"
@@ -2137,6 +2155,7 @@
 						"Function"	"hammering"
 					}
 				}
+				"IsDebuff"	"1"
 			}
 		}
 		"AbilitySpecial"
