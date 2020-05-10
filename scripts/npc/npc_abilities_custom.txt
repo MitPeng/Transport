@@ -1418,6 +1418,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/generic_gameplay/rune_haste_owner.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_rebirth"
@@ -1478,6 +1482,7 @@
 						"ModifierName"	"modifier_phased"
 					}
 				}
+				"EffectName"	"particles/generic_gameplay/rune_haste_owner.vpcf"
 			}
 		}
 		"AbilitySpecial"
