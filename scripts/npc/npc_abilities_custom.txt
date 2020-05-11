@@ -54,7 +54,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"resistance"	"12.0 15.0 18.0"
+				"resistance"	"10.0 15.0 20.0"
 			}
 		}
 	}
@@ -793,10 +793,9 @@
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"400"
+		"AbilityCastRange"	"600"
 		"precache"
 		{
-			"particle"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
 			"particle"	"particles/items5_fx/essence_ring.vpcf"
 		}
 		"Modifiers"
@@ -807,8 +806,6 @@
 				"Duration"	"-1"
 				"TextureName"	"forest_troll_high_priest_heal"
 				"ThinkInterval"	"1.0"
-				"EffectName"	"particles/econ/items/huskar/huskar_ti8/huskar_ti8_shoulder_heal.vpcf"
-				"EffectAttachType"	"follow_origin"
 				"OnIntervalThink"
 				{
 					"ActOnTargets"
@@ -847,17 +844,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"550"
+				"radius"	"600"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_damage"	"5"
+				"lvl_damage"	"2"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"healing_percent"	"40"
+				"healing_percent"	"30"
 			}
 		}
 	}

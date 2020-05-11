@@ -54,7 +54,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"resistance"	"12.0 15.0 18.0"
+				"resistance"	"10.0 15.0 20.0"
 			}
 		}
 	}
@@ -847,17 +847,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"550"
+				"radius"	"500"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_damage"	"5"
+				"lvl_damage"	"2"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"healing_percent"	"40"
+				"healing_percent"	"25"
 			}
 		}
 	}
@@ -1240,6 +1240,7 @@
 		"precache"
 		{
 			"particle"	"particles/items_fx/arcane_boots_recipient.vpcf"
+			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
 		"Modifiers"
 		{
@@ -1273,6 +1274,11 @@
 				"IsHidden"	"1"
 				"OnCreated"
 				{
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"DOTA_Item.ArcaneBoots.Activate"
+					}
 					"RunScript"
 					{
 						"Target"	"CASTER"
@@ -1280,7 +1286,7 @@
 						"Function"	"fire_effect"
 					}
 				}
-				"ThinkInterval"	"0.6"
+				"ThinkInterval"	"0.8"
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -1412,6 +1418,10 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/generic_gameplay/rune_haste_owner.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_rebirth"
@@ -1472,6 +1482,7 @@
 						"ModifierName"	"modifier_phased"
 					}
 				}
+				"EffectName"	"particles/generic_gameplay/rune_haste_owner.vpcf"
 			}
 		}
 		"AbilitySpecial"

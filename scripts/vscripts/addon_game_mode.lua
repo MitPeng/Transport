@@ -54,7 +54,8 @@ function TransportGameMode:InitGameMode()
 
 	--推进时间
 	_G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
-
+	--倒计时
+	_G.countdown = tonumber(_G.load_map["countdown"])
 	--记录路段点
 	_G.map_sections = {}
 	local i = 1
@@ -106,7 +107,7 @@ function TransportGameMode:InitGameMode()
 	-- 设置不能买活
 	GameRules:GetGameModeEntity():SetBuybackEnabled(false)
 	-- 设置复活时间
-	GameRules:GetGameModeEntity():SetFixedRespawnTime(10.0)
+	GameRules:GetGameModeEntity():SetFixedRespawnTime(12.0)
 	-- 设置泉水回蓝回血
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen(10.0)
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen(10.0)
@@ -332,6 +333,9 @@ end
 
 function TransportGameMode:PlayerChat(keys)
 	if _G.map_name == "map_1" then
+		if keys.text == "push" then
+			_G.push_time = 30
+		end
 		--添加天赋技能
 		--猛然一击
 		if keys.text == "suddenly_strike" then

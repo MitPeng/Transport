@@ -1,7 +1,7 @@
 "addon"
 {
     "defend_success" "防守成功！进入下一路段！"
-    "push_remain_30" "推进时间即将结束！"
+    "push_time_to_end" "推进时间即将结束！"
     "start_defend"  "即将开始防守运输车！"
     "push_time_remain"  "推进时间"
     "start_transport"  "开 始 运 输 ！"

@@ -272,18 +272,18 @@ function is_push(keys)
             local shortest_push_time = tonumber(_G.load_map["shortest_push_time"])
             if _G.push_time >= shortest_push_time then
                 display_push_time()
-                push_remain_30(caster)
+                push_time_to_end(caster)
                 print("Push remaining time: " .. _G.push_time)
                 --剩余推进时间减1
                 _G.push_time = _G.push_time - 1
             else
                 if caster.is_stop_time then
                     display_push_time()
-                    push_remain_30(caster)
+                    push_time_to_end(caster)
                     print("Push remaining time: " .. _G.push_time)
                 else
                     display_push_time()
-                    push_remain_30(caster)
+                    push_time_to_end(caster)
                     print("Push remaining time: " .. _G.push_time)
                     --剩余推进时间减1
                     _G.push_time = _G.push_time - 1
@@ -327,19 +327,19 @@ function display_push_time()
     CustomGameEventManager:Send_ServerToAllClients("show_push_time", show_push_time_event)
 end
 
---推进还剩30秒提示
-function push_remain_30(caster)
+--推进时间不足提示
+function push_time_to_end(caster)
     --提前2秒文字提示
-    if _G.push_time == 32 then
+    if _G.push_time == _G.countdown + 2 then
         Notifications:ClearTopFromAll()
         Notifications:TopToAll(
-            {text = "#push_remain_30", duration = 2.0, style = {color = "red", ["font-size"] = "50px"}}
+            {text = "#push_time_to_end", duration = 2.0, style = {color = "red", ["font-size"] = "50px"}}
         )
         --计时音效
         caster:EmitSound("Tutorial.TaskProgress")
     end
-    --倒数30秒数字提示
-    if _G.push_time <= 30 then
+    --倒计时数字提示
+    if _G.push_time <= _G.countdown then
         Notifications:ClearTopFromAll()
         Notifications:TopToAll({text = _G.push_time, duration = 0.9, style = {color = "red", ["font-size"] = "50px"}})
         --计时音效
