@@ -271,7 +271,6 @@
 		"AbilityCooldown"	"5.5"
 		"precache"
 		{
-			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
 			"particle"	"particles/econ/items/troll_warlord/troll_warlord_ti7_axe/troll_ti7_axe_bash_explosion.vpcf"
 			"soundfile"	"soundevents/game_sounds_items.vsndevts"
 		}
@@ -293,8 +292,6 @@
 				}
 				"Passive"	"1"
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"EffectAttachType"	"follow_origin"
-				"EffectName"	"particles/items2_fx/mask_of_madness.vpcf"
 			}
 			"modifier_suddenly_strike_slow"
 			{
@@ -793,7 +790,7 @@
 		"AbilityUnitDamageType"	"DAMAGE_TYPE_MAGICAL"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"400"
+		"AbilityCastRange"	"550"
 		"precache"
 		{
 			"particle"	"particles/items5_fx/essence_ring.vpcf"
@@ -844,7 +841,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"500"
+				"radius"	"550"
 			}
 			"02"
 			{
@@ -854,7 +851,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"healing_percent"	"30"
+				"healing_percent"	"25"
 			}
 		}
 	}
@@ -1005,7 +1002,7 @@
 		"AbilityCastRange"	"300"
 		"precache"
 		{
-			"particle"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
+			"particle"	"particles/boiling_blood.vpcf"
 		}
 		"Modifiers"
 		{
@@ -1040,30 +1037,8 @@
 				"Duration"	"%attack_speed_reduce_time"
 				"IsDebuff"	"0"
 				"TextureName"	"forged_spirit_melting_strike"
-				"EffectName"	"particles/units/heroes/hero_huskar/huskar_burning_spear_debuff.vpcf"
-				"EffectAttachType"	"attach_hitloc"
-				"OnCreated"
-				{
-					"ActOnTargets"
-					{
-						"Target"
-						{
-							"Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC | DOTA_UNIT_TARGET_ALL"
-							"Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-							"Center"	"CASTER"
-							"Radius"	"%burning_radius"
-						}
-						"Action"
-						{
-							"RunScript"
-							{
-								"Target"	"TARGET"
-								"ScriptFile"	"scripts/vscripts/talent/boiling_blood.lua"
-								"Function"	"burning_damage"
-							}
-						}
-					}
-				}
+				"EffectName"	"particles/boiling_blood.vpcf"
+				"EffectAttachType"	"follow_origin"
 				"OnIntervalThink"
 				{
 					"ActOnTargets"
@@ -1102,7 +1077,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_burning_damage"	"15"
+				"lvl_burning_damage"	"10"
 			}
 			"03"
 			{
@@ -1112,12 +1087,12 @@
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent_caster"	"10"
+				"hp_percent_caster"	"12"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent_target"	"10"
+				"hp_percent_target"	"12"
 			}
 		}
 	}
@@ -1305,7 +1280,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana_regen_percent"	"30.0"
+				"mana_regen_percent"	"36.0"
 			}
 		}
 	}
@@ -1344,7 +1319,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"700"
+		"AbilityCastRange"	"900"
 		"precache"
 		{
 			"particle"	"particles/soul_harvest.vpcf"
@@ -1398,7 +1373,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"700"
+				"radius"	"900"
 			}
 			"02"
 			{
@@ -1618,6 +1593,7 @@
 		"RequiredLevel"	"1"
 		"precache"
 		{
+			"particle"	"particles/units/heroes/hero_ursa/ursa_enrage_buff_2.vpcf"
 			"particle"	"particles/units/heroes/hero_axe/axe_culling_blade_kill.vpcf"
 			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_axe.vsndevts"
 		}
@@ -1629,6 +1605,8 @@
 				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Passive"	"1"
 				"IsHidden"	"1"
+				"EffectName"	"particles/units/heroes/hero_ursa/ursa_enrage_buff_2.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 			"modifier_execution_apply"
 			{
@@ -1693,6 +1671,11 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
+		"precache"
+		{
+			"particle"	"particles/units/heroes/hero_troll_warlord/troll_warlord_berserk_buff.vpcf"
+			"particle"	"particles/units/heroes/hero_troll_warlord/troll_warlord_berserk_buff.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_giant_killer"
@@ -1701,6 +1684,8 @@
 				"Duration"	"-1"
 				"Passive"	"1"
 				"IsHidden"	"1"
+				"EffectName"	"particles/units/heroes/hero_troll_warlord/troll_warlord_berserk_buff.vpcf"
+				"EffectAttachType"	"follow_origin"
 			}
 		}
 		"AbilitySpecial"
@@ -1832,6 +1817,10 @@
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
 		"AbilityCastRange"	"800"
+		"precache"
+		{
+			"particle"	"particles/econ/items/undying/undying_pale_augur/undying_pale_augur_decay_strength_buff.vpcf"
+		}
 		"Modifiers"
 		{
 			"modifier_summon_zombie"
@@ -1844,6 +1833,8 @@
 				"Aura_Radius"	"%radius"
 				"Aura_Teams"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 				"Aura_Types"	"DOTA_UNIT_TARGET_HERO"
+				"EffectName"	"particles/econ/items/undying/undying_pale_augur/undying_pale_augur_decay_strength_buff.vpcf"
+				"EffectAttachType"	"attach_attack"
 			}
 			"modifier_summon_zombie_apply"
 			{
@@ -1890,6 +1881,8 @@
 		"precache"
 		{
 			"particle"	"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
+			"particle"	"particles/units/heroes/hero_undying/t_r.vpcf"
+			"soundfile"	"soundevents/game_sounds_heroes/game_sounds_undying.vsndevts"
 			"particle"	"particles/items2_fx/mask_of_madness.vpcf"
 		}
 		"Modifiers"
@@ -1898,6 +1891,24 @@
 			{
 				"EffectName"	"particles/units/heroes/hero_pudge/pudge_rot.vpcf"
 				"EffectAttachType"	"follow_hitloc"
+				"OnCreated"
+				{
+					"FireEffect"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"particles/units/heroes/hero_undying/t_r.vpcf"
+						"EffectAttachType"	"follow_origin"
+					}
+					"FireSound"
+					{
+						"Target"	"CASTER"
+						"EffectName"	"Hero_Undying.FleshGolem.Cast"
+					}
+				}
+				"ThinkInterval"	"1.0"
+				"Passive"	"1"
+				"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"IsHidden"	"1"
 				"OnIntervalThink"
 				{
 					"RunScript"
@@ -1925,10 +1936,6 @@
 						"Function"	"apply_damage"
 					}
 				}
-				"ThinkInterval"	"1.0"
-				"Passive"	"1"
-				"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"IsHidden"	"1"
 			}
 			"modifier_hungry_count"
 			{
@@ -1948,7 +1955,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_percent"	"20"
+				"hp_percent"	"25"
 			}
 			"02"
 			{
@@ -1968,7 +1975,7 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_damage"	"5"
+				"lvl_damage"	"3"
 			}
 			"06"
 			{
@@ -2255,17 +2262,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"450"
+				"radius"	"350"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"base_damage_percent"	"25.0"
+				"base_damage_percent"	"24.0"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_damage_percent"	"0.5"
+				"lvl_damage_percent"	"0.8"
 			}
 		}
 	}

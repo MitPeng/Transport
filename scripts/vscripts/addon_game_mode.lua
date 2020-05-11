@@ -681,6 +681,15 @@ function TransportGameMode:DamageFilter(damageTable)
 			local total_damage_percent = (base_damage_percent + lvl_damage_percent * attacker:GetLevel()) / 100
 			damageTable.damage = math.ceil(damageTable.damage * (1 + total_damage_percent))
 			PopupDamage(victim, math.ceil(damageTable.damage * total_damage_percent))
+			local particle =
+				ParticleManager:CreateParticle(
+				"particles/units/heroes/hero_sven/sven_storm_bolt_projectile_explosion_trail.vpcf",
+				PATTACH_ABSORIGIN,
+				victim
+			)
+			ParticleManager:SetParticleControl(particle, 3, victim:GetAbsOrigin())
+
+			ParticleManager:ReleaseParticleIndex(particle)
 		end
 	end
 

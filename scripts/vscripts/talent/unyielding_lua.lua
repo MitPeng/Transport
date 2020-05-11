@@ -44,7 +44,11 @@ function modifier_unyielding:OnCreated()
 end
 
 function modifier_unyielding:OnDestroy()
-    ParticleManager:DestroyParticle(self.particle, true)
+    if not IsServer() then
+        return
+    end
+    ParticleManager:DestroyParticle(self.particle, false)
+    ParticleManager:ReleaseParticleIndex(self.particle)
 end
 
 function modifier_unyielding:DeclareFunctions()
@@ -64,9 +68,11 @@ function modifier_unyielding:GetModifierIncomingDamage_Percentage()
 end
 
 function modifier_unyielding:GetModifierModelScale()
+    if not IsServer() then
+        return
+    end
     local pct = math.max((self.parent:GetHealthPercent() - self.hp_threshold_max) / self.range, 0)
     ParticleManager:SetParticleControl(self.particle, 1, Vector((1 - pct) * 100, 0, 0))
-    self.parent:SetRenderColor(255, 255 * pct, 255 * pct)
     return (1 - pct) * 60
 end
 
@@ -87,6 +93,9 @@ function modifier_unyielding:GetAttributes()
 end
 
 function modifier_unyielding:OnIntervalThink()
+    if not IsServer() then
+        return
+    end
     local caster = self:GetCaster()
     local hp_percent = caster:GetHealthPercent()
     local max_count = self:GetAbility():GetSpecialValueFor("max_count")

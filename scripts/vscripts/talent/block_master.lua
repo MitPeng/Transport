@@ -13,12 +13,7 @@ end
 
 function fire_effect(keys)
     local caster = keys.caster
-    local particle =
-        ParticleManager:CreateParticle(
-        "particles/units/heroes/hero_pangolier/pangolier_tailthump_buff.vpcf",
-        PATTACH_ABSORIGIN_FOLLOW,
-        caster
-    )
+    local particle = ParticleManager:CreateParticle("particles/block_master.vpcf", PATTACH_ABSORIGIN_FOLLOW, caster)
     ParticleManager:SetParticleControlEnt(particle, 1, caster, PATTACH_ABSORIGIN_FOLLOW, nil, Vector(0, 0, 0), false) --origin
     local modifier = caster:FindModifierByName("modifier_block_master_block_damage")
     modifier:AddParticle(particle, false, false, -1, true, false)
@@ -26,6 +21,5 @@ function fire_effect(keys)
 end
 
 function destroy_effect(keys)
-    print_r(keys)
     ParticleManager:DestroyParticle(keys.ability.particle, true)
 end

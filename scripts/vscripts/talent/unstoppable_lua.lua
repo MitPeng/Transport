@@ -9,7 +9,7 @@ end
 modifier_unstoppable_lua = class({})
 
 function modifier_unstoppable_lua:GetTexture()
-    return "blue_dragonspawn_sorcerer_evasion"
+    return "blue_dragonspawn_overseer_evasion"
 end
 
 function modifier_unstoppable_lua:GetDuration()
@@ -56,7 +56,15 @@ function modifier_unstoppable_lua:GetAttributes()
     return MODIFIER_ATTRIBUTE_PERMANENT + MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE
 end
 
-function modifier_unstoppable_lua:OnCreated(keys)
+function modifier_unstoppable_lua:GetEffectName()
+    return "particles/unstoppable_2.vpcf"
+end
+
+function modifier_unstoppable_lua:GetEffectAttachType()
+    return PATTACH_POINT_FOLLOW
+end
+
+function modifier_unstoppable_lua:OnCreated()
     self:StartIntervalThink(0.1)
 end
 
