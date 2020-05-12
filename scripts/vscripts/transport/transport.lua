@@ -102,8 +102,8 @@ function is_transport(keys)
     local loc = caster:GetAbsOrigin()
     local radius = ability:GetSpecialValueFor("vision_radius")
     local interval = ability:GetSpecialValueFor("interval")
-    AddFOWViewer(DOTA_TEAM_GOODGUYS, loc, radius, interval, false)
-    AddFOWViewer(DOTA_TEAM_BADGUYS, loc, radius, interval, false)
+    AddFOWViewer(DOTA_TEAM_GOODGUYS, loc, radius, interval, true)
+    AddFOWViewer(DOTA_TEAM_BADGUYS, loc, radius, interval, true)
 end
 
 --判断是否到达下一路点,到达则更换上一路点和下一路点信息
