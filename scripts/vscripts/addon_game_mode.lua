@@ -21,6 +21,50 @@ function Precache(context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_ui_imported.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_undying.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context)
+
+	PrecacheResource("particle", "particles/author_effect.vpcf", context)
+	PrecacheResource("particle", "particles/desert_sands.vpcf", context)
+	PrecacheResource("particle", "particles/frost.vpcf", context)
+	PrecacheResource("particle", "particles/cave_crystal.vpcf", context)
+	PrecacheResource("particle", "particles/darkmoon.vpcf", context)
+	PrecacheResource("particle", "particles/econ/courier/courier_oculopus/courier_oculopus_ambient.vpcf", context)
+	PrecacheResource(
+		"particle",
+		"particles/econ/courier/courier_hyeonmu_ambient/courier_hyeonmu_ambient_gold.vpcf",
+		context
+	)
+	PrecacheResource(
+		"particle",
+		"particles/econ/courier/courier_hyeonmu_ambient/courier_hyeonmu_ambient_blue_plus.vpcf",
+		context
+	)
+	PrecacheResource(
+		"particle",
+		"particles/econ/courier/courier_hyeonmu_ambient/courier_hyeonmu_ambient_green.vpcf",
+		context
+	)
+	PrecacheResource(
+		"particle",
+		"particles/econ/courier/courier_hyeonmu_ambient/courier_hyeonmu_ambient_red_plus.vpcf",
+		context
+	)
+	PrecacheResource("particle", "particles/particles/bee_flying.vpcf", context)
+	PrecacheResource("particle", "particles/particles/christmas.vpcf", context)
+	PrecacheResource("particle", "particles/econ/courier/courier_baekho/courier_baekho_ambient.vpcf", context)
+
+	LinkLuaModifier("author_effect", "effect_modifiers/author_effect.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("desert_sands", "effect_modifiers/desert_sands.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("frost", "effect_modifiers/frost.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("cave_crystal", "effect_modifiers/cave_crystal.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("darkmoon", "effect_modifiers/darkmoon.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("void_mist", "effect_modifiers/void_mist.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("golden_fire", "effect_modifiers/golden_fire.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("blue_fire", "effect_modifiers/blue_fire.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("green_fire", "effect_modifiers/green_fire.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("red_fire", "effect_modifiers/red_fire.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("bee_flying", "effect_modifiers/bee_flying.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("christmas", "effect_modifiers/christmas.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("pink_memories", "effect_modifiers/pink_memories.lua", LUA_MODIFIER_MOTION_NONE)
 end
 
 -- Create the game mode when we activate
@@ -86,6 +130,8 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("player_chat", Dynamic_Wrap(TransportGameMode, "PlayerChat"), self)
 	-- 重连事件
 	ListenToGameEvent("player_reconnected", Dynamic_Wrap(TransportGameMode, "OnPlayerReconnected"), self)
+	-- 玩家全部连接
+	ListenToGameEvent("player_connect_full", Dynamic_Wrap(TransportGameMode, "OnPlayerConnectFull"), self)
 	-- 设置伤害过滤器
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(TransportGameMode, "DamageFilter"), self)
 
@@ -172,6 +218,33 @@ function TransportGameMode:OnPlayerSelectAbility(keys)
 	hero.talent_ability = ability
 end
 
+-- 当玩家连接完成
+function TransportGameMode:OnPlayerConnectFull(keys)
+	_G.players = _G.players or {}
+	local player = {}
+	player.userid = keys.index + 1
+	player.playerid = keys.PlayerID
+	player.steamid = PlayerResource:GetSteamAccountID(keys.PlayerID)
+	_G.players[keys.userid] = player
+
+	Timers:CreateTimer(
+		1.0,
+		function()
+			--显示所有天赋技能
+			local all_talent_abilities = {}
+			for num = 1, _G.abilities_num do
+				table.insert(all_talent_abilities, _G.talent_abilities[tostring(num)])
+			end
+			CustomGameEventManager:Send_ServerToAllClients(
+				"show_all_talent_abilities",
+				{
+					Abilities = all_talent_abilities
+				}
+			)
+		end
+	)
+end
+
 -- 重连事件
 function TransportGameMode:OnPlayerReconnected(event)
 	-- 判断游戏进度
@@ -195,22 +268,6 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 	if newState == DOTA_GAMERULES_STATE_CUSTOM_GAME_SETUP then
 	elseif newState == DOTA_GAMERULES_STATE_HERO_SELECTION then
 		-- print("Player begin select hero") -- 玩家处于选择英雄界面
-		Timers:CreateTimer(
-			1.0,
-			function()
-				--显示所有天赋技能
-				local all_talent_abilities = {}
-				for num = 1, _G.abilities_num do
-					table.insert(all_talent_abilities, _G.talent_abilities[tostring(num)])
-				end
-				CustomGameEventManager:Send_ServerToAllClients(
-					"show_all_talent_abilities",
-					{
-						Abilities = all_talent_abilities
-					}
-				)
-			end
-		)
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
 		Timers:CreateTimer(
@@ -279,11 +336,17 @@ function TransportGameMode:OnNPCSpawned(keys)
 			if not hero:IsClone() then
 				--升至指定等级
 				hero:AddExperience(_G.first_spawn_xp, 0, false, false)
-				--加初始天赋药水
+
 				Timers:CreateTimer(
-					1.0,
+					0.5,
 					function()
+						--加初始天赋药水
 						hero:AddItemByName("item_talent_potion_2")
+						--加特效
+						if PlayerResource:GetSteamAccountID(hero:GetPlayerID()) == 179637729 then
+							local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
+							hero.effect_modifier = modifier
+						end
 					end
 				)
 			end
@@ -332,7 +395,9 @@ function TransportGameMode:OnNPCSpawned(keys)
 end
 
 function TransportGameMode:PlayerChat(keys)
-	if _G.map_name == "map_1" then
+	-- 作者才能用
+	local player = _G.players[keys.userid]
+	if player.steamid == 179637729 then
 		if keys.text == "push" then
 			_G.push_time = 30
 		end
@@ -548,6 +613,27 @@ function TransportGameMode:PlayerChat(keys)
 					is_first = false
 				}
 			)
+		end
+
+		--特效测试
+		if
+			keys.text == "author_effect" or keys.text == "desert_sands" or keys.text == "frost" or keys.text == "cave_crystal" or
+				keys.text == "darkmoon" or
+				keys.text == "void_mist" or
+				keys.text == "golden_fire" or
+				keys.text == "blue_fire" or
+				keys.text == "green_fire" or
+				keys.text == "red_fire" or
+				keys.text == "bee_flying" or
+				keys.text == "christmas" or
+				keys.text == "pink_memories"
+		 then
+			local hero = PlayerResource:GetPlayer(player.playerid):GetAssignedHero()
+			if hero.effect_modifier ~= nil then
+				hero:RemoveModifierByName(hero.effect_modifier:GetName())
+			end
+			local modifier = hero:AddNewModifier(hero, nil, keys.text, {duration = -1})
+			hero.effect_modifier = modifier
 		end
 	end
 end
