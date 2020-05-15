@@ -165,6 +165,8 @@ function TransportGameMode:InitGameMode()
 	GameRules:SetStartingGold(tonumber(_G.load_kv["first_spawn_hero_gold"]))
 	-- 开启宇宙商店模式
 	GameRules:SetUseUniversalShopMode(true)
+	-- 设置死亡不掉钱
+	GameRules:GetGameModeEntity():SetLoseGoldOnDeath(false)
 	-- 7.23更新，使用modifier来为英雄增加被动金钱
 	GameRules:SetGoldTickTime(0)
 	GameRules:SetGoldPerTick(0)
@@ -399,7 +401,7 @@ function TransportGameMode:PlayerChat(keys)
 	local player = _G.players[keys.userid]
 	if player.steamid == 179637729 then
 		if keys.text == "push" then
-			_G.push_time = 30
+			_G.push_time = 10
 		end
 		--添加天赋技能
 		--猛然一击
