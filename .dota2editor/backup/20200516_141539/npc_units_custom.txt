@@ -91,7 +91,7 @@
 		"AttackDamageMax"	"35"
 		"AttackRate"	"1.6"
 		"AttackRange"	"150"
-		"ArmorPhysical"	"0"
+		"ArmorPhysical"	"1"
 		"MagicalResistance"	"15"
 		"MovementCapabilities"	"DOTA_UNIT_CAP_MOVE_GROUND"
 		"MovementSpeed"	"325"

@@ -211,7 +211,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"vision_radius"	"400"
+				"vision_radius"	"450"
 			}
 			"04"
 			{
@@ -944,7 +944,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_block_damage"	"20"
+				"base_block_damage"	"5"
 			}
 			"02"
 			{
@@ -954,12 +954,12 @@
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"trigger_times"	"3.5"
+				"trigger_times"	"5.0"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"damage_times"	"5.0"
+				"damage_times"	"2.5"
 			}
 		}
 	}
@@ -1323,7 +1323,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"900"
+		"AbilityCastRange"	"1200"
 		"precache"
 		{
 			"particle"	"particles/soul_harvest.vpcf"
@@ -1377,7 +1377,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"900"
+				"radius"	"1200"
 			}
 			"02"
 			{
@@ -1557,7 +1557,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"times"	"1.20"
+				"times"	"1.18"
 			}
 		}
 	}

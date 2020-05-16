@@ -1557,7 +1557,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"times"	"1.20"
+				"times"	"1.18"
 			}
 		}
 	}
