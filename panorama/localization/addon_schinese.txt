@@ -13,4 +13,12 @@
     "all_talent_abilities"  "所有天赋技能"
     "cancel_change" "取消"
     "overtime"  "加时!"
+    "new_stat_gpm"												"每分钟金钱"
+    "new_stat_total_damage"										"总伤害"
+    "new_stat_total_healing"									"总治疗"
+    "new_stat_networth"											"总财产"
+    "new_stat_wards"											"哨岗/侦察守卫"
+    "new_stat_killed_heroes"									"击杀敌人"
+    "custom_end_screen_team_kills"  "总击杀"
+    "custom_end_screen_remaining_gold"   "剩余金钱"
 }

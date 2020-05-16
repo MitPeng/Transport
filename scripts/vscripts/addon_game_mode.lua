@@ -111,7 +111,8 @@ function TransportGameMode:InitGameMode()
 			end
 		end
 	end
-
+	--nettable里的属性,结束面板数据
+	_G.newStats = newStats or {}
 	--记录初次出生所需等级经验
 	local first_spawn_hero_lvl = tonumber(_G.load_kv["first_spawn_hero_lvl"])
 	local total_xp = 0
@@ -132,6 +133,8 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("player_reconnected", Dynamic_Wrap(TransportGameMode, "OnPlayerReconnected"), self)
 	-- 玩家全部连接
 	ListenToGameEvent("player_connect_full", Dynamic_Wrap(TransportGameMode, "OnPlayerConnectFull"), self)
+	-- 击杀事件
+	ListenToGameEvent("entity_killed", Dynamic_Wrap(TransportGameMode, "OnEntityKilled"), self)
 	-- 设置伤害过滤器
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(TransportGameMode, "DamageFilter"), self)
 
@@ -326,11 +329,93 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 			{text = "#start_transport", duration = 3.0, style = {color = "yellow", ["font-size"] = "50px"}}
 		)
 	end
+	if newState == DOTA_GAMERULES_STATE_POST_GAME then
+		for i = 0, 64 do
+			if PlayerResource:IsValidPlayer(i) then
+				local networth = 0
+				local hero = PlayerResource:GetSelectedHeroEntity(i)
+				networth = networth + PlayerResource:GetGold(i)
+				for s = 0, 8 do
+					local item = hero:GetItemInSlot(s)
+
+					if item then
+						networth = networth + item:GetCost()
+					end
+				end
+				local stats = {
+					networth = networth,
+					total_damage = PlayerResource:GetRawPlayerDamage(i),
+					total_healing = PlayerResource:GetHealing(i)
+				}
+
+				if newStats and newStats[i] then
+					stats.sentries_count = newStats[i].npc_dota_sentry_wards
+					stats.observers_count = newStats[i].npc_dota_observer_wards
+					stats.killed_hero = newStats[i].killed_hero
+				end
+
+				CustomNetTables:SetTableValue("custom_stats", tostring(i), stats)
+				print_r(CustomNetTables:GetTableValue("custom_stats", tostring(i)))
+			end
+		end
+	end
+end
+
+-- 击杀事件
+function TransportGameMode:OnEntityKilled(event)
+	local killedUnit = EntIndexToHScript(event.entindex_killed)
+	local hero
+	if event.entindex_attacker then
+		hero = EntIndexToHScript(event.entindex_attacker)
+	end
+	if killedUnit:IsRealHero() and not killedUnit:IsReincarnating() then
+		local player_id = -1
+		if hero and hero:IsRealHero() and hero.GetPlayerID then
+			player_id = hero:GetPlayerID()
+		else
+			if hero:GetPlayerOwnerID() ~= -1 then
+				player_id = hero:GetPlayerOwnerID()
+			end
+		end
+		if player_id ~= -1 then
+			local name = killedUnit:GetUnitName()
+
+			newStats[player_id] =
+				newStats[player_id] or
+				{
+					npc_dota_sentry_wards = 0,
+					npc_dota_observer_wards = 0,
+					killed_hero = {}
+				}
+
+			local kh = newStats[player_id].killed_hero
+
+			kh[name] = kh[name] and kh[name] + 1 or 1
+		end
+	end
 end
 
 -- 单位出生
 function TransportGameMode:OnNPCSpawned(keys)
 	local hero = EntIndexToHScript(keys.entindex)
+
+	-- 记录插眼个数
+	local owner = hero:GetOwner()
+	local name = hero:GetUnitName()
+	if owner and owner.GetPlayerID and (name == "npc_dota_sentry_wards" or name == "npc_dota_observer_wards") then
+		local player_id = owner:GetPlayerID()
+
+		newStats[player_id] =
+			newStats[player_id] or
+			{
+				npc_dota_sentry_wards = 0,
+				npc_dota_observer_wards = 0,
+				killed_hero = {}
+			}
+
+		newStats[player_id][name] = newStats[player_id][name] + 1
+	end
+
 	if Utils:is_real_hero(hero) or hero:IsClone() then
 		-- 初次重生
 		if hero.is_first_spawn == nil then
@@ -345,7 +430,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 						--加初始天赋药水
 						hero:AddItemByName("item_talent_potion_2")
 						--加特效
-						if PlayerResource:GetSteamAccountID(hero:GetPlayerID()) == 179637729 then
+						if PlayerResource:GetSteamAccountID(hero:GetPlayerID()) == 179637729 or 111384022 then
 							local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
 							hero.effect_modifier = modifier
 						end
@@ -399,7 +484,7 @@ end
 function TransportGameMode:PlayerChat(keys)
 	-- 作者才能用
 	local player = _G.players[keys.userid]
-	if player.steamid == 179637729 then
+	if player.steamid == 179637729 or player.steamid == 111384022 then
 		if keys.text == "push" then
 			_G.push_time = 10
 		end
