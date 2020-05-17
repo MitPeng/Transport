@@ -1974,12 +1974,12 @@
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_damage"	"30"
+				"base_damage"	"15"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_damage"	"3"
+				"lvl_damage"	"2"
 			}
 			"06"
 			{

@@ -240,7 +240,8 @@ function TransportGameMode:OnPlayerConnectFull(keys)
 			for num = 1, _G.abilities_num do
 				table.insert(all_talent_abilities, _G.talent_abilities[tostring(num)])
 			end
-			CustomGameEventManager:Send_ServerToAllClients(
+			CustomGameEventManager:Send_ServerToPlayer(
+				PlayerResource:GetPlayer(keys.PlayerID),
 				"show_all_talent_abilities",
 				{
 					Abilities = all_talent_abilities
@@ -430,7 +431,8 @@ function TransportGameMode:OnNPCSpawned(keys)
 						--加初始天赋药水
 						hero:AddItemByName("item_talent_potion_2")
 						--加特效
-						if PlayerResource:GetSteamAccountID(hero:GetPlayerID()) == 179637729 or 111384022 then
+						local steamid = PlayerResource:GetSteamAccountID(hero:GetPlayerID())
+						if steamid == 179637729 or steamid == 111384022 then
 							local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
 							hero.effect_modifier = modifier
 						end
