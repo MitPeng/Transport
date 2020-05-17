@@ -331,7 +331,7 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		)
 	end
 	if newState == DOTA_GAMERULES_STATE_POST_GAME then
-		for i = 0, 64 do
+		for i = 0, 12 do
 			if PlayerResource:IsValidPlayer(i) then
 				local networth = 0
 				local hero = PlayerResource:GetSelectedHeroEntity(i)
@@ -346,7 +346,8 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 				local stats = {
 					networth = networth,
 					total_damage = PlayerResource:GetRawPlayerDamage(i),
-					total_healing = PlayerResource:GetHealing(i)
+					total_healing = PlayerResource:GetHealing(i),
+					push_score = PlayerResource:GetPlayer(i):GetAssignedHero().push_score
 				}
 
 				if newStats and newStats[i] then
@@ -417,28 +418,27 @@ function TransportGameMode:OnNPCSpawned(keys)
 		newStats[player_id][name] = newStats[player_id][name] + 1
 	end
 
-	if Utils:is_real_hero(hero) or hero:IsClone() then
+	if Utils:is_real_hero(hero) then
 		-- 初次重生
 		if hero.is_first_spawn == nil then
 			hero.is_first_spawn = false
-			if not hero:IsClone() then
-				--升至指定等级
-				hero:AddExperience(_G.first_spawn_xp, 0, false, false)
 
-				Timers:CreateTimer(
-					0.5,
-					function()
-						--加初始天赋药水
-						hero:AddItemByName("item_talent_potion_2")
-						--加特效
-						local steamid = PlayerResource:GetSteamAccountID(hero:GetPlayerID())
-						if steamid == 179637729 or steamid == 111384022 then
-							local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
-							hero.effect_modifier = modifier
-						end
+			--升至指定等级
+			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
+			hero.push_score = 0
+			Timers:CreateTimer(
+				0.5,
+				function()
+					--加初始天赋药水
+					hero:AddItemByName("item_talent_potion_2")
+					--加特效
+					local steamid = PlayerResource:GetSteamAccountID(hero:GetPlayerID())
+					if steamid == 179637729 or steamid == 111384022 then
+						local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
+						hero.effect_modifier = modifier
 					end
-				)
-			end
+				end
+			)
 
 		-- if _G.map_name == "map_1" then
 		-- 	local ability = hero:AddAbility("keen")

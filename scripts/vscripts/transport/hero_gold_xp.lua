@@ -9,14 +9,14 @@ function get_gold_xp(keys)
             level * _G.load_kv["lvl_gold"]
         PlayerResource:SetGold(hero:GetPlayerID(), gold, false)
         local radius = keys.ability:GetSpecialValueFor("radius")
+        --如果在推车范围内
         if Path:distance_between_two_point(hero:GetAbsOrigin(), _G.transport_car:GetAbsOrigin()) < radius then
             local add_xp = _G.load_kv["base_bonus_xp"] + level * _G.load_kv["lvl_bonus_xp"]
             hero:AddExperience(add_xp, 0, false, false)
-            -- PopupXPGain(hero, math.floor(xp))
             local add_gold = _G.load_kv["base_bonus_gold"] + level * _G.load_kv["lvl_bonus_gold"]
             local total_gold = PlayerResource:GetUnreliableGold(hero:GetPlayerID()) + add_gold
             PlayerResource:SetGold(hero:GetPlayerID(), total_gold, false)
-        -- PopupGoldGain(hero, math.floor(add_gold))
+            hero.push_score = hero.push_score + 1
         end
     end
 end
