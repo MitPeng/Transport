@@ -777,7 +777,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"max_count"	"50"
+				"max_count"	"60"
 			}
 		}
 	}
@@ -2002,7 +2002,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"900"
+		"AbilityCastRange"	"600"
 		"precache"
 		{
 			"particle"	"particles/serve.vpcf"
@@ -2040,12 +2040,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"900"
+				"radius"	"600"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_xp"	"1.0"
+				"lvl_xp"	"1.2"
 			}
 			"03"
 			{

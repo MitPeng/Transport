@@ -216,8 +216,8 @@ function denfend_success(caster)
         bad_start:SetOrigin(bad_change)
     end
 
-    --重置推进时间
-    _G.push_time = tonumber(_G.load_map["push_time_" .. _G.road_section_num])
+    --推进时间奖励
+    _G.push_time = _G.push_time + tonumber(_G.load_map["push_time_" .. _G.road_section_num])
     --若处于防御阶段，则结束防御阶段
     if caster:HasModifier("modifier_transport_defend_road_section") then
         caster:RemoveModifierByName("modifier_transport_defend_road_section")

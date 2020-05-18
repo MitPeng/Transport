@@ -777,7 +777,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"max_count"	"60"
+				"max_count"	"50"
 			}
 		}
 	}
@@ -1358,7 +1358,7 @@
 			}
 			"modifier_soul_harvest_apply"
 			{
-				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"-1"
 				"IsHidden"	"1"
 				"OnDeath"
@@ -1820,7 +1820,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"800"
+		"AbilityCastRange"	"900"
 		"precache"
 		{
 			"particle"	"particles/econ/items/undying/undying_pale_augur/undying_pale_augur_decay_strength_buff.vpcf"
@@ -1857,6 +1857,7 @@
 						"UnitCount"	"1"
 					}
 				}
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE"
 			}
 		}
 		"AbilitySpecial"
@@ -1869,7 +1870,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"800"
+				"radius"	"900"
 			}
 		}
 	}
@@ -1974,7 +1975,7 @@
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_damage"	"15"
+				"base_damage"	"10"
 			}
 			"05"
 			{
@@ -1984,12 +1985,12 @@
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_attack_speed"	"5"
+				"lvl_attack_speed"	"6"
 			}
 			"07"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"lvl_move_speed"	"5"
+				"lvl_move_speed"	"6"
 			}
 		}
 	}
@@ -2001,7 +2002,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"600"
+		"AbilityCastRange"	"900"
 		"precache"
 		{
 			"particle"	"particles/serve.vpcf"
@@ -2039,12 +2040,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"600"
+				"radius"	"900"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"lvl_xp"	"1.2"
+				"lvl_xp"	"1.0"
 			}
 			"03"
 			{
