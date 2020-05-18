@@ -85,7 +85,6 @@
 				"ScriptFile"	"scripts/vscripts/items/item_book.lua"
 				"Function"	"use_book"
 				"modifier_name"	"modifier_item_str_book"
-				"void_modifier"	"modifier_item_str_book_void"
 			}
 		}
 		"Modifiers"
@@ -101,7 +100,6 @@
 					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%add_str"
 				}
 			}
-			"modifier_item_str_book_void"	{}
 		}
 		"AbilitySpecial"
 		{
@@ -138,7 +136,6 @@
 				"ScriptFile"	"scripts/vscripts/items/item_book.lua"
 				"Function"	"use_book"
 				"modifier_name"	"modifier_item_agi_book"
-				"void_modifier"	"modifier_item_agi_book_void"
 			}
 		}
 		"Modifiers"
@@ -154,7 +151,6 @@
 					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%add_agi"
 				}
 			}
-			"modifier_item_agi_book_void"	{}
 		}
 		"AbilitySpecial"
 		{
@@ -191,7 +187,6 @@
 				"ScriptFile"	"scripts/vscripts/items/item_book.lua"
 				"Function"	"use_book"
 				"modifier_name"	"modifier_item_int_book"
-				"void_modifier"	"modifier_item_int_book_void"
 			}
 		}
 		"Modifiers"
@@ -207,7 +202,6 @@
 					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%add_int"
 				}
 			}
-			"modifier_item_int_book_void"	{}
 		}
 		"AbilitySpecial"
 		{

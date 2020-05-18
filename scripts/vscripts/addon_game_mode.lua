@@ -19,6 +19,7 @@ function Precache(context)
 			PrecacheResource( "particle_folder", "particles/folder", context )
 	]]
 	PrecacheResource("soundfile", "soundevents/game_sounds_ui_imported.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_items.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_undying.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context)
 

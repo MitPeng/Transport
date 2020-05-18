@@ -1,10 +1,10 @@
 "addon"
 {
-    "defend_success" "Defend Success! Turn to the next road section!"
-    "push_time_to_end"    "Push time is about to end!"
-    "start_defend"  "Start defending the transporter!"
+    "defend_success" "Defend Success! Turn to the next road section !"
+    "push_time_to_end"    "Push time is about to end !"
+    "start_defend"  "Start defending the transporter !"
     "push_time_remain"  "Push Time"
-    "start_transport"  "Start Transport!"
+    "start_transport"  "Start Transport !"
     "glhf"  "Good Luck Have Fun !"
     "player_prepare"  "Prepare to battle !"
     "car_spawn"  "Transport car will be spawned !"
@@ -20,4 +20,5 @@
     "new_stat_wards"				"Wards sentries/obsrvrs"
     "new_stat_killed_heroes"		"Killed enemies"
     "custom_end_screen_team_kills"  "Team total Kills"
+    "cant_use"  "Can not use !"
 }

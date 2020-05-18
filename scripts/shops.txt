@@ -15,6 +15,9 @@
 		"item"		"item_dust"	
 		"item"		"item_bottle"
 		"item"      "item_talent_potion"    //天赋药水
+		"item"		"item_str_book"			//力量书
+		"item"		"item_agi_book"			//敏捷书
+		"item"		"item_int_book"			//智力书
 	}
 
 	"attributes"
