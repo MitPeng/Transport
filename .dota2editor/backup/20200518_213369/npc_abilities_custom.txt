@@ -557,7 +557,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"break_percent"	"15"
+				"break_percent"	"12"
 			}
 			"03"
 			{
@@ -750,7 +750,7 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed"	"75"
+				"attack_speed"	"100"
 			}
 			"03"
 			{
@@ -2067,7 +2067,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"MaxLevel"	"1"
 		"RequiredLevel"	"1"
-		"AbilityCastRange"	"900"
+		"AbilityCastRange"	"800"
 		"Modifiers"
 		{
 			"modifier_mist"
@@ -2140,17 +2140,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"1000"
+				"radius"	"900"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"broken_radius"	"900"
+				"broken_radius"	"800"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"move_speed_percent"	"25"
+				"move_speed_percent"	"20"
 			}
 		}
 	}

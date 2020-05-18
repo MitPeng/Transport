@@ -442,7 +442,7 @@ function TransportGameMode:OnNPCSpawned(keys)
 			)
 
 			if _G.map_name == "map_1" then
-				local ability = hero:AddAbility("summon_zombie")
+				local ability = hero:AddAbility("feral_aura")
 				ability:SetLevel(1)
 				hero.talent_ability = ability
 			end
