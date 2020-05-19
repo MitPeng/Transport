@@ -276,12 +276,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"health"	"450"
+				"health"	"425"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"mana"	"450"
+				"mana"	"425"
 			}
 			"03"
 			{
@@ -402,27 +402,27 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage"	"80"
+				"damage"	"75"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed"	"80"
+				"attack_speed"	"60"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"health_regen"	"8"
+				"health_regen"	"7"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"chance"	"40"
+				"chance"	"45"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"max_hp_percent"	"4.0"
+				"max_hp_percent"	"4.5"
 			}
 		}
 	}
@@ -521,7 +521,7 @@
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"aura_movespeed"	"25"
+				"aura_movespeed"	"20"
 			}
 			"07"
 			{

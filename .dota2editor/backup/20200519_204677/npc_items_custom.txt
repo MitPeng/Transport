@@ -521,7 +521,7 @@
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"aura_movespeed"	"25"
+				"aura_movespeed"	"20"
 			}
 			"07"
 			{
