@@ -440,12 +440,12 @@ function TransportGameMode:OnNPCSpawned(keys)
 					end
 				end
 			)
-
-			if _G.map_name == "map_1" then
-				local ability = hero:AddAbility("feral_aura")
-				ability:SetLevel(1)
-				hero.talent_ability = ability
-			end
+		-- 测试技能
+		-- if _G.map_name == "map_1" then
+		-- 	local ability = hero:AddAbility("feral_aura")
+		-- 	ability:SetLevel(1)
+		-- 	hero.talent_ability = ability
+		-- end
 		--加个技能，处理存在多个英雄天赋技能的情况
 		-- local ability = hero:AddAbility("deal_talent")
 		-- ability:SetLevel(1)

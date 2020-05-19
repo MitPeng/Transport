@@ -286,12 +286,12 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"armor"	"12"
+				"armor"	"10"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_stat"	"12"
+				"all_stat"	"10"
 			}
 			"05"
 			{
@@ -323,7 +323,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1508"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"850"
+		"ItemCost"	"750"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"
@@ -434,7 +434,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1506"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"1675"
+		"ItemCost"	"1375"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"

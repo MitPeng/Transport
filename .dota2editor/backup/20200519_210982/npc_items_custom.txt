@@ -286,12 +286,12 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"armor"	"12"
+				"armor"	"10"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_stat"	"12"
+				"all_stat"	"10"
 			}
 			"05"
 			{
@@ -323,7 +323,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1508"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"850"
+		"ItemCost"	"750"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"
@@ -402,27 +402,27 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage"	"70"
+				"damage"	"80"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed"	"70"
+				"attack_speed"	"80"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"health_regen"	"7"
+				"health_regen"	"8"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"chance"	"70"
+				"chance"	"40"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"max_hp_percent"	"3.5"
+				"max_hp_percent"	"4.0"
 			}
 		}
 	}
@@ -434,7 +434,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1506"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"1675"
+		"ItemCost"	"1375"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"
