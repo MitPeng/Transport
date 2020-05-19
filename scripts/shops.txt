@@ -151,6 +151,7 @@
 		"item"		"item_sphere"
 		"item"		"item_heart"	
 		"item"		"item_assault"
+		"item"		"item_hell_robe"
 	}
 			
 	"weapons"
@@ -190,6 +191,7 @@
  		"item"		"item_satanic"		
  		"item"		"item_skadi" 
  		"item"		"item_mjollnir"
+		"item"		"item_nether_sword"
 	}
 	
 	"secretshop"

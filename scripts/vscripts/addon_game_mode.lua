@@ -794,7 +794,8 @@ function TransportGameMode:DamageFilter(damageTable)
 					victim = attacker,
 					attacker = victim,
 					damage = block_damage,
-					damage_type = DAMAGE_TYPE_PURE
+					damage_type = DAMAGE_TYPE_PURE,
+					ability = ability
 				}
 				ApplyDamage(damage_table)
 				local amp = victim:GetSpellAmplification(false)

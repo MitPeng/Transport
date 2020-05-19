@@ -306,7 +306,7 @@
 			"07"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_damage"	"60"
+				"base_damage"	"45"
 			}
 			"08"
 			{

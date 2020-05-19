@@ -8,7 +8,8 @@ function source_of_life(keys)
             victim = target,
             attacker = caster,
             damage = damage,
-            damage_type = DAMAGE_TYPE_MAGICAL
+            damage_type = DAMAGE_TYPE_MAGICAL,
+            ability = ability
         }
         ApplyDamage(damage_table)
         local healing_percent = ability:GetSpecialValueFor("healing_percent") / 100

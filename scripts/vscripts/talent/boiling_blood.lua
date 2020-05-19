@@ -8,7 +8,8 @@ function boiling_blood(keys)
         victim = caster,
         attacker = caster,
         damage = damage_caster,
-        damage_type = DAMAGE_TYPE_MAGICAL
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability
     }
     ApplyDamage(damage_table_1)
     PopupDamageOverTime(caster, math.ceil(damage_caster))
@@ -16,7 +17,8 @@ function boiling_blood(keys)
         victim = target,
         attacker = caster,
         damage = damage_target,
-        damage_type = DAMAGE_TYPE_MAGICAL
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability
     }
     ApplyDamage(damage_table_2)
     PopupDamageOverTime(target, math.ceil(damage_target))
@@ -31,7 +33,8 @@ function burning_damage(keys)
         victim = target,
         attacker = caster,
         damage = damage,
-        damage_type = DAMAGE_TYPE_MAGICAL
+        damage_type = DAMAGE_TYPE_MAGICAL,
+        ability = ability
     }
     ApplyDamage(damage_table)
 end

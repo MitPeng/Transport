@@ -243,6 +243,7 @@
 					"MODIFIER_PROPERTY_HEALTH_BONUS"	"%health"
 					"MODIFIER_PROPERTY_MANA_BONUS"	"%mana"
 					"MODIFIER_PROPERTY_PHYSICAL_ARMOR_BONUS"	"%armor"
+					"MODIFIER_PROPERTY_MAGICAL_RESISTANCE_BONUS"	"%magical_resist"
 					"MODIFIER_PROPERTY_STATS_STRENGTH_BONUS"	"%all_stat"
 					"MODIFIER_PROPERTY_STATS_AGILITY_BONUS"	"%all_stat"
 					"MODIFIER_PROPERTY_STATS_INTELLECT_BONUS"	"%all_stat"
@@ -276,12 +277,12 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"health"	"425"
+				"health"	"250"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"mana"	"425"
+				"mana"	"250"
 			}
 			"03"
 			{
@@ -291,24 +292,29 @@
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_stat"	"10"
+				"magical_resist"	"15"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"700"
+				"all_stat"	"10"
 			}
 			"06"
 			{
-				"var_type"	"FIELD_FLOAT"
-				"max_hp_percent"	"1.5"
+				"var_type"	"FIELD_INTEGER"
+				"radius"	"700"
 			}
 			"07"
 			{
-				"var_type"	"FIELD_INTEGER"
-				"base_damage"	"60"
+				"var_type"	"FIELD_FLOAT"
+				"max_hp_percent"	"1.2"
 			}
 			"08"
+			{
+				"var_type"	"FIELD_INTEGER"
+				"base_damage"	"45"
+			}
+			"09"
 			{
 				"var_type"	"FIELD_INTEGER"
 				"not_hero_damage_percent"	"50"
@@ -323,12 +329,12 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1508"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"750"
+		"ItemCost"	"1700"
 		"ItemRecipe"	"1"
 		"ItemResult"	"item_hell_robe"
 		"ItemRequirements"
 		{
-			"01"	"item_platemail;item_ultimate_orb;item_soul_booster"
+			"01"	"item_cloak;item_platemail;item_point_booster;item_ultimate_orb"
 		}
 	}
 
@@ -415,7 +421,7 @@
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"chance"	"45"
+				"chance"	"33"
 			}
 			"05"
 			{
