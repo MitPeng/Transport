@@ -802,23 +802,17 @@
 	"item_extreme_sword"
 	{
 		"BaseClass"	"item_datadriven"
-		"AbilityTextureName"	"item_extreme_sword"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
+		"AbilityTextureName"	"extreme_sword"
+		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityCooldown"	"36"
+		"AbilityCooldown"	"35"
 		"AbilityManaCost"	"50"
 		"ID"	"1515"
-		"ItemQuality"	"artifact"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemShareability"	"ITEM_NOT_SHAREABLE"
 		"ItemRequirements"	{}
-		"precache"
-		{
-			"particle"	"particles/econ/items/invoker/invoker_ti7/invoker_ti7_alacrity.vpcf"
-			"soundfile"	"soundevents/game_sounds_items.vsndevts"
-		}
 		"OnSpellStart"
 		{
 			"ApplyModifier"
@@ -843,9 +837,9 @@
 			}
 			"modifier_item_extreme_sword_apply"
 			{
-				"Attributes"	"MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Attributes"	"MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
 				"Duration"	"%duration"
-				"TextureName"	"item_extreme_sword"
+				"TextureName"	"extreme_sword"
 				"IsBuff"	"1"
 				"Properties"
 				{
@@ -853,15 +847,6 @@
 					"MODIFIER_PROPERTY_ATTACKSPEED_BONUS_CONSTANT"	"%attack_speed_bonus"
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%move_speed_bonus"
 				}
-				"OnCreated"
-				{
-					"FireSound"
-					{
-						"Target"	"CASTER"
-						"EffectName"	"Item.MoonShard.Consume"
-					}
-				}
-				"IsPurgable"	"1"
 				"OnDestroy"
 				{
 					"RunScript"
@@ -871,8 +856,7 @@
 						"Function"	"apply_debuff"
 					}
 				}
-				"EffectName"	"particles/econ/items/invoker/invoker_ti7/invoker_ti7_alacrity.vpcf"
-				"EffectAttachType"	"follow_origin"
+				"IsPurgable"	"1"
 			}
 			"modifier_item_extreme_sword_debuff"
 			{
@@ -883,10 +867,10 @@
 					"MODIFIER_PROPERTY_MOVESPEED_BONUS_CONSTANT"	"%move_speed_debuff"
 				}
 				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"TextureName"	"extreme_sword"
 				"IsDebuff"	"1"
-				"AllowIllusionDuplicate"	"0"
+				"AllowIllusionDuplicate"	"1"
 				"Duration"	"-1"
-				"IsHidden"	"1"
 			}
 		}
 		"AbilitySpecial"
@@ -894,17 +878,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage"	"160"
+				"damage"	"150"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed_bonus"	"80"
+				"attack_speed_bonus"	"90"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"move_speed_bonus"	"80"
+				"move_speed_bonus"	"60"
 			}
 			"04"
 			{
@@ -914,12 +898,12 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage_debuff"	"-20"
+				"damage_debuff"	"-25"
 			}
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed_debuff"	"-10"
+				"attack_speed_debuff"	"-15"
 			}
 			"07"
 			{
@@ -941,7 +925,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1516"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"1200"
+		"ItemCost"	"900"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"

@@ -894,17 +894,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage"	"160"
+				"damage"	"150"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed_bonus"	"80"
+				"attack_speed_bonus"	"90"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"move_speed_bonus"	"80"
+				"move_speed_bonus"	"60"
 			}
 			"04"
 			{
@@ -914,12 +914,12 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage_debuff"	"-20"
+				"damage_debuff"	"-25"
 			}
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed_debuff"	"-10"
+				"attack_speed_debuff"	"-15"
 			}
 			"07"
 			{
