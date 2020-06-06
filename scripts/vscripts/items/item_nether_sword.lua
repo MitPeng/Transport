@@ -8,7 +8,7 @@ function nether_sword(keys)
             victim = target,
             attacker = caster,
             damage = damage,
-            damage_type = DAMAGE_TYPE_MAGICAL,
+            damage_type = DAMAGE_TYPE_PURE,
             ability = ability
         }
         ApplyDamage(damage_table)

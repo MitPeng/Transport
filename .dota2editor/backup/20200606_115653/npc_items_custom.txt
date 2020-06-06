@@ -755,12 +755,12 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_bonus"	"400"
+				"hp_regen_bonus"	"4"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_regen_bonus"	"4"
+				"hp_bonus"	"400"
 			}
 			"04"
 			{

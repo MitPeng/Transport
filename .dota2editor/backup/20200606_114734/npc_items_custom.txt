@@ -683,7 +683,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityCooldown"	"24"
+		"AbilityCooldown"	"25"
 		"ID"	"1513"
 		"ItemQuality"	"rare"
 		"ItemDroppable"	"1"
@@ -750,32 +750,32 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"8.0"
+				"duration"	"10.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_bonus"	"400"
+				"hp_regen_bonus"	"5"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_regen_bonus"	"4"
+				"hp_bonus"	"400"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"buff_hp_regen"	"20"
+				"buff_hp_regen"	"16"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"buff_hp_percent"	"20"
+				"buff_hp_percent"	"24"
 			}
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"900"
+				"radius"	"1200"
 			}
 		}
 	}
