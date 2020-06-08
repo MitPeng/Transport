@@ -276,22 +276,22 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"health"	"425"
+				"health"	"450"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"mana"	"425"
+				"mana"	"450"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"armor"	"10"
+				"armor"	"12"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_stat"	"10"
+				"all_stat"	"12"
 			}
 			"05"
 			{
@@ -323,7 +323,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1508"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"1050"
+		"ItemCost"	"850"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"

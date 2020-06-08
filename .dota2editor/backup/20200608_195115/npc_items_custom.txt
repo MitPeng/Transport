@@ -323,7 +323,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_PASSIVE"
 		"ID"	"1508"
 		"Model"	"models/props_gameplay/recipe.mdl"
-		"ItemCost"	"1050"
+		"ItemCost"	"1250"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemRecipe"	"1"

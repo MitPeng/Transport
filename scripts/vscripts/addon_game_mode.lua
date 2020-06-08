@@ -22,6 +22,7 @@ function Precache(context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_items.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_undying.vsndevts", context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_axe.vsndevts", context)
+	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts", context)
 
 	PrecacheResource("particle", "particles/author_effect.vpcf", context)
 	PrecacheResource("particle", "particles/desert_sands.vpcf", context)

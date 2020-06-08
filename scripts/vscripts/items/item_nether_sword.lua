@@ -12,6 +12,5 @@ function nether_sword(keys)
             ability = ability
         }
         ApplyDamage(damage_table)
-        PopupDamageOverTime(target, math.floor(damage))
     end
 end
