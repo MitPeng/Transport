@@ -115,6 +115,7 @@
 		"item"		"item_pipe"			
 		"item"		"item_guardian_greaves"
 		"item"		"item_super_power_treads"
+		"item"		"item_battle_flag"
 	}
 				
 	"magics"			

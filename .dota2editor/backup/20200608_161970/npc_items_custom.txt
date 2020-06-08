@@ -1033,7 +1033,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"1200"
+				"radius"	"900"
 			}
 			"02"
 			{
@@ -1043,32 +1043,32 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_stats_bonus"	"12"
+				"all_stats_bonus"	"15"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed_bonus"	"35"
+				"attack_speed_bonus"	"40"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage_bonus"	"35"
+				"damage_bonus"	"40"
 			}
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"move_speed_percent_buff"	"20"
+				"move_speed_percent_buff"	"25"
 			}
 			"07"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"armor_buff"	"7"
+				"armor_buff"	"8"
 			}
 			"08"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"magical_resist_buff"	"20"
+				"magical_resist_buff"	"25"
 			}
 		}
 	}

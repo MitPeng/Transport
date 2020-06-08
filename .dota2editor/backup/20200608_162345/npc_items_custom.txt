@@ -1033,7 +1033,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"radius"	"1200"
+				"radius"	"900"
 			}
 			"02"
 			{
@@ -1058,17 +1058,17 @@
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"move_speed_percent_buff"	"20"
+				"move_speed_percent_buff"	"25"
 			}
 			"07"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"armor_buff"	"7"
+				"armor_buff"	"8"
 			}
 			"08"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"magical_resist_buff"	"20"
+				"magical_resist_buff"	"25"
 			}
 		}
 	}
