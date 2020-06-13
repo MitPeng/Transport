@@ -139,7 +139,8 @@ function TransportGameMode:InitGameMode()
 	ListenToGameEvent("entity_killed", Dynamic_Wrap(TransportGameMode, "OnEntityKilled"), self)
 	-- 设置伤害过滤器
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(TransportGameMode, "DamageFilter"), self)
-
+	-- 设置金币过滤器
+	GameRules:GetGameModeEntity():SetModifyGoldFilter(Dynamic_Wrap(TransportGameMode, "GoldFilter"), self)
 	CustomGameEventManager:RegisterListener(
 		"player_select_ability",
 		function(_, keys)
@@ -869,6 +870,21 @@ function TransportGameMode:DamageFilter(damageTable)
 
 			ParticleManager:ReleaseParticleIndex(particle)
 		end
+	end
+
+	return true
+end
+
+-- 金币过滤器
+function TransportGameMode:GoldFilter(keys)
+	-- 扣钱不算
+	if keys.gold <= 0 then
+		return false
+	end
+
+	if keys.reason_const == DOTA_ModifyGold_NeutralKill then
+		keys.gold = keys.gold * 3
+		return true
 	end
 
 	return true

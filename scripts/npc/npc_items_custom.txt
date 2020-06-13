@@ -69,7 +69,7 @@
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"ID"	"1502"
 		"ItemQuality"	"consumable"
-		"ItemCost"	"250"
+		"ItemCost"	"1000"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemShareability"	"ITEM_NOT_SHAREABLE"
@@ -108,7 +108,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"add_str"	"1"
+				"add_str"	"5"
 			}
 		}
 	}
@@ -122,7 +122,7 @@
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"ID"	"1503"
 		"ItemQuality"	"consumable"
-		"ItemCost"	"250"
+		"ItemCost"	"1000"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemShareability"	"ITEM_NOT_SHAREABLE"
@@ -161,7 +161,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"add_agi"	"1"
+				"add_agi"	"5"
 			}
 		}
 	}
@@ -175,7 +175,7 @@
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
 		"ID"	"1504"
 		"ItemQuality"	"consumable"
-		"ItemCost"	"250"
+		"ItemCost"	"1000"
 		"ItemDroppable"	"1"
 		"ItemSellable"	"1"
 		"ItemShareability"	"ITEM_NOT_SHAREABLE"
@@ -214,7 +214,7 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"add_int"	"1"
+				"add_int"	"5"
 			}
 		}
 	}
@@ -301,7 +301,7 @@
 			"06"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"max_hp_percent"	"2.5"
+				"max_hp_percent"	"2.0"
 			}
 			"07"
 			{
@@ -402,27 +402,27 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"damage"	"70"
+				"damage"	"75"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed"	"70"
+				"attack_speed"	"75"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"health_regen"	"7"
+				"health_regen"	"7.5"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"chance"	"70"
+				"chance"	"75"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"max_hp_percent"	"3.5"
+				"max_hp_percent"	"2.5"
 			}
 		}
 	}
@@ -496,17 +496,17 @@
 			"01"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"movespeed"	"25"
+				"movespeed"	"35"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_stat"	"5"
+				"all_stat"	"10"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"attack_speed"	"30"
+				"attack_speed"	"35"
 			}
 			"04"
 			{
@@ -521,7 +521,7 @@
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"aura_attack_speed"	"30"
+				"aura_attack_speed"	"25"
 			}
 			"07"
 			{
@@ -623,32 +623,32 @@
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"int_bonus"	"15"
+				"int_bonus"	"18"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"str_bonus"	"5"
+				"str_bonus"	"6"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"agi_bonus"	"5"
+				"agi_bonus"	"6"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"mana_regen"	"3.0"
+				"mana_regen"	"3.5"
 			}
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"amp_percent"	"25"
+				"amp_percent"	"20"
 			}
 			"07"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"magical_resist_percent"	"-50"
+				"magical_resist_percent"	"-40"
 			}
 			"08"
 			{
@@ -683,7 +683,7 @@
 		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_IMMEDIATE | DOTA_ABILITY_BEHAVIOR_NO_TARGET"
 		"AbilityUnitTargetType"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 		"AbilityUnitTargetTeam"	"DOTA_UNIT_TARGET_TEAM_ENEMY"
-		"AbilityCooldown"	"24"
+		"AbilityCooldown"	"20"
 		"AbilityManaCost"	"50"
 		"ID"	"1513"
 		"ItemQuality"	"rare"
@@ -751,27 +751,27 @@
 			"01"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"duration"	"8.0"
+				"duration"	"6.0"
 			}
 			"02"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_bonus"	"400"
+				"hp_bonus"	"450"
 			}
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"hp_regen_bonus"	"4"
+				"hp_regen_bonus"	"5"
 			}
 			"04"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"buff_hp_regen"	"20"
+				"buff_hp_regen"	"30"
 			}
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"buff_hp_percent"	"20"
+				"buff_hp_percent"	"15"
 			}
 			"06"
 			{
@@ -978,7 +978,7 @@
 			{
 				"Target"
 				{
-					"Types"	"DOTA_UNIT_TARGET_HERO"
+					"Types"	"DOTA_UNIT_TARGET_HERO | DOTA_UNIT_TARGET_BASIC"
 					"Teams"	"DOTA_UNIT_TARGET_TEAM_FRIENDLY"
 					"Center"	"CASTER"
 					"Radius"	"%radius"
@@ -1180,7 +1180,7 @@
 			"03"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"base_damage"	"250"
+				"base_damage"	"300"
 			}
 			"04"
 			{
@@ -1190,22 +1190,22 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"int_bonus"	"50"
+				"int_bonus"	"60"
 			}
 			"06"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"health_bonus"	"200"
+				"health_bonus"	"250"
 			}
 			"07"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"mana_bonus"	"200"
+				"mana_bonus"	"250"
 			}
 			"08"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"mana_regen_bonus"	"5"
+				"mana_regen_bonus"	"6"
 			}
 			"09"
 			{
