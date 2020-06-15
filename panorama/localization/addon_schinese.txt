@@ -21,4 +21,5 @@
     "new_stat_killed_heroes"		"击杀敌人"
     "custom_end_screen_team_kills"  "总击杀"
     "cant_use"  "无法使用！"
+    "effect_box"   "特效背包"
 }
