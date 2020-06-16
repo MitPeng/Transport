@@ -234,24 +234,6 @@ function TransportGameMode:OnPlayerConnectFull(keys)
 	player.playerid = keys.PlayerID
 	player.steamid = PlayerResource:GetSteamAccountID(keys.PlayerID)
 	_G.players[keys.userid] = player
-
-	Timers:CreateTimer(
-		1.0,
-		function()
-			--显示所有天赋技能
-			local all_talent_abilities = {}
-			for num = 1, _G.abilities_num do
-				table.insert(all_talent_abilities, _G.talent_abilities[tostring(num)])
-			end
-			CustomGameEventManager:Send_ServerToPlayer(
-				PlayerResource:GetPlayer(keys.PlayerID),
-				"show_all_talent_abilities",
-				{
-					Abilities = all_talent_abilities
-				}
-			)
-		end
-	)
 end
 
 -- 重连事件
@@ -279,6 +261,22 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 		-- print("Player begin select hero") -- 玩家处于选择英雄界面
 	elseif newState == DOTA_GAMERULES_STATE_PRE_GAME then
 		-- print("Player ready game begin") -- 玩家处于游戏准备状态
+		Timers:CreateTimer(
+			1.0,
+			function()
+				--显示所有天赋技能
+				local all_talent_abilities = {}
+				for num = 1, _G.abilities_num do
+					table.insert(all_talent_abilities, _G.talent_abilities[tostring(num)])
+				end
+				CustomGameEventManager:Send_ServerToAllClients(
+					"show_all_talent_abilities",
+					{
+						Abilities = all_talent_abilities
+					}
+				)
+			end
+		)
 		Timers:CreateTimer(
 			4.0,
 			function()

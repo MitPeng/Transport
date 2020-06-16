@@ -22,4 +22,5 @@
     "custom_end_screen_team_kills"  "Team total Kills"
     "cant_use"  "Can not use !"
     "effect_box"   "Effect Box"
+    "close"     "Close"
 }
