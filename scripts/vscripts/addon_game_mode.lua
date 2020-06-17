@@ -141,10 +141,18 @@ function TransportGameMode:InitGameMode()
 	GameRules:GetGameModeEntity():SetDamageFilter(Dynamic_Wrap(TransportGameMode, "DamageFilter"), self)
 	-- 设置金币过滤器
 	GameRules:GetGameModeEntity():SetModifyGoldFilter(Dynamic_Wrap(TransportGameMode, "GoldFilter"), self)
+	-- 选择天赋技能
 	CustomGameEventManager:RegisterListener(
 		"player_select_ability",
 		function(_, keys)
 			self:OnPlayerSelectAbility(keys)
+		end
+	)
+	-- 选择特效
+	CustomGameEventManager:RegisterListener(
+		"player_select_effect",
+		function(_, keys)
+			self:OnPlayerSelectEffect(keys)
 		end
 	)
 
@@ -226,6 +234,21 @@ function TransportGameMode:OnPlayerSelectAbility(keys)
 	hero.talent_ability = ability
 end
 
+function TransportGameMode:OnPlayerSelectEffect(keys)
+	local effectName = keys.EffectName
+	local playerID = keys.PlayerID
+	local player = PlayerResource:GetPlayer(playerID)
+	local hero = player:GetAssignedHero()
+	if not hero then
+		return
+	end
+	if hero.effect_modifier ~= nil then
+		hero:RemoveModifierByName(hero.effect_modifier:GetName())
+	end
+	local modifier = hero:AddNewModifier(hero, nil, effectName, {duration = -1})
+	hero.effect_modifier = modifier
+end
+
 -- 当玩家连接完成
 function TransportGameMode:OnPlayerConnectFull(keys)
 	_G.players = _G.players or {}
@@ -273,6 +296,27 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 					"show_all_talent_abilities",
 					{
 						Abilities = all_talent_abilities
+					}
+				)
+				--显示所有特效
+				local all_effects = {
+					"bee_flying",
+					"blue_fire",
+					"cave_crystal",
+					"christmas",
+					"darkmoon",
+					"desert_sands",
+					"frost",
+					"golden_fire",
+					"green_fire",
+					"pink_memories",
+					"red_fire",
+					"void_mist"
+				}
+				CustomGameEventManager:Send_ServerToAllClients(
+					"show_all_effects",
+					{
+						Effects = all_effects
 					}
 				)
 			end
@@ -433,11 +477,11 @@ function TransportGameMode:OnNPCSpawned(keys)
 					--加初始天赋药水
 					hero:AddItemByName("item_talent_potion_2")
 					--加特效
-					local steamid = PlayerResource:GetSteamAccountID(hero:GetPlayerID())
-					if steamid == 179637729 or steamid == 111384022 then
-						local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
-						hero.effect_modifier = modifier
-					end
+					-- local steamid = PlayerResource:GetSteamAccountID(hero:GetPlayerID())
+					-- if steamid == 179637729 or steamid == 111384022 then
+					-- 	local modifier = hero:AddNewModifier(hero, nil, "author_effect", {duration = -1})
+					-- 	hero.effect_modifier = modifier
+					-- end
 				end
 			)
 		-- 测试技能
@@ -716,7 +760,8 @@ function TransportGameMode:PlayerChat(keys)
 				keys.text == "red_fire" or
 				keys.text == "bee_flying" or
 				keys.text == "christmas" or
-				keys.text == "pink_memories"
+				keys.text == "pink_memories" or
+				keys.text == "star_magic"
 		 then
 			local hero = PlayerResource:GetPlayer(player.playerid):GetAssignedHero()
 			if hero.effect_modifier ~= nil then
