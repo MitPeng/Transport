@@ -260,14 +260,18 @@ end
 --推进阶段每秒事件
 function is_push(keys)
     local caster = keys.caster
+    if caster.is_game_end then
+        return
+    end
     --不处于防御阶段则倒计时
     if not caster.is_defend then
         if _G.push_time == 0 then
             --推进时间耗尽,游戏结束,防守方胜利
             print("Push Failed! End Game!")
-            GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
             --防止一直弹队伍获胜
-            _G.push_time = _G.push_time - 1
+            -- _G.push_time = _G.push_time - 1
+            caster.is_game_end = true
+            GameRules:SetGameWinner(DOTA_TEAM_BADGUYS)
         elseif _G.push_time > 0 then
             local shortest_push_time = tonumber(_G.load_map["shortest_push_time"])
             if _G.push_time >= shortest_push_time then
