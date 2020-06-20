@@ -35,4 +35,8 @@
     "effect_pink_memories"  "Pink Memories"
     "effect_red_fire"       "Red Fire"
     "effect_void_mist"      "Void Mist"
+    "effect_ti10_effect"      "TI10 Emblem"
+    "effect_ti9_effect"      "TI9 Emblem"
+    "effect_ti8_effect"      "TI8 Emblem"
+    "effect_ti7_effect"      "TI7 Emblem"
 }

@@ -53,6 +53,10 @@ function Precache(context)
 	PrecacheResource("particle", "particles/particles/bee_flying.vpcf", context)
 	PrecacheResource("particle", "particles/particles/christmas.vpcf", context)
 	PrecacheResource("particle", "particles/econ/courier/courier_baekho/courier_baekho_ambient.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti7/ti7_hero_effect.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti8/ti8_hero_effect.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti9/ti9_emblem_effect.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti10/emblem/ti10_emblem_effect.vpcf", context)
 
 	LinkLuaModifier("author_effect", "effect_modifiers/author_effect.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("desert_sands", "effect_modifiers/desert_sands.lua", LUA_MODIFIER_MOTION_NONE)
@@ -67,6 +71,10 @@ function Precache(context)
 	LinkLuaModifier("bee_flying", "effect_modifiers/bee_flying.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("christmas", "effect_modifiers/christmas.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("pink_memories", "effect_modifiers/pink_memories.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti10_effect", "effect_modifiers/ti10_effect.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti9_effect", "effect_modifiers/ti9_effect.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti8_effect", "effect_modifiers/ti8_effect.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti7_effect", "effect_modifiers/ti7_effect.lua", LUA_MODIFIER_MOTION_NONE)
 end
 
 -- Create the game mode when we activate
@@ -300,6 +308,10 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 				)
 				--显示所有特效
 				local all_effects = {
+					"ti10_effect",
+					"ti9_effect",
+					"ti8_effect",
+					"ti7_effect",
 					"bee_flying",
 					"blue_fire",
 					"cave_crystal",

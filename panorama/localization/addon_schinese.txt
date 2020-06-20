@@ -35,4 +35,8 @@
     "effect_pink_memories"  "粉红回忆"
     "effect_red_fire"       "沸血之焰"
     "effect_void_mist"      "虚空迷雾"
+    "effect_ti10_effect"      "TI10纹章"
+    "effect_ti9_effect"      "TI9纹章"
+    "effect_ti8_effect"      "TI8纹章"
+    "effect_ti7_effect"      "TI7纹章"
 }
