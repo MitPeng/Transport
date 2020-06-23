@@ -5,11 +5,11 @@ function author_effect:GetDuration()
 end
 
 function author_effect:GetEffectName()
-    return "particles/author_effect.vpcf"
+    return "particles/heart.vpcf"
 end
 
 function author_effect:GetEffectAttachType()
-    return PATTACH_ABSORIGIN_FOLLOW
+    return PATTACH_OVERHEAD_FOLLOW
 end
 
 function author_effect:AllowIllusionDuplicate()

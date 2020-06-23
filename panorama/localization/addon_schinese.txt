@@ -39,4 +39,9 @@
     "effect_ti9_effect"      "TI9纹章"
     "effect_ti8_effect"      "TI8纹章"
     "effect_ti7_effect"      "TI7纹章"
+    "effect_ti6_radiance"      "血色光辉"
+    "effect_ti7_radiance"      "深海光辉"
+    "effect_ti8_radiance"      "晶石光辉"
+    "effect_ti9_radiance"      "密林光辉"
+    "effect_ti10_radiance"      "闪耀光辉"
 }

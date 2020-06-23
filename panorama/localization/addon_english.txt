@@ -39,4 +39,9 @@
     "effect_ti9_effect"      "TI9 Emblem"
     "effect_ti8_effect"      "TI8 Emblem"
     "effect_ti7_effect"      "TI7 Emblem"
+    "effect_ti6_radiance"      "Blood Radiance"
+    "effect_ti7_radiance"      "Sea Radiance"
+    "effect_ti8_radiance"      "Spar Radiance"
+    "effect_ti9_radiance"      "Jungle Radiance"
+    "effect_ti10_radiance"      "Shining Radiance"
 }

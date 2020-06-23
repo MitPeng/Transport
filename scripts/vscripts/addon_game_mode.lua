@@ -25,6 +25,7 @@ function Precache(context)
 	PrecacheResource("soundfile", "soundevents/game_sounds_heroes/game_sounds_lina.vsndevts", context)
 
 	PrecacheResource("particle", "particles/author_effect.vpcf", context)
+	PrecacheResource("particle", "particles/heart.vpcf", context)
 	PrecacheResource("particle", "particles/desert_sands.vpcf", context)
 	PrecacheResource("particle", "particles/frost.vpcf", context)
 	PrecacheResource("particle", "particles/cave_crystal.vpcf", context)
@@ -56,7 +57,11 @@ function Precache(context)
 	PrecacheResource("particle", "particles/econ/events/ti7/ti7_hero_effect.vpcf", context)
 	PrecacheResource("particle", "particles/econ/events/ti8/ti8_hero_effect.vpcf", context)
 	PrecacheResource("particle", "particles/econ/events/ti9/ti9_emblem_effect.vpcf", context)
-	PrecacheResource("particle", "particles/econ/events/ti10/emblem/ti10_emblem_effect.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti6/radiance_owner_ti6.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti7/radiance_owner_ti7.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti8/radiance_owner_ti8.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti9/radiance_owner_ti9.vpcf", context)
+	PrecacheResource("particle", "particles/econ/events/ti10/radiance_owner_ti10.vpcf", context)
 
 	LinkLuaModifier("author_effect", "effect_modifiers/author_effect.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("desert_sands", "effect_modifiers/desert_sands.lua", LUA_MODIFIER_MOTION_NONE)
@@ -75,6 +80,11 @@ function Precache(context)
 	LinkLuaModifier("ti9_effect", "effect_modifiers/ti9_effect.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("ti8_effect", "effect_modifiers/ti8_effect.lua", LUA_MODIFIER_MOTION_NONE)
 	LinkLuaModifier("ti7_effect", "effect_modifiers/ti7_effect.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti10_radiance", "effect_modifiers/ti10_radiance.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti9_radiance", "effect_modifiers/ti9_radiance.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti8_radiance", "effect_modifiers/ti8_radiance.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti7_radiance", "effect_modifiers/ti7_radiance.lua", LUA_MODIFIER_MOTION_NONE)
+	LinkLuaModifier("ti6_radiance", "effect_modifiers/ti6_radiance.lua", LUA_MODIFIER_MOTION_NONE)
 end
 
 -- Create the game mode when we activate
@@ -312,6 +322,11 @@ function TransportGameMode:OnGameRulesStateChange(keys)
 					"ti9_effect",
 					"ti8_effect",
 					"ti7_effect",
+					"ti10_radiance",
+					"ti9_radiance",
+					"ti8_radiance",
+					"ti7_radiance",
+					"ti6_radiance",
 					"bee_flying",
 					"blue_fire",
 					"cave_crystal",
