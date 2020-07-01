@@ -235,6 +235,15 @@
 				"Passive"	"1"
 				"TextureName"	"buyback"
 				"IsBuff"	"1"
+				"OnCreated"
+				{
+					"RunScript"
+					{
+						"Target"	"CASTER"
+						"ScriptFile"	"scripts/vscripts/transport/hero_gold_xp.lua"
+						"Function"	"apply_modifier_count"
+					}
+				}
 				"ThinkInterval"	"1.0"
 				"IsHidden"	"0"
 				"OnIntervalThink"
@@ -245,6 +254,26 @@
 						"ScriptFile"	"scripts/vscripts/transport/hero_gold_xp.lua"
 						"Function"	"get_gold_xp"
 					}
+				}
+			}
+			"modifier_hero_gold_xp_hp_50"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"IsHidden"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_HEALTH_BONUS"	"50"
+				}
+			}
+			"modifier_hero_gold_xp_mp_50"
+			{
+				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
+				"Duration"	"-1"
+				"IsHidden"	"1"
+				"Properties"
+				{
+					"MODIFIER_PROPERTY_MANA_BONUS"	"50"
 				}
 			}
 		}
@@ -2288,65 +2317,6 @@
 			{
 				"var_type"	"FIELD_FLOAT"
 				"lvl_damage_percent"	"0.8"
-			}
-		}
-	}
-
-	"hero_bonus"
-	{
-		"BaseClass"	"ability_datadriven"
-		"AbilityBehavior"	"DOTA_ABILITY_BEHAVIOR_HIDDEN | DOTA_ABILITY_BEHAVIOR_PASSIVE"
-		"Modifiers"
-		{
-			"modifier_hero_bonus"
-			{
-				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"Duration"	"-1"
-				"States"	{}
-				"OnCreated"
-				{
-					"RunScript"
-					{
-						"Target"	"CASTER"
-						"ScriptFile"	"scripts/vscripts/transport/hero_bonus.lua"
-						"Function"	"apply_modifier_count"
-					}
-				}
-				"IsHidden"	"1"
-				"Passive"	"1"
-			}
-			"modifier_hero_bonus_hp"
-			{
-				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"Duration"	"-1"
-				"IsHidden"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_HEALTH_BONUS"	"%bonus_hp"
-				}
-			}
-			"modifier_hero_bonus_mp"
-			{
-				"Attributes"	"MODIFIER_ATTRIBUTE_MULTIPLE | MODIFIER_ATTRIBUTE_PERMANENT | MODIFIER_ATTRIBUTE_IGNORE_INVULNERABLE"
-				"Duration"	"-1"
-				"IsHidden"	"1"
-				"Properties"
-				{
-					"MODIFIER_PROPERTY_MANA_BONUS"	"%bonus_mp"
-				}
-			}
-		}
-		"AbilitySpecial"
-		{
-			"01"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"bonus_hp"	"50"
-			}
-			"02"
-			{
-				"var_type"	"FIELD_INTEGER"
-				"bonus_mp"	"50"
 			}
 		}
 	}

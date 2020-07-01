@@ -498,6 +498,10 @@ function TransportGameMode:OnNPCSpawned(keys)
 			--升至指定等级
 			hero:AddExperience(_G.first_spawn_xp, 0, false, false)
 			hero.push_score = 0
+			-- 根据英雄属性添加英雄奖励
+			local ability = hero:AddAbility("hero_bonus")
+			ability:SetLevel(1)
+
 			Timers:CreateTimer(
 				0.5,
 				function()

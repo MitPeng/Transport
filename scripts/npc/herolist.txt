@@ -60,7 +60,7 @@
     "npc_dota_hero_morphling"        "0" //水人给爷爬
     "npc_dota_hero_naga_siren"        "0"
     "npc_dota_hero_necrolyte"        "1"
-    "npc_dota_hero_nevermore"        "0"
+    "npc_dota_hero_nevermore"        "1"
     "npc_dota_hero_night_stalker"        "0"
     "npc_dota_hero_nyx_assassin"        "1"
     "npc_dota_hero_obsidian_destroyer"        "0"
@@ -116,7 +116,7 @@
     "npc_dota_hero_witch_doctor"        "1"
     "npc_dota_hero_zuus"        "1"
     "npc_dota_hero_grimstroke"        "1"
-    "npc_dota_hero_invoker"        "0"
+    "npc_dota_hero_invoker"        "1"
     "npc_dota_hero_snapfire"        "0"
     "npc_dota_hero_void_spirit"        "1"
 }
