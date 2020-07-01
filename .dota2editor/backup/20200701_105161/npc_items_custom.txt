@@ -1184,7 +1184,7 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_bonus"	"30"
+				"all_bonus"	"25"
 			}
 		}
 	}

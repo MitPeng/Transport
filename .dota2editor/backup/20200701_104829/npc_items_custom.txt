@@ -307,7 +307,7 @@
 			"07"
 			{
 				"var_type"	"FIELD_FLOAT"
-				"max_hp_percent"	"1.5"
+				"max_hp_percent"	"2.0"
 			}
 			"08"
 			{
@@ -1184,7 +1184,7 @@
 			"05"
 			{
 				"var_type"	"FIELD_INTEGER"
-				"all_bonus"	"30"
+				"all_bonus"	"25"
 			}
 		}
 	}
