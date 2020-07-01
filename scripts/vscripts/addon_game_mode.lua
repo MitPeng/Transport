@@ -185,7 +185,7 @@ function TransportGameMode:InitGameMode()
 	-- 设置不能买活
 	GameRules:GetGameModeEntity():SetBuybackEnabled(false)
 	-- 设置复活时间
-	GameRules:GetGameModeEntity():SetFixedRespawnTime(12.0)
+	GameRules:GetGameModeEntity():SetFixedRespawnTime(15.0)
 	-- 设置泉水回蓝回血
 	GameRules:GetGameModeEntity():SetFountainPercentageManaRegen(10.0)
 	GameRules:GetGameModeEntity():SetFountainPercentageHealthRegen(10.0)
